@@ -1,19 +1,16 @@
 <template>
   <main class="container">
-    <h1></h1>
   </main>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'home',
+}
 </script>
 
 <style lang="scss" scoped>
 main {
-  background: red;
-
-  h1 {
-    font-size: 21px;
-  }
+  background: #F7F4F0;
 }
 </style>

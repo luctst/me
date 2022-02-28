@@ -1,3 +1,4 @@
+require('dotenv').config();
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   loading: '~/components/Loader.vue',
@@ -29,6 +30,8 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
+    '@nuxtjs/dotenv',
+    "@nuxtjs/svg",
     '@nuxtjs/eslint-module',
   ],
 
@@ -38,10 +41,22 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/style-resources',
   ],
 
+  styleResources: {
+    scss: ['@/assets/main.scss']
+  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseUrl: 'https://api.github.com/',
+    headers: {
+      Authorization: `token ${process.env.APIKEY}`,
+      Accept: 'application/vnd.github.v3+json',
+      "User-Agent": "luctst",
+    }
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {

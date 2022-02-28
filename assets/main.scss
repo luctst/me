@@ -4,3 +4,35 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/*************
+Font
+*************/
+@font-face {
+  font-family: 'helvetica-medium';
+  src: url('~assets/HelveticaMedium.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'helvetica-thin';
+  src: url('~assets/HelveticaThin.ttf') format('ttf');
+}
+
+/*************
+Keyframes
+*************/
+@keyframes fadeIn {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/**********
+Variables
+**********/
+$mainBlack: #262626;
+$mainGrey: #A4A4A4;
+$mainLightBg: #F7F4F0; 
