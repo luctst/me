@@ -1,5 +1,5 @@
 <template>
-  <main class="container is-fullhd">
+  <main class="container is-fullhd home">
     <section class="sidebar">
       <header class="sidebar--header">
         <h1>Lucas Tostée</h1>
@@ -50,7 +50,7 @@
             <div>Last pushed</div>
           </section>
         </header>
-        <section class="projects--container--items">
+        <section class="projects--container--items" ref="itemsContainer">
           <div 
           v-if="!$store.state[filter] || !$store.state[filter].length" class="projects--container--items--empty">
             <p>There is no data for this category..</p>
@@ -73,12 +73,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import Arrow from '~/assets/arrow.svg?inline';
 
 export default {
   name: 'Home',
   components: {
     Arrow,
+  },
+  mounted() {
+    this.$refs.itemsContainer.addEventListener('scroll', async (event) => {
+      if (!this.$store.state.canFetchRepos) return false;
+
+      const element = event.target;
+      if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+        await this.fetchRepo();
+      }
+    });
   },
   data() {
     return {
@@ -103,6 +115,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['fetchRepo']),
     switchItems(index) {
       const newTitles = this.titles.map((t, i) => {
         const newT = { ...t };
@@ -125,15 +138,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-main {
-  height: calc(100vh - 40px);
+.home {
   background: $mainLightBg;
   display: grid;
   grid-template-columns: 1fr 2fr;
 
   @media screen and (min-width: 700px) {
+    height: -moz-available;
     padding: 0 15px;
     padding-top: 40px;
+  }
+
+  @media screen and (min-width: 1100px) {
+    height: calc(100vh - 40px);
   }
 
   @media screen and (min-width: 1200px) {
@@ -145,7 +162,7 @@ main {
   .sidebar {
     display: flex;
     flex-direction: column;
-    height: inherit;
+    height: 100%;
     text-align: left;
     justify-content: space-between;
 
@@ -174,9 +191,12 @@ main {
     }
 
     &--footer {
-      margin-bottom: 40px;
       max-width: 197px;
       width: 100%;
+
+      @media screen and (min-width: 1100px) {
+        margin-bottom: 40px;
+      }
 
       p {
         font-family: 'helvetica-thin', sans-serif;
@@ -213,6 +233,9 @@ main {
   }
 
   .projects {
+    display: flex;
+    flex-direction: column;
+
     &--header {
       display: flex;
       align-items: flex-start;
@@ -288,12 +311,12 @@ main {
     }
 
     &--container {
-      display: block;
+      flex-grow: 1;
       height: inherit;
       padding: 0;
       margin-top: 32px;
-      width: 100%;
       position: relative;
+      width: 100%;
 
       &--header {
         align-items: center;
@@ -303,6 +326,7 @@ main {
         max-height: 31px;
         max-width: inherit;
         position: sticky;
+        justify-content: space-between;
         width: inherit;
 
         div {
@@ -323,16 +347,36 @@ main {
 
         section {
           display: flex;
-          margin-left: auto;
           justify-content: space-between;
-          max-width: 173px;
           width: 100%;
+
+          @media screen and (min-width: 700px) {
+            max-width: 150px;
+          }
+
+          div:first-child {
+            margin-right: 16px;
+          }
         }
       }
 
       &--items {
         overflow-y: scroll;
-        max-height: 500px;
+
+        @media screen and (min-width: 700px) {
+          height: 450px;
+          max-height: 450px;
+        }
+
+        @media screen and (min-width: 920px) {
+          height: 416px;
+          max-height: 416px;
+        }
+
+        @media screen and (min-width: 1100px) {
+          height: inherit;
+          max-height: 470px;
+        }
 
         &--empty {
           width: 100%;

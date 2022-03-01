@@ -1,5 +1,5 @@
 <template>
-  <section class="container loader">
+  <section class="container loader is-fullhd">
     <div 
     v-if="loading"
     class="loader--skeleton">
@@ -105,14 +105,18 @@ export default {
   position: fixed;
   z-index: 10;
   top: 0;
+  width: 100%;
 
   &--skeleton {
     overflow: hidden;
 
+    @media screen and (min-width: 700px) {
+      margin-top: 40px;
+    }
+
     svg {
       animation: fadeIn 1000ms ease forwards;
       transform: translateY(100%);
-      width: 100%;
     }
   }
 
