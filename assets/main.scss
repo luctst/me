@@ -1,6 +1,7 @@
 @import '../node_modules/bulma/sass/elements/container.sass';
 
 body {
+  background-color: #F7F4F0;
   margin: 0;
   padding: 0;
 }
@@ -36,3 +37,7 @@ Variables
 $mainBlack: #262626;
 $mainGrey: #A4A4A4;
 $mainLightBg: #F7F4F0; 
+$mainGrey: #A4A4A4;
+$secondaryLight: #FFFCF9;
+$secondaryGrey: #DCDCDC;
+$mainYellow: #F1FF4A;

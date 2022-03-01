@@ -1,16 +1,352 @@
 <template>
-  <main class="container">
+  <main class="container is-fullhd">
+    <section class="sidebar">
+      <header class="sidebar--header">
+        <h1>Lucas Tostée</h1>
+        <h2>_ Full-Stack JS</h2>
+      </header>
+      <footer class="sidebar--footer">
+        <p>_ Welcome to my website, my name is Lucas, I live in Paris, I'm working as a full-stack JavaScript developer.</p>
+        <p>I currently maintain more than 100 projects on Github</p>
+        <div>
+          <a
+            v-for="(link, i) in $store.state.footerLinks"
+            :key="i"
+            :href="link.href"
+            target="_blank">
+            {{ link.content }}
+            <arrow></arrow>
+          </a>
+        </div>
+      </footer>
+    </section>
+    <section class="projects">
+      <header class="projects--header">
+        <div class="projects--header--title">
+          <h3
+          v-for="(t, i) in titles"
+          :key="i"
+          :class="[t.active ? 'title__active' : 'title__inactive']"
+          @click="switchItems(i)">
+            {{ t.content }}
+            <span>
+              {{ 
+                Array.isArray($store.state[t.store]) 
+                ? $store.state[t.store].length
+                : 0
+              }}
+            </span>
+          </h3>
+        </div>
+        <div class="projects--header--badge">
+          <button>_activity</button>
+        </div>
+      </header>
+      <main class="projects--container">
+        <header class="projects--container--header">
+          <div>Filename</div>
+          <section>
+            <div>Id</div>
+            <div>Last pushed</div>
+          </section>
+        </header>
+        <section class="projects--container--items">
+          <div 
+          v-if="!$store.state[filter] || !$store.state[filter].length" class="projects--container--items--empty">
+            <p>There is no data for this category..</p>
+          </div>
+          <items
+          v-for="(d, i) in $store.state[filter]"
+          v-else
+          :key="i"
+          :itemsType="filter"
+          :repoName="d.name"
+          :repoId="d.id"
+          :language="d.language ? d.language : false"
+          :topics="d.topics"
+          :lastPush="d.pushed_at"
+          :type="d.visibility"></items>
+        </section>
+      </main>
+    </section>
   </main>
 </template>
 
 <script>
+import Arrow from '~/assets/arrow.svg?inline';
+
 export default {
-  name: 'home',
+  name: 'Home',
+  components: {
+    Arrow,
+  },
+  data() {
+    return {
+      filter: 'app',
+      titles: [
+        {
+          content: 'Products',
+          store: 'app',
+          active: true,
+        },
+        {
+          content: 'NodeJs Modules',
+          store: 'npm',
+          active: false,
+        },
+        {
+          content: 'All',
+          store: 'repos',
+          active: false,
+        }
+      ]
+    };
+  },
+  methods: {
+    switchItems(index) {
+      const newTitles = this.titles.map((t, i) => {
+        const newT = { ...t };
+        if (index === i) {
+          if (newT.active) return newT;
+          this.filter = newT.store;
+          newT.active = true;
+
+          return newT;
+        };
+
+        newT.active = false;
+        return newT;
+      });
+
+      this.titles = newTitles;
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 main {
-  background: #F7F4F0;
+  height: calc(100vh - 40px);
+  background: $mainLightBg;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  @media screen and (min-width: 700px) {
+    padding: 0 15px;
+    padding-top: 40px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding: 0;
+    padding-top: 40px;
+  }
+
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    text-align: left;
+    justify-content: space-between;
+
+    &--header {
+      width: 100%;
+
+      h1,
+      h2 {
+        font-size: 14px;
+        margin: 0;
+      }
+
+      h1 {
+        color: $mainBlack;
+        font-family: 'helvetica-medium', sans-serif;
+        font-weight: 700;
+        margin-bottom: 5px;
+        line-height: 17.09px;
+      }
+  
+      h2 {
+        color: $mainBlack;
+        font-family: 'helvetica-thin', sans-serif;
+        font-weight: normal;
+      }
+    }
+
+    &--footer {
+      margin-bottom: 40px;
+      max-width: 197px;
+      width: 100%;
+
+      p {
+        font-family: 'helvetica-thin', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16.7px;
+        color: $mainBlack;
+        margin-bottom: 8px;
+      }
+
+      div {
+        align-items: center;
+        display: flex;
+
+        a {
+          align-items: center;
+          display: flex;
+          color: $mainBlack;
+          font-family: 'helvetica-medium', sans-serif;
+          font-size: 10px;
+          font-weight: 550;
+          text-decoration: none;
+          line-height: 14.56px;   
+          margin-right: 5px;     
+
+          svg {
+            height: 8px;
+            margin-left: 2px;
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .projects {
+    &--header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      &--title {
+        .title__active {
+          color: $mainBlack;
+          text-decoration: underline;
+          padding-bottom: 2px;
+        }
+
+        .title__inactive {
+          color: $mainGrey;
+          text-decoration: none;
+        }
+
+        h3 {
+          &:hover {
+            cursor: pointer;
+          }
+
+          align-items: flex-start;
+          display: flex;
+          font-family: 'helvetica-medium', sans-serif;
+          font-weight: 300;
+          margin: 0;
+          margin-bottom: 6px;
+
+          span {
+            font-family: 'helvetica-thin', sans-serif;
+            font-weight: 400;
+            line-height: 11.93px;
+            font-size: 10px;
+            margin-left: 5.48px;
+            text-decoration: none;
+          }
+
+          @media screen and (min-width: 700px) {
+            font-size: 30px;
+            line-height: 32px;
+          }
+
+          @media screen and (min-width: 820px) {
+            font-size: 36px;
+          }
+
+          @media screen and (min-width: 920px) {
+            font-size: 42px;
+            line-height: 40px;
+          }
+          @media screen and (min-width: 1100px) {
+            font-size: 52px;
+            line-height: 52px;
+          }
+        }
+      }
+
+      &--badge {
+        button {
+          background-color: $secondaryLight;
+          border: none;
+          border-radius: 2px;
+          color: $mainBlack;
+          font-family: 'helvetica-medium', sans-serif;
+          font-size: 10px;
+          font-weight: 550;
+          padding: 7px 11px 8px;
+          text-align: right;
+          outline: none;
+        }
+      }
+    }
+
+    &--container {
+      display: block;
+      height: inherit;
+      padding: 0;
+      margin-top: 32px;
+      width: 100%;
+      position: relative;
+
+      &--header {
+        align-items: center;
+        border-bottom: 1px solid $secondaryGrey;
+        display: flex;
+        height: 31px;
+        max-height: 31px;
+        max-width: inherit;
+        position: sticky;
+        width: inherit;
+
+        div {
+          color: $mainBlack;
+          font-family: 'helvetica-medium', sans-serif;
+          font-weight: 500;
+          line-height: 17.09px;
+          padding-bottom: 8px;
+
+          @media screen and (min-width: 700px) {
+            font-size: 13px;
+          }
+
+          @media screen and (min-width: 820px) {
+            font-size: 14px;
+          }
+        }
+
+        section {
+          display: flex;
+          margin-left: auto;
+          justify-content: space-between;
+          max-width: 173px;
+          width: 100%;
+        }
+      }
+
+      &--items {
+        overflow-y: scroll;
+        max-height: 500px;
+
+        &--empty {
+          width: 100%;
+          text-align: center;
+
+          p {
+            color: $mainGrey;
+            font-family: 'helvetice-thin', sans-serif;
+            font-size: 13px;
+            font-weight: 300;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
