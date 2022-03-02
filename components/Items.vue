@@ -6,6 +6,8 @@
     <div class="project--item--left">
       <div class="project--item--left--icon">
         <folderall v-if="itemsType === 'repos'"></folderall>
+        <folderapp v-if="itemsType === 'app'"></folderapp>
+        <foldernpm v-if="itemsType === 'npm'"></foldernpm>
       </div>
       <div class="project--item--left--name">{{ repoName }}</div>
       <div class="project--item--left--topics">
@@ -34,11 +36,15 @@
 
 <script>
 import folderall from '~/assets/folderall.svg?inline';
+import folderapp from '~/assets/folderapp.svg?inline';
+import foldernpm from '~/assets/foldernpm.svg?inline';
 
 export default {
   name: 'Items',
   components: {
-    folderall
+    folderall,
+    folderapp,
+    foldernpm,
   },
   props: {
     itemsType: {

@@ -1,5 +1,7 @@
 <template>
-  <section class="container loader is-fullhd">
+  <section 
+  :class="[containerFullHd && 'is-fullhd']"
+  class="container loader">
     <div 
     v-if="loading"
     class="loader--skeleton">
@@ -46,11 +48,13 @@ export default {
     return {
       available: true,
       loading: true,
+      containerFullHd: null,
     };
   },
   async fetch() {
     try {
       await this.fetchRepo();
+      await this.fetchProducts();
       this.loading = false;
     } catch (error) {
       this.fail(error);
@@ -61,7 +65,7 @@ export default {
     if (process.client) return this.checkAppAvailability();
   },
   methods: {
-    ...mapActions(['fetchRepo']),
+    ...mapActions(['fetchRepo', 'fetchProducts']),
     fail(error) {
       console.error(error);
     },
@@ -88,10 +92,12 @@ export default {
       });
 
       if (window.innerWidth <= 700) {
+        this.containerFullHd = false;
         this.available = false;
         return false;
       }
 
+      this.containerFullHd = true;
       return true;
     }
   },
@@ -101,6 +107,7 @@ export default {
 <style lang="scss" scoped>
 .loader {
   background: $mainLightBg;
+  box-sizing: border-box;
   padding: 0  15px;
   position: fixed;
   z-index: 10;
@@ -109,10 +116,7 @@ export default {
 
   &--skeleton {
     overflow: hidden;
-
-    @media screen and (min-width: 700px) {
-      margin-top: 40px;
-    }
+    margin-top: 40px;
 
     svg {
       animation: fadeIn 1000ms ease forwards;
@@ -169,6 +173,10 @@ export default {
         line-height: 50.11px;
         margin: 0;
         transform: translateY(100%);
+
+        @media screen and (min-width: 625px) {
+          text-align: center;
+        }
 
         span {
           color: $mainGrey;

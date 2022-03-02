@@ -22,6 +22,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '@/plugin/api.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -51,11 +52,6 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseUrl: 'https://api.github.com/',
-    headers: {
-      Authorization: `token ${process.env.APIKEY}`,
-      Accept: 'application/vnd.github.v3+json',
-      "User-Agent": "luctst",
-    }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

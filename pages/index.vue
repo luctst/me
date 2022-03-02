@@ -47,7 +47,7 @@
           <div>Filename</div>
           <section>
             <div>Id</div>
-            <div>Last pushed</div>
+            <div>{{ filter === 'repos' ? 'Last pushed' : 'Created at' }}</div>
           </section>
         </header>
         <section class="projects--container--items" ref="itemsContainer">
