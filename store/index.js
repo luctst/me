@@ -17,10 +17,24 @@ export const state = () => ({
       href: '',
       content: 'Linkedin'
     }
-  ]
+  ],
+  hostName: 'http://ec2-54-77-208-143.eu-west-1.compute.amazonaws.com',
+  modals: [],
 });
 
 export const mutations = {
+  ADD_MODAL(state, newModalData) {
+    newModalData.top = '25%';
+    newModalData.left = '50%';
+    newModalData.zIndex = 100 + state.modals.length;
+
+    state.modals.push(newModalData);
+  },
+  REMOVE_MODAL(state, index) {
+    const newModalsArray = [...state.modals];
+    newModalsArray.splice(index, 1);
+    state.modals = newModalsArray;
+  },
   UPDATE_APP(state, a) {
     if (Array.isArray(state.app)) {
       state.app.push(...a);

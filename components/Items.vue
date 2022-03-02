@@ -29,7 +29,7 @@
     </div>
     <items-collapse 
     v-if="showMeta"
-    :assets="[]"></items-collapse>
+    :assets="forCollapseCompo"></items-collapse>
   </div>
 </template>
 
@@ -90,9 +90,46 @@ export default {
       required: true,
     }
   },
+  mounted() {
+    const assets = [];
+
+    if (this.media) {
+      const assetMedia = this.media.map((a) =>  ({
+        name: a.attributes.name,
+        alt: a.attributes.alternativeText,
+        extension: a.attributes.ext,
+        height: a.attributes.height,
+        width: a.attributes.width,
+        path: a.attributes.url,
+        small: {
+          url: a.attributes.formats.thumbnail.url,
+          height: a.attributes.formats.thumbnail.height,
+          width: a.attributes.formats.thumbnail.width
+        },
+        modal: {
+          url: a.attributes.formats.small.url,
+          height: a.attributes.formats.small.height,
+          width: a.attributes.formats.small.width
+        }
+      }));
+
+      assets.push(...assetMedia);
+    }
+
+    if (this.description) {
+      assets.push({ extension: '.md', name: 'description.md', content: this.description})
+    }
+
+    if (this.url) {
+      assets.push({ extension: 'www', name: this.url });
+    }
+
+    this.forCollapseCompo = assets;
+  },
   data() {
     return {
       showMeta: false,
+      forCollapseCompo: false,
     };
   },
   computed: {
@@ -107,8 +144,12 @@ export default {
   },
   directives: {
     "add-class-hover": {
-      bind(el) {
+      bind(el, b, node) {
+        el.addEventListener('click', () => {
+          el.classList.remove('project__hover');
+        })
         el.addEventListener("mouseenter", () => {
+          if (node.context.showMeta) return false;
           el.classList.add('project__hover');
         });
         el.addEventListener("mouseleave", () => {
@@ -116,6 +157,7 @@ export default {
         });
       },
       unbind(el) {
+        el.removeEventListener('click', () => {});
         el.removeEventListener("mouseenter", () => {});
         el.removeEventListener("mouseleave", () => {});
       },

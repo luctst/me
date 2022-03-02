@@ -72,6 +72,13 @@
         </section>
       </main>
     </section>
+    <template v-if="$store.state.modals.length">
+      <modal 
+      v-for="(modalData, i) in $store.state.modals"
+      :key="i"
+      :data="modalData"
+      @removeModal="$store.commit('REMOVE_MODAL', i)"></modal>
+    </template>
   </main>
 </template>
 
@@ -135,7 +142,7 @@ export default {
       });
 
       this.titles = newTitles;
-    }
+    },
   }
 }
 </script>
@@ -145,6 +152,7 @@ export default {
   background: $mainLightBg;
   display: grid;
   grid-template-columns: 1fr 2fr;
+  position: relative;
 
   @media screen and (min-width: 700px) {
     height: -moz-available;
