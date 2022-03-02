@@ -51,7 +51,6 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseUrl: 'https://api.github.com/',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

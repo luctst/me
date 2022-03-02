@@ -59,8 +59,11 @@
           v-for="(d, i) in $store.state[filter]"
           v-else
           :key="i"
+          :media="d.media"
           :itemsType="filter"
           :repoName="d.name"
+          :description="d.description"
+          :url="d.html_url"
           :repoId="d.id"
           :language="d.language ? d.language : false"
           :topics="d.topics"

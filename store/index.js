@@ -22,7 +22,6 @@ export const state = () => ({
 
 export const mutations = {
   UPDATE_APP(state, a) {
-    console.error(a);
     if (Array.isArray(state.app)) {
       state.app.push(...a);
       return true;
@@ -60,15 +59,18 @@ export const actions = {
     const response = await this.$api.get();
 
     response.data.data.forEach((p) => {
-      const objToPush = {};
-
-      objToPush.itemsType = p.attributes.type;
-      objToPush.topics = p.attributes.topics;
-      objToPush.name = p.attributes.name;
-      objToPush.id = p.id;
-      objToPush.visibility = p.attributes.visibility;
-      objToPush.pushed_at = p.attributes.createdAt;
-      
+      const objToPush = {
+        id: p.id,
+        description: p.attributes.description,
+        html_url: p.attributes.url,
+        itemsType: p.attributes.type,
+        topics: p.attributes.topics,
+        name: p.attributes.name,
+        visibility: p.attributes.visibility,
+        pushed_at: p.attributes.createdAt,
+        ...(p.attributes.assets && { media: p.attributes.assets.data }),
+      };
+       
       if (objToPush.itemsType === 'app') {
         app.push(objToPush);
         return true;
@@ -84,7 +86,7 @@ export const actions = {
   async fetchRepo({ commit, state }) {
     if (state.canFetchRepos) {
       const repos = await this.$axios.$get(
-        'user/repos',
+        'https://api.github.com/user/repos',
         {
           params: {
             sort: 'pushed',
@@ -106,6 +108,5 @@ export const actions = {
 
       commit('STOP_FETCH', false);
     }
-
   }
 };

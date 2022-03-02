@@ -27,10 +27,9 @@
       <div class="project--item--right--id">{{ repoId }}</div>
       <div class="project--item--right--pushed">{{ parseDate }}</div>
     </div>
-    <div 
-    v-if="showMeta" 
-    class="project--item--meta">
-    </div>
+    <items-collapse 
+    v-if="showMeta"
+    :assets="[]"></items-collapse>
   </div>
 </template>
 
@@ -47,8 +46,23 @@ export default {
     foldernpm,
   },
   props: {
+    media: {
+      type: [Array, Boolean],
+      default: false,
+      required: true,
+    },
     itemsType: {
       type: String,
+      required: true,
+    },
+    description: {
+      type: [String, Boolean],
+      default: false,
+      required: true,
+    },
+    url: {
+      type: [String, Boolean],
+      default: false,
       required: true,
     },
     repoName: {
@@ -137,7 +151,7 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  height: 56px;
+  max-height: fit-content;
   max-width: inherit;
   transition: all 900ms cubic-bezier(0.19, 1, 0.22, 1);
   transform: translate(0, 0) scale(1);
@@ -146,6 +160,7 @@ export default {
   &--left {
     align-items: center;
     display: flex;
+    height: 56px;
     transition: all 900ms cubic-bezier(0.19, 1, 0.22, 1);
 
     &--icon {
@@ -172,6 +187,7 @@ export default {
     }
 
     &--topics {
+      align-items: center;
       flex: 0 0 auto;
       height: 100%;
       display: flex;
@@ -216,7 +232,9 @@ export default {
   }
 
   &--right {
+    align-items: center;
     display: flex;
+    height: 56px;
     justify-content: space-between;
     transition: all 900ms cubic-bezier(0.19, 1, 0.22, 1);
     width: 100%;
@@ -232,10 +250,6 @@ export default {
       font-size: 14px;
       font-weight: 300;
     }
-  }
-
-  &--meta {
-    flex: 0 0 100%;
   }
 }
 </style>
