@@ -21,7 +21,7 @@
       </div>
     </div>
     <div v-if="type !== 'public'" class="project--item--middle">
-      {{ parseMiddleContent }}
+      {{ type }}
     </div>
     <div class="project--item--right">
       <div class="project--item--right--id">{{ repoId }}</div>
@@ -136,10 +136,6 @@ export default {
     parseDate() {
       const d = new Date(this.lastPush)
       return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`
-    },
-    parseMiddleContent() {
-      if (this.type === 'private') return 'Private'
-      return ''
     },
   },
   directives: {

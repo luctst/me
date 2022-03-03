@@ -70,7 +70,7 @@
           :topics="d.topics"
           :lastPush="d.pushed_at"
           :type="d.visibility"
-          @switchItemActive="function (emitData) { switchItemsActive(emitData, d.id) }"></items>
+          @switchItemActive="function (emitData) { switchItemsActive(emitData, d) }"></items>
         </section>
       </main>
     </section>
@@ -135,18 +135,20 @@ export default {
     openActivity() {
       window.open('https://gitstalk.netlify.app/luctst');
     },
-    switchItemsActive(shouldActiveItem, itemId) {
+    switchItemsActive(shouldActiveItem, itemData) {
+      if (itemData.visibility !== 'public') return false;
+
       if (!shouldActiveItem) {
         const newArray = [...this.itemActive];
         newArray.splice(
-          newArray.findIndex((i) => i === itemId), 
+          newArray.findIndex((i) => i === itemData.id), 
           1
         );
         this.itemActive = newArray;
         return true;
       }
 
-      this.itemActive.push(itemId);
+      this.itemActive.push(itemData.id);
       return true;
     },
     switchItems(index) {
@@ -191,7 +193,7 @@ export default {
   }
 
   @media screen and (min-width: 1100px) {
-    grid-template-columns: minmax(auto, 250px) 2fr;
+    grid-template-columns: minmax(auto, 280px) 2fr;
     column-gap: 0;
   }
 
