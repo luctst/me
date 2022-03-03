@@ -75,6 +75,7 @@
     <template v-if="$store.state.modals.length">
       <modal 
       v-for="(modalData, i) in $store.state.modals"
+      ref="i"
       :key="i"
       :data="modalData"
       @removeModal="$store.commit('REMOVE_MODAL', i)"></modal>

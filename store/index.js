@@ -24,8 +24,8 @@ export const state = () => ({
 
 export const mutations = {
   ADD_MODAL(state, newModalData) {
-    newModalData.top = '25%';
-    newModalData.left = '50%';
+    newModalData.top = 25;
+    newModalData.left = 50;
     newModalData.zIndex = 100 + state.modals.length;
 
     state.modals.push(newModalData);
