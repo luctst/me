@@ -15,7 +15,9 @@
       v-if="data.extension === '.jpg'"
       :height="data.height"
       :width="data.width"
-      :src="`${$store.state.hostName}${data.url}`"/>
+      :src="`${$store.state.hostName}${data.url}`"
+      class="modal--main--img"/>
+      <div v-else class="modal--main--content">{{ data.content }}</div>
     </main>
   </section>
 </template>
@@ -95,18 +97,23 @@ export default {
 
   &--header {
     align-items: center;
-    border-bottom: 1px solid $mainBlack;
+    box-sizing: border-box;
     background-color: $secondaryLight;
     display: flex;
     justify-content: space-between;
     height: 30px;
     padding: 0 10px;
+    width: 100%;
 
     &--title {
       color: $mainBlack;
       font-family: 'helvetica-thin', sans-serif;
-      font-weight: 400;
-      line-height: 16.7px;
+      font-weight: 300;
+      line-height: 14px;
+
+      @media screen and (min-width: 700px) {
+        font-size: 13px;
+      }
     }
 
     &--icon {
@@ -125,10 +132,29 @@ export default {
   }
 
   &--main {
-    img {
+    background-color: $secondaryLight;
+    
+    &--img {
       max-height: 100%;
       max-width: 100%;
       object-fit: contain;
+    }
+
+    &--content {
+      color: $mainBlack;
+      font-family: 'helvetica-medium', sans-serif;
+      font-weight: 500;
+      height: max-content;
+      width: 440px;
+      max-width: 500px;
+      line-height: 28.63px;
+      margin-top: 6px;
+      margin-bottom: 8px;
+      padding: 0 10px;
+
+      @media screen and (min-width: 700px) {
+        font-size: 16px;
+      }
     }
   }
 }

@@ -39,7 +39,7 @@
           </h3>
         </div>
         <div class="projects--header--badge">
-          <button>_activity</button>
+          <button @click="openActivity">_activity</button>
         </div>
       </header>
       <main class="projects--container">
@@ -127,6 +127,9 @@ export default {
   },
   methods: {
     ...mapActions(['fetchRepo']),
+    openActivity() {
+      window.open('https://gitstalk.netlify.app/luctst');
+    },
     switchItems(index) {
       const newTitles = this.titles.map((t, i) => {
         const newT = { ...t };
@@ -308,6 +311,10 @@ export default {
 
       &--badge {
         button {
+          &:hover {
+            cursor: pointer;
+          }
+
           background-color: $secondaryLight;
           border: none;
           border-radius: 2px;

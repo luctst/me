@@ -1,8 +1,9 @@
 <template>
-  <div 
-  @click="showMeta = !showMeta"
-  :class="['project--item', type !== 'public' ? 'is__private' : 'is__public']"
-  v-add-class-hover>
+  <div
+    @click="showMeta = !showMeta"
+    :class="['project--item', type !== 'public' ? 'is__private' : 'is__public']"
+    v-add-class-hover
+  >
     <div class="project--item--left">
       <div class="project--item--left--icon">
         <folderall v-if="itemsType === 'repos'"></folderall>
@@ -12,31 +13,28 @@
       <div class="project--item--left--name">{{ repoName }}</div>
       <div class="project--item--left--topics">
         <span v-if="language">{{ language }}</span>
-        <template
-        v-if="topics.length">
-          <span
-          v-for="(topic, y) in topics"
-          :key="y">
+        <template v-if="topics.length">
+          <span v-for="(topic, y) in topics" :key="y">
             {{ topic }}
           </span>
         </template>
       </div>
     </div>
-    <div v-if="type !== 'public'" class="project--item--middle">{{ parseMiddleContent }}</div>
+    <div v-if="type !== 'public'" class="project--item--middle">
+      {{ parseMiddleContent }}
+    </div>
     <div class="project--item--right">
       <div class="project--item--right--id">{{ repoId }}</div>
       <div class="project--item--right--pushed">{{ parseDate }}</div>
     </div>
-    <items-collapse 
-    v-if="showMeta"
-    :assets="forCollapseCompo"></items-collapse>
+    <items-collapse v-if="showMeta" :assets="forCollapseCompo"></items-collapse>
   </div>
 </template>
 
 <script>
-import folderall from '~/assets/folderall.svg?inline';
-import folderapp from '~/assets/folderapp.svg?inline';
-import foldernpm from '~/assets/foldernpm.svg?inline';
+import folderall from '~/assets/folderall.svg?inline'
+import folderapp from '~/assets/folderapp.svg?inline'
+import foldernpm from '~/assets/foldernpm.svg?inline'
 
 export default {
   name: 'Items',
@@ -88,78 +86,81 @@ export default {
     type: {
       type: String,
       required: true,
-    }
-  },
-  mounted() {
-    const assets = [];
-
-    if (this.media) {
-      const assetMedia = this.media.map((a) =>  ({
-        name: a.attributes.name,
-        alt: a.attributes.alternativeText,
-        extension: a.attributes.ext,
-        height: a.attributes.height,
-        width: a.attributes.width,
-        path: a.attributes.url,
-        small: {
-          url: a.attributes.formats.thumbnail.url,
-          height: a.attributes.formats.thumbnail.height,
-          width: a.attributes.formats.thumbnail.width
-        },
-        modal: {
-          url: a.attributes.formats.small.url,
-          height: a.attributes.formats.small.height,
-          width: a.attributes.formats.small.width
-        }
-      }));
-
-      assets.push(...assetMedia);
-    }
-
-    if (this.description) {
-      assets.push({ extension: '.md', name: 'description.md', content: this.description})
-    }
-
-    if (this.url) {
-      assets.push({ extension: 'www', name: this.url });
-    }
-
-    this.forCollapseCompo = assets;
+    },
   },
   data() {
     return {
       showMeta: false,
-      forCollapseCompo: false,
-    };
-  },
-  computed: {
-    parseDate() {
-      const d = new Date(this.lastPush);
-      return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
-    },
-    parseMiddleContent() {
-      if (this.type === 'private') return 'Private';
-      return '';
     }
   },
+  computed: {
+    forCollapseCompo() {
+      const assets = []
+
+      if (this.media) {
+        const assetMedia = this.media.map((a) => ({
+          name: a.attributes.name,
+          alt: a.attributes.alternativeText,
+          extension: a.attributes.ext,
+          height: a.attributes.height,
+          width: a.attributes.width,
+          path: a.attributes.url,
+          small: {
+            url: a.attributes.formats.thumbnail.url,
+            height: a.attributes.formats.thumbnail.height,
+            width: a.attributes.formats.thumbnail.width,
+          },
+          modal: {
+            url: a.attributes.formats.small.url,
+            height: a.attributes.formats.small.height,
+            width: a.attributes.formats.small.width,
+          },
+        }))
+
+        assets.push(...assetMedia)
+      }
+
+      if (this.description) {
+        assets.push({
+          extension: '.md',
+          name: 'description.md',
+          content: this.description,
+        })
+      }
+
+      if (this.url) {
+        assets.push({ extension: 'www', name: this.url })
+      }
+
+      return assets;
+    },
+    parseDate() {
+      const d = new Date(this.lastPush)
+      return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`
+    },
+    parseMiddleContent() {
+      if (this.type === 'private') return 'Private'
+      return ''
+    },
+  },
   directives: {
-    "add-class-hover": {
+    'add-class-hover': {
       bind(el, b, node) {
         el.addEventListener('click', () => {
-          el.classList.remove('project__hover');
+          el.classList.remove('project__hover')
         })
-        el.addEventListener("mouseenter", () => {
-          if (node.context.showMeta) return false;
-          el.classList.add('project__hover');
-        });
-        el.addEventListener("mouseleave", () => {
-          el.classList.remove('project__hover');
-        });
+        el.addEventListener('mouseenter', () => {
+          if (node.context.showMeta) return false
+          el.classList.add('project__hover')
+        })
+        el.addEventListener('mouseleave', () => {
+          el.classList.remove('project__hover')
+        })
       },
       unbind(el) {
-        el.removeEventListener('click', () => {});
-        el.removeEventListener("mouseenter", () => {});
-        el.removeEventListener("mouseleave", () => {});
+        el.removeEventListener('click', () => {})
+        el.removeEventListener('mouseenter', () => {})
+        el.removeEventListener('mouseleave', () => {})
       },
     },
   },
@@ -168,7 +169,7 @@ export default {
 
 <style lang="scss" scoped>
 .is__private {
-  opacity: .5;
+  opacity: 0.5;
 
   &:hover {
     cursor: not-allowed;

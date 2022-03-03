@@ -1,7 +1,7 @@
 <template>
   <section 
-  :class="[containerFullHd && 'is-fullhd']"
-  class="container loader">
+  :class="isFullHd"
+  class="loader">
     <div 
     v-if="loading"
     class="loader--skeleton">
@@ -64,6 +64,11 @@ export default {
   created() {
     if (process.client) return this.checkAppAvailability();
   },
+  computed: {
+    isFullHd() {
+      return this.loading ? '' : 'container is-fullhd'
+    }
+  },
   methods: {
     ...mapActions(['fetchRepo', 'fetchProducts']),
     fail(error) {
@@ -92,12 +97,10 @@ export default {
       });
 
       if (window.innerWidth <= 700) {
-        this.containerFullHd = false;
         this.available = false;
         return false;
       }
 
-      this.containerFullHd = true;
       return true;
     }
   },
