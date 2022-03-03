@@ -1,6 +1,6 @@
 <template>
   <div
-    @click="showMeta = !showMeta"
+    @click="$emit('switchItemActive', !active)"
     :class="['project--item', type !== 'public' ? 'is__private' : 'is__public']"
     v-add-class-hover
   >
@@ -27,7 +27,7 @@
       <div class="project--item--right--id">{{ repoId }}</div>
       <div class="project--item--right--pushed">{{ parseDate }}</div>
     </div>
-    <items-collapse v-if="showMeta" :assets="forCollapseCompo"></items-collapse>
+    <items-collapse v-if="active" :assets="forCollapseCompo"></items-collapse>
   </div>
 </template>
 
@@ -44,6 +44,10 @@ export default {
     foldernpm,
   },
   props: {
+    active: {
+      type: Boolean,
+      required: true,
+    },
     media: {
       type: [Array, Boolean],
       default: false,
@@ -87,11 +91,6 @@ export default {
       type: String,
       required: true,
     },
-  },
-  data() {
-    return {
-      showMeta: false,
-    }
   },
   computed: {
     forCollapseCompo() {

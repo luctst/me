@@ -42,8 +42,8 @@
           <button @click="openActivity">_activity</button>
         </div>
       </header>
-      <main class="projects--container">
-        <header class="projects--container--header">
+      <main class="projects--container" ref="projectContainer">
+        <header class="projects--container--header" ref="projectHeader">
           <div>Filename</div>
           <section>
             <div>Id</div>
@@ -59,6 +59,7 @@
           v-for="(d, i) in $store.state[filter]"
           v-else
           :key="i"
+          :active="itemActive.includes(d.id)"
           :media="d.media"
           :itemsType="filter"
           :repoName="d.name"
@@ -68,7 +69,8 @@
           :language="d.language ? d.language : false"
           :topics="d.topics"
           :lastPush="d.pushed_at"
-          :type="d.visibility"></items>
+          :type="d.visibility"
+          @switchItemActive="function (emitData) { switchItemsActive(emitData, d.id) }"></items>
         </section>
       </main>
     </section>
@@ -94,6 +96,8 @@ export default {
     Arrow,
   },
   mounted() {
+    this.$refs.itemsContainer.setAttribute('style', `max-height:${this.$refs.projectContainer.clientHeight - this.$refs.projectHeader.clientHeight - 40}px;`);
+
     this.$refs.itemsContainer.addEventListener('scroll', async (event) => {
       if (!this.$store.state.canFetchRepos) return false;
 
@@ -105,6 +109,7 @@ export default {
   },
   data() {
     return {
+      itemActive: [],
       filter: 'app',
       titles: [
         {
@@ -130,6 +135,20 @@ export default {
     openActivity() {
       window.open('https://gitstalk.netlify.app/luctst');
     },
+    switchItemsActive(shouldActiveItem, itemId) {
+      if (!shouldActiveItem) {
+        const newArray = [...this.itemActive];
+        newArray.splice(
+          newArray.findIndex((i) => i === itemId), 
+          1
+        );
+        this.itemActive = newArray;
+        return true;
+      }
+
+      this.itemActive.push(itemId);
+      return true;
+    },
     switchItems(index) {
       const newTitles = this.titles.map((t, i) => {
         const newT = { ...t };
@@ -145,6 +164,7 @@ export default {
         return newT;
       });
 
+      this.itemActive = [];
       this.titles = newTitles;
     },
   }
@@ -155,29 +175,31 @@ export default {
 .home {
   background: $mainLightBg;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  height: calc(100vh - 40px);
   position: relative;
+  padding-top: 40px;
 
   @media screen and (min-width: 700px) {
-    height: -moz-available;
-    padding: 0 15px;
-    padding-top: 40px;
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  @media screen and (min-width: 800px) {
+    grid-template-columns: minmax(auto, 200px) 2fr;
   }
 
   @media screen and (min-width: 1100px) {
-    height: calc(100vh - 40px);
+    grid-template-columns: minmax(auto, 250px) 2fr;
+    column-gap: 0;
   }
-
-  @media screen and (min-width: 1200px) {
-    padding: 0;
-    padding-top: 40px;
-  }
-
 
   .sidebar {
     display: flex;
     flex-direction: column;
     height: 100%;
+    max-height: inherit;
     text-align: left;
     justify-content: space-between;
 
@@ -206,12 +228,9 @@ export default {
     }
 
     &--footer {
+      margin-bottom: 16px;
       max-width: 197px;
       width: 100%;
-
-      @media screen and (min-width: 1100px) {
-        margin-bottom: 40px;
-      }
 
       p {
         font-family: 'helvetica-thin', sans-serif;
@@ -249,7 +268,9 @@ export default {
 
   .projects {
     display: flex;
+    height: 100%;
     flex-direction: column;
+    max-height: inherit;
 
     &--header {
       display: flex;
@@ -290,7 +311,7 @@ export default {
           }
 
           @media screen and (min-width: 700px) {
-            font-size: 30px;
+            font-size: 34px;
             line-height: 32px;
           }
 
@@ -380,22 +401,8 @@ export default {
       }
 
       &--items {
+        height: 100%;
         overflow-y: scroll;
-
-        @media screen and (min-width: 700px) {
-          height: 450px;
-          max-height: 450px;
-        }
-
-        @media screen and (min-width: 920px) {
-          height: 416px;
-          max-height: 416px;
-        }
-
-        @media screen and (min-width: 1100px) {
-          height: inherit;
-          max-height: 470px;
-        }
 
         &--empty {
           width: 100%;
