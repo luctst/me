@@ -1,5 +1,5 @@
 <template>
-  <main class="container is-fullhd home">
+  <main  v-if="$store.state.appIsReady" class="container is-fullhd home">
     <section class="sidebar">
       <header class="sidebar--header">
         <h1>Lucas Tostée</h1>
@@ -42,15 +42,15 @@
           <button @click="openActivity">_activity</button>
         </div>
       </header>
-      <main class="projects--container" ref="projectContainer">
-        <header class="projects--container--header" ref="projectHeader">
+      <main class="projects--container">
+        <header class="projects--container--header">
           <div>Filename</div>
           <section>
             <div>Id</div>
             <div>{{ filter === 'repos' ? 'Last pushed' : 'Created at' }}</div>
           </section>
         </header>
-        <section class="projects--container--items" ref="itemsContainer">
+        <section class="projects--container--items">
           <div 
           v-if="!$store.state[filter] || !$store.state[filter].length" class="projects--container--items--empty">
             <p>There is no data for this category..</p>
@@ -94,18 +94,6 @@ export default {
   name: 'Home',
   components: {
     Arrow,
-  },
-  mounted() {
-    this.$refs.itemsContainer.setAttribute('style', `max-height:${this.$refs.projectContainer.clientHeight - this.$refs.projectHeader.clientHeight - 40}px;`);
-
-    this.$refs.itemsContainer.addEventListener('scroll', async (event) => {
-      if (!this.$store.state.canFetchRepos) return false;
-
-      const element = event.target;
-      if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-        await this.fetchRepo();
-      }
-    });
   },
   data() {
     return {
@@ -177,33 +165,33 @@ export default {
 .home {
   background: $mainLightBg;
   display: grid;
-  height: calc(100vh - 40px);
   position: relative;
-  padding-top: 40px;
 
   @media screen and (min-width: 700px) {
     grid-template-columns: auto 1fr;
     column-gap: 12px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   @media screen and (min-width: 800px) {
-    grid-template-columns: minmax(auto, 200px) 2fr;
+    grid-template-columns: minmax(auto, 26vw) 2fr;
   }
 
   @media screen and (min-width: 1100px) {
-    grid-template-columns: minmax(auto, 280px) 2fr;
+    grid-template-columns: minmax(auto, 26vw) 2fr;
     column-gap: 0;
   }
 
   .sidebar {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100vh - 40px);
     max-height: inherit;
+    padding-top: 40px;
     text-align: left;
     justify-content: space-between;
+    position: fixed;
 
     &--header {
       width: 100%;
@@ -273,11 +261,17 @@ export default {
     height: 100%;
     flex-direction: column;
     max-height: inherit;
+    grid-column: 2 / -1;
 
     &--header {
+      background-color: $mainLightBg;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
+      top: 0;
+      padding-top: 40px;
+      position: sticky;
+      z-index: 20;
 
       &--title {
         .title__active {
@@ -353,12 +347,7 @@ export default {
     }
 
     &--container {
-      flex-grow: 1;
-      height: inherit;
-      padding: 0;
       margin-top: 32px;
-      position: relative;
-      width: 100%;
 
       &--header {
         align-items: center;
@@ -403,9 +392,6 @@ export default {
       }
 
       &--items {
-        height: 100%;
-        overflow-y: scroll;
-
         &--empty {
           width: 100%;
           text-align: center;

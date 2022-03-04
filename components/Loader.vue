@@ -2,11 +2,6 @@
   <section 
   :class="isFullHd"
   class="loader">
-    <div 
-    v-if="loading"
-    class="loader--skeleton">
-      <loader></loader>
-    </div>
     <div
     v-if="!available"
     class="loader--not--available">
@@ -28,20 +23,25 @@
         </a>
       </footer>
     </div>
+    <template v-else>
+      <div 
+      v-if="loading"
+      class="loader--skeleton">
+        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_j2r5hnko.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+      </div>
+    </template>
   </section>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 
-import Loader from '~/assets/loader.svg?inline';
 import Arrow from '~/assets/arrow.svg?inline';
 
 export default {
   name: 'Load',
   fetchOnServer: false,
   components: {
-    Loader,
     Arrow,
   },
   data() {
@@ -74,34 +74,29 @@ export default {
     fail(error) {
       console.error(error);
     },
-    finish() {
-      this.loading = false;
-      this.available = true;
-    },
     checkAppAvailability() {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      if (window.innerWidth <= 700) {
+        if (!this.available) return false;
+        this.available = false;
+      } else {
+        this.available = true;
+      }
 
       window.addEventListener('resize', () => {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-
         if (window.innerWidth <= 700) {
           if (!this.available) return false;
           this.available = false;
           return true;
         }
 
-        if (this.available) return false;
-        this.available = true;
+        if (!this.loading) {
+          this.loading = true;
+        }
+
+        if (!this.available) {
+          this.available = true;
+        }
       });
-
-      if (window.innerWidth <= 700) {
-        this.available = false;
-        return false;
-      }
-
-      return true;
     }
   },
 }
@@ -113,7 +108,7 @@ export default {
   box-sizing: border-box;
   padding: 0  15px;
   position: fixed;
-  z-index: 10;
+  z-index: 30;
   top: 0;
   width: 100%;
 

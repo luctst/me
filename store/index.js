@@ -3,6 +3,7 @@ export const state = () => ({
   app: null,
   repos: null,
   canFetchRepos: true,
+  appIsReady: false,
   reposPage: 0,
   footerLinks: [
     {
