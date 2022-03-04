@@ -145,7 +145,10 @@ export default {
           el.classList.remove('project__hover')
         })
         el.addEventListener('mouseenter', () => {
-          if (node.context.showMeta) return false
+          if (
+            node.context.showMeta ||
+            el.classList.contains('is__private')
+          ) return false
           el.classList.add('project__hover')
         })
         el.addEventListener('mouseleave', () => {
@@ -165,9 +168,8 @@ export default {
 <style lang="scss" scoped>
 .is__private {
   opacity: 0.5;
-
   &:hover {
-    cursor: not-allowed;
+    cursor: default;
   }
 }
 

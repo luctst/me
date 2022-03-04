@@ -1,88 +1,93 @@
 <template>
-  <main  v-if="$store.state.appIsReady" class="container is-fullhd home">
-    <section class="sidebar">
-      <header class="sidebar--header">
-        <h1>Lucas Tostée</h1>
-        <h2>_ Full-Stack JS</h2>
-      </header>
-      <footer class="sidebar--footer">
-        <p>_ Welcome to my website, my name is Lucas, I live in Paris, I'm working as a full-stack JavaScript developer.</p>
-        <p>I currently maintain more than 100 projects on Github</p>
-        <div>
-          <a
-            v-for="(link, i) in $store.state.footerLinks"
-            :key="i"
-            :href="link.href"
-            target="_blank">
-            {{ link.content }}
-            <arrow></arrow>
-          </a>
-        </div>
-      </footer>
-    </section>
-    <section class="projects">
-      <header class="projects--header">
-        <div class="projects--header--title">
-          <h3
-          v-for="(t, i) in titles"
-          :key="i"
-          :class="[t.active ? 'title__active' : 'title__inactive']"
-          @click="switchItems(i)">
-            {{ t.content }}
-            <span>
-              {{ 
-                Array.isArray($store.state[t.store]) 
-                ? $store.state[t.store].length
-                : 0
-              }}
-            </span>
-          </h3>
-        </div>
-        <div class="projects--header--badge">
-          <button @click="openActivity">_activity</button>
-        </div>
-      </header>
-      <main class="projects--container">
-        <header class="projects--container--header">
-          <div>Filename</div>
-          <section>
-            <div>Id</div>
-            <div>{{ filter === 'repos' ? 'Last pushed' : 'Created at' }}</div>
-          </section>
+  <section v-if="$store.state.appIsAvailable">
+    <main v-if="!dataIsReady" class="loader">
+      <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_j2r5hnko.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+    </main>
+    <main v-else class="container is-fullhd home">
+      <section class="sidebar">
+        <header class="sidebar--header">
+          <h1>Lucas Tostée</h1>
+          <h2>_ Full-Stack JS</h2>
         </header>
-        <section class="projects--container--items">
-          <div 
-          v-if="!$store.state[filter] || !$store.state[filter].length" class="projects--container--items--empty">
-            <p>There is no data for this category..</p>
+        <footer class="sidebar--footer">
+          <p>_ Welcome to my website, my name is Lucas, I live in Paris, I'm working as a full-stack JavaScript developer.</p>
+          <p>I currently maintain more than 100 projects on Github</p>
+          <div>
+            <a
+              v-for="(link, i) in $store.state.footerLinks"
+              :key="i"
+              :href="link.href"
+              target="_blank">
+              {{ link.content }}
+              <arrow></arrow>
+            </a>
           </div>
-          <items
-          v-for="(d, i) in $store.state[filter]"
-          v-else
-          :key="i"
-          :active="itemActive.includes(d.id)"
-          :media="d.media"
-          :itemsType="filter"
-          :repoName="d.name"
-          :description="d.description"
-          :url="d.html_url"
-          :repoId="d.id"
-          :language="d.language ? d.language : false"
-          :topics="d.topics"
-          :lastPush="d.pushed_at"
-          :type="d.visibility"
-          @switchItemActive="function (emitData) { switchItemsActive(emitData, d) }"></items>
-        </section>
-      </main>
-    </section>
-    <template v-if="$store.state.modals.length">
-      <modal 
-      v-for="(modalData, i) in $store.state.modals"
-      ref="i"
-      :key="i"
-      :data="modalData"
-      @removeModal="$store.commit('REMOVE_MODAL', i)"></modal>
-    </template>
-  </main>
+        </footer>
+      </section>
+      <section class="projects">
+        <header class="projects--header">
+          <div class="projects--header--title">
+            <h3
+            v-for="(t, i) in titles"
+            :key="i"
+            :class="[t.active ? 'title__active' : 'title__inactive']"
+            @click="switchItems(i)">
+              {{ t.content }}
+              <span>
+                {{ 
+                  Array.isArray($store.state[t.store]) 
+                  ? $store.state[t.store].length
+                  : 0
+                }}
+              </span>
+            </h3>
+          </div>
+          <div class="projects--header--badge">
+            <button>_activity</button>
+          </div>
+          <div class="projects--header--banner">
+            <div>Filename</div>
+            <section>
+              <div>Id</div>
+              <div>{{ filter === 'repos' ? 'Last pushed' : 'Created at' }}</div>
+            </section>
+          </div>
+        </header>
+        <main class="projects--container">
+          <section class="projects--container--items">
+            <div 
+            v-if="!$store.state[filter] || !$store.state[filter].length" class="projects--container--items--empty">
+              <p>There is no data for this category..</p>
+            </div>
+            <items
+            v-for="(d, i) in $store.state[filter]"
+            v-else
+            :key="i"
+            :active="itemActive.includes(d.id)"
+            :media="d.media"
+            :itemsType="filter"
+            :repoName="d.name"
+            :description="d.description"
+            :url="d.html_url"
+            :repoId="d.id"
+            :language="d.language ? d.language : false"
+            :topics="d.topics"
+            :lastPush="d.pushed_at"
+            :type="d.visibility"
+            @switchItemActive="function (emitData) { switchItemsActive(emitData, d) }"></items>
+          </section>
+        </main>
+      </section>
+      <template v-if="$store.state.modals.length">
+        <modal 
+        v-for="(modalData, i) in $store.state.modals"
+        ref="i"
+        :key="i"
+        :data="modalData"
+        @removeModal="$store.commit('REMOVE_MODAL', i)"></modal>
+      </template>
+    </main>
+  </section>
 </template>
 
 <script>
@@ -95,8 +100,17 @@ export default {
   components: {
     Arrow,
   },
+  async mounted() {
+    try {
+      await Promise.all([ await this.fetchRepo(), await this.fetchProducts()] );
+      this.dataIsReady = true;
+    } catch (error) {
+      console.error(error);
+    }
+  },
   data() {
     return {
+      dataIsReady: false,
       itemActive: [],
       filter: 'app',
       titles: [
@@ -119,10 +133,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchRepo']),
-    openActivity() {
-      window.open('https://gitstalk.netlify.app/luctst');
-    },
+    ...mapActions(['fetchRepo', 'fetchProducts']),
     switchItemsActive(shouldActiveItem, itemData) {
       if (itemData.visibility !== 'public') return false;
 
@@ -168,8 +179,8 @@ export default {
   position: relative;
 
   @media screen and (min-width: 700px) {
-    grid-template-columns: auto 1fr;
-    column-gap: 12px;
+    grid-template-columns: minmax(auto, 26vw) 1fr;
+    column-gap: 26px;
     padding-left: 40px;
     padding-right: 40px;
   }
@@ -258,15 +269,15 @@ export default {
 
   .projects {
     display: flex;
-    height: 100%;
     flex-direction: column;
     max-height: inherit;
     grid-column: 2 / -1;
 
     &--header {
+      align-items: flex-start;
       background-color: $mainLightBg;
       display: flex;
-      align-items: flex-start;
+      flex-wrap: wrap;
       justify-content: space-between;
       top: 0;
       padding-top: 40px;
@@ -344,16 +355,14 @@ export default {
           outline: none;
         }
       }
-    }
 
-    &--container {
-      margin-top: 32px;
-
-      &--header {
+      &--banner {
         align-items: center;
         border-bottom: 1px solid $secondaryGrey;
         display: flex;
+        flex: 0 0 100%;
         height: 31px;
+        margin-top: 32px;
         max-height: 31px;
         max-width: inherit;
         position: sticky;
@@ -390,7 +399,9 @@ export default {
           }
         }
       }
+    }
 
+    &--container {
       &--items {
         &--empty {
           width: 100%;

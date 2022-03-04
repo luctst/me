@@ -141,10 +141,13 @@ export default {
     }
 
     &--content {
+      align-items: flex-end;
       color: $mainBlack;
+      display: flex;
       font-family: 'helvetica-medium', sans-serif;
       font-weight: 500;
       height: max-content;
+      min-height: 324px;
       width: 440px;
       max-width: 500px;
       line-height: 28.63px;

@@ -1,9 +1,8 @@
 <template>
-  <section 
-  :class="isFullHd"
+  <section
+  v-if="!$store.state.appIsAvailable"
   class="loader">
     <div
-    v-if="!available"
     class="loader--not--available">
       <header class="loader--not--available--header">
         <h1>Lucas Tostée</h1>
@@ -23,78 +22,41 @@
         </a>
       </footer>
     </div>
-    <template v-else>
-      <div 
-      v-if="loading"
-      class="loader--skeleton">
-        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_j2r5hnko.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
-      </div>
-    </template>
   </section>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 import Arrow from '~/assets/arrow.svg?inline';
 
 export default {
   name: 'Load',
-  fetchOnServer: false,
   components: {
     Arrow,
   },
-  data() {
-    return {
-      available: true,
-      loading: true,
-      containerFullHd: null,
-    };
-  },
-  async fetch() {
-    try {
-      await this.fetchRepo();
-      await this.fetchProducts();
-      this.loading = false;
-    } catch (error) {
-      this.fail(error);
-    }
-
-  },
   created() {
-    if (process.client) return this.checkAppAvailability();
-  },
-  computed: {
-    isFullHd() {
-      return this.loading ? '' : 'container is-fullhd'
-    }
+    if (process.client) this.checkAppAvailability();
   },
   methods: {
-    ...mapActions(['fetchRepo', 'fetchProducts']),
-    fail(error) {
-      console.error(error);
+    updateAppIsAvailable(bool) {
+      return this.$store.commit('APP_IS_READY', bool);
     },
     checkAppAvailability() {
       if (window.innerWidth <= 700) {
-        if (!this.available) return false;
-        this.available = false;
+        if (!this.$store.state.appIsAvailable) return false;
+        this.updateAppIsAvailable(false);
       } else {
-        this.available = true;
+        this.updateAppIsAvailable(true);
       }
 
       window.addEventListener('resize', () => {
         if (window.innerWidth <= 700) {
-          if (!this.available) return false;
-          this.available = false;
+          if (!this.$store.state.appIsAvailable) return false;
+          this.updateAppIsAvailable(false);
           return true;
         }
 
-        if (!this.loading) {
-          this.loading = true;
-        }
-
         if (!this.available) {
-          this.available = true;
+          this.updateAppIsAvailable(true);
         }
       });
     }

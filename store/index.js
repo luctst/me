@@ -3,7 +3,7 @@ export const state = () => ({
   app: null,
   repos: null,
   canFetchRepos: true,
-  appIsReady: false,
+  appIsAvailable: false,
   reposPage: 0,
   footerLinks: [
     {
@@ -24,9 +24,12 @@ export const state = () => ({
 });
 
 export const mutations = {
+  APP_IS_READY(state, bool) {
+    state.appIsAvailable = bool;
+  },
   ADD_MODAL(state, newModalData) {
-    newModalData.top = 25;
-    newModalData.left = 50;
+    newModalData.top = Math.floor(Math.random() * ((window.innerHeight - newModalData.height) - 0 + 1) - 0);
+    newModalData.left = Math.floor(Math.random() * ((window.innerWidth - newModalData.width) - 0 + 1) - 0);
     newModalData.zIndex = 100 + state.modals.length;
 
     state.modals.push(newModalData);
