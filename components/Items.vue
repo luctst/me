@@ -12,12 +12,13 @@
       </div>
       <div class="project--item--left--name">{{ repoName }}</div>
       <div class="project--item--left--topics">
-        <span v-if="language">{{ language }}</span>
-        <template v-if="topics.length">
-          <span v-for="(topic, y) in topics" :key="y">
-            {{ topic }}
-          </span>
+        <span v-if="language" class="project--item--left--topics--tag">{{ language }}</span>
+        <template v-else>
+            <span v-if="topics.length" class="project--item--left--topics--tag">{{ topics[0] }}</span>
         </template>
+        <span v-if="topics.length > 1" class="project--item--left--topics--count">
+          +{{ topics.length - 1 }}
+        </span>
       </div>
     </div>
     <div v-if="type !== 'public'" class="project--item--middle">
@@ -27,7 +28,11 @@
       <div class="project--item--right--id">{{ repoId }}</div>
       <div class="project--item--right--pushed">{{ parseDate }}</div>
     </div>
-    <items-collapse v-if="active" :assets="forCollapseCompo"></items-collapse>
+    <items-collapse 
+    v-if="active" 
+    :assets="forCollapseCompo" 
+    :topics="collapseCompoTopics">
+    </items-collapse>
   </div>
 </template>
 
@@ -93,6 +98,14 @@ export default {
     },
   },
   computed: {
+    collapseCompoTopics() {
+      const topics = [...this.topics];
+      if (!topics.length) return false;
+      if (this.language) return topics;
+
+      topics.splice(0, 1);
+      return topics;
+    },
     forCollapseCompo() {
       const assets = []
 
@@ -146,9 +159,10 @@ export default {
         })
         el.addEventListener('mouseenter', () => {
           if (
-            node.context.showMeta ||
+            node.context.active ||
             el.classList.contains('is__private')
-          ) return false
+          ) return false;
+
           el.classList.add('project__hover')
         })
         el.addEventListener('mouseleave', () => {
@@ -231,23 +245,8 @@ export default {
       flex: 0 0 auto;
       height: 100%;
       display: flex;
-      overflow-y: hidden;
-      scrollbar-width: none;
-      white-space: nowrap;
 
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      @media screen and (min-width: 700px) {
-        max-width: 150px;
-      }
-
-      @media screen and (min-width: 1100px) {
-        max-width: 400px;
-      }
-
-      span {
+      &--tag {
         background-color: $mainYellow;
         border-radius: 2px;
         color: $mainBlack;
@@ -256,8 +255,15 @@ export default {
         line-height: 12px;
         font-weight: 500;
         height: fit-content;
-        margin-right: 8px;
+        margin-right: 6px;
         padding: 4px 5px;
+      }
+
+      &--count {
+        color: $mainBlack;
+        font-family: 'helvetice-thin', sans-serif;
+        font-size: 10px;
+        font-weight: 300;
       }
     }
   }

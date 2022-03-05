@@ -5,8 +5,16 @@
     <div
     class="loader--not--available">
       <header class="loader--not--available--header">
-        <h1>Lucas Tostée</h1>
-        <h2>_ Full-Stack JS</h2>
+        <h1>
+          <span>
+            <span>Lucas Tostée</span>
+          </span>
+        </h1>
+        <h2>
+          <span>
+            <span>_ Full-Stack JS</span>
+          </span>
+        </h2>
       </header>
       <main class="loader--not--available--main">
         <h3>Discover all my projects via the <span>desktop version</span> or on Github</h3>
@@ -98,11 +106,19 @@ export default {
 
       h1,
       h2 {
-        animation: fadeIn 1000ms ease forwards;
-        animation-delay: 1000ms;
-        transform: translateY(100%);
         font-size: 14px;
         margin: 0;
+
+        > span {
+          display: block;
+          overflow: hidden;
+
+          > span {
+            display: block;
+            animation: fadeIn 500ms ease forwards;
+            transform: translateY(100%);
+          }
+        }
       }
 
       h1 {
@@ -111,12 +127,24 @@ export default {
         font-weight: 700;
         margin-bottom: 5px;
         line-height: 17.09px;
+
+        > span {
+          > span {
+            animation-delay: 200ms;
+          }
+        }
       }
   
       h2 {
         color: $mainBlack;
         font-family: 'helvetica-thin', sans-serif;
         font-weight: normal;
+
+        > span {
+          > span {
+            animation-delay: 400ms;
+          }
+        }
       }
     }
 

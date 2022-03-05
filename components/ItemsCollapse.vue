@@ -19,6 +19,9 @@
       @click.stop="handleModal(a)">{{ a.name }}</div>
       </div>
     </div>
+    <div v-if="topics" class="project--item--meta--topics">
+      <span v-for="(t, i) in topics" :key="i">{{ t }}</span>
+    </div>
   </div>
 </template>
 
@@ -36,6 +39,10 @@ export default {
     assets: {
       type: [Array, Boolean],
       default: false,
+    },
+    topics: {
+      type: [Array, Boolean],
+      required: true,
     }
   },
   methods: {
@@ -59,8 +66,11 @@ export default {
 <style lang="scss" scoped>
 .project--item--meta {
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 15px;
   flex: 0 0 100%;
+  padding-left: 32px;
 
   &--container {
     display: grid;
@@ -68,7 +78,6 @@ export default {
     grid-auto-rows: auto;
     grid-template-rows: repeat(3, auto);
     grid-gap: 12px;
-    padding-left: 32px;
 
     @media screen and (min-width: 700px) {
       grid-template-columns: repeat(3, 1fr);
@@ -112,6 +121,25 @@ export default {
           font-size: 12px;
         }
       }
+    }
+  }
+
+  &--topics {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 8px;
+
+    span {
+      background-color: $mainYellow;
+      border-radius: 2px;
+      color: $mainBlack;
+      font-family: 'helvetica-medium', sans-serif;
+      font-size: 10px;
+      line-height: 12px;
+      font-weight: 500;
+      height: fit-content;
+      margin-right: 6px;
+      padding: 4px 5px;
     }
   }
 }

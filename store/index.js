@@ -5,6 +5,7 @@ export const state = () => ({
   canFetchRepos: true,
   appIsAvailable: false,
   reposPage: 0,
+  totalRepos: null,
   footerLinks: [
     {
       href: 'https://github.com/luctst',
@@ -28,11 +29,17 @@ export const mutations = {
     state.appIsAvailable = bool;
   },
   ADD_MODAL(state, newModalData) {
-    newModalData.top = Math.floor(Math.random() * ((window.innerHeight - newModalData.height) - 0 + 1) - 0);
-    newModalData.left = Math.floor(Math.random() * ((window.innerWidth - newModalData.width) - 0 + 1) - 0);
+    const newModalHeight = newModalData.extension === '.md' ? 324 : newModalData.height;
+    const newModalWidth = newModalData.extension === '.md' ? 500 : newModalData.width;
+    
+    newModalData.top = Math.floor(Math.random() * ((window.innerHeight - newModalHeight) - 0 + 1) - 0);
+    newModalData.left = Math.floor(Math.random() * ((window.innerWidth - newModalWidth) - 0 + 1) - 0);
     newModalData.zIndex = 100 + state.modals.length;
 
     state.modals.push(newModalData);
+  },
+  COUNT_REPOS(state, repos) {
+    state.totalRepos = repos;
   },
   REMOVE_MODAL(state, index) {
     const newModalsArray = [...state.modals];
@@ -100,6 +107,20 @@ export const actions = {
 
     if (app.length) commit('UPDATE_APP', app);
     if (npm.length) commit('UPDATE_NPM', npm);
+  },
+  async countRepos({ commit}) {
+    const data = await this.$axios.$get(
+      'https://api.github.com/user',
+      {
+        headers: {
+          Authorization: `token ${process.env.APIKEY}`,
+          Accept: 'application/vnd.github.v3+json',
+          "User-Agent": "luctst",
+        }
+      }
+    );
+
+    commit('COUNT_REPOS', data.public_repos);
   },
   async fetchRepo({ commit, state }) {
     if (state.canFetchRepos) {

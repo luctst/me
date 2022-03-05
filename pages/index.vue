@@ -6,20 +6,39 @@
     <main v-else class="container is-fullhd home">
       <section class="sidebar">
         <header class="sidebar--header">
-          <h1>Lucas Tostée</h1>
-          <h2>_ Full-Stack JS</h2>
+          <h1>
+            <span><span>Lucas Tostée</span></span>
+          </h1>
+          <h2>
+            <span>
+              <span>
+                _ Full-Stack JS
+              </span>
+            </span>
+          </h2>
         </header>
         <footer class="sidebar--footer">
-          <p>_ Welcome to my website, my name is Lucas, I live in Paris, I'm working as a full-stack JavaScript developer.</p>
-          <p>I currently maintain more than 100 projects on Github</p>
+          <p
+          v-for="(f, i) in footerContent"
+          :key="i">
+            <span>
+              <span :style="`animation-delay:${400 + (i * 200)}ms;`">
+                {{ f }}
+              </span>
+            </span>
+          </p>
           <div>
             <a
               v-for="(link, i) in $store.state.footerLinks"
               :key="i"
               :href="link.href"
               target="_blank">
-              {{ link.content }}
-              <arrow></arrow>
+              <span>
+                <span :style="`animation-delay:${1000 + (i * 200)}ms;`">
+                  {{ link.content }}
+                  <arrow></arrow>
+                </span>
+              </span>
             </a>
           </div>
         </footer>
@@ -34,16 +53,14 @@
             @click="switchItems(i)">
               {{ t.content }}
               <span>
-                {{ 
-                  Array.isArray($store.state[t.store]) 
-                  ? $store.state[t.store].length
-                  : 0
+                {{
+                  parseSpanNumber(t.store)
                 }}
               </span>
             </h3>
           </div>
           <div class="projects--header--badge">
-            <button>_activity</button>
+            <button><span class="is__blink">_</span>activity</button>
           </div>
           <div class="projects--header--banner">
             <div>Filename</div>
@@ -102,7 +119,16 @@ export default {
   },
   async mounted() {
     try {
-      await Promise.all([ await this.fetchRepo(), await this.fetchProducts()] );
+      window.addEventListener('scroll', async () => {
+        if (!this.$store.state.canFetchRepos) return false;
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) await this.fetchRepo();
+      });
+
+      await Promise.all([ 
+        await this.countRepos(),
+        await this.fetchRepo(), 
+        await this.fetchProducts()
+      ]);
       this.dataIsReady = true;
     } catch (error) {
       console.error(error);
@@ -113,6 +139,12 @@ export default {
       dataIsReady: false,
       itemActive: [],
       filter: 'app',
+      footerContent: [
+        '_ Welcome to my website,',
+        'my name is Lucas, I live in Paris,',
+        'I\'m working as a full-stack JavaScript developer.',
+        'I currently maintain more than 100 projects on Github '
+      ],
       titles: [
         {
           content: 'Products',
@@ -133,7 +165,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchRepo', 'fetchProducts']),
+    ...mapActions(['fetchRepo', 'fetchProducts', 'countRepos']),
     switchItemsActive(shouldActiveItem, itemData) {
       if (itemData.visibility !== 'public') return false;
 
@@ -168,15 +200,17 @@ export default {
       this.itemActive = [];
       this.titles = newTitles;
     },
+    parseSpanNumber(storeName) {
+      if (storeName === 'repos') return this.$store.state.totalRepos;
+      return Array.isArray(this.$store.state[storeName]) ? this.$store.state[storeName].length : 0;
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .home {
-  background: $mainLightBg;
   display: grid;
-  position: relative;
 
   @media screen and (min-width: 700px) {
     grid-template-columns: minmax(auto, 26vw) 1fr;
@@ -211,6 +245,17 @@ export default {
       h2 {
         font-size: 14px;
         margin: 0;
+
+        > span {
+          display: block;
+          overflow: hidden;
+
+          > span {
+            display: block;
+            animation: fadeIn 500ms ease forwards;
+            transform: translateY(100%);
+          }
+        }
       }
 
       h1 {
@@ -219,12 +264,24 @@ export default {
         font-weight: 700;
         margin-bottom: 5px;
         line-height: 17.09px;
+
+        > span {
+          > span {
+            animation-delay: 200ms;
+          }
+        }
       }
   
       h2 {
         color: $mainBlack;
         font-family: 'helvetica-thin', sans-serif;
         font-weight: normal;
+
+        > span {
+          > span {
+            animation-delay: 400ms;
+          }
+        }
       }
     }
 
@@ -233,13 +290,29 @@ export default {
       max-width: 197px;
       width: 100%;
 
+      p:last-of-type {
+        margin: 8px 0;
+      }
+
       p {
         font-family: 'helvetica-thin', sans-serif;
         font-size: 14px;
         font-weight: 400;
         line-height: 16.7px;
         color: $mainBlack;
-        margin-bottom: 8px;
+        margin: 0;
+
+
+        > span {
+          display: block;
+          overflow: hidden;
+
+          > span {
+            display: block;
+            animation: fadeIn 500ms ease forwards;
+            transform: translateY(100%);
+          }
+        }
       }
 
       div {
@@ -255,7 +328,18 @@ export default {
           font-weight: 550;
           text-decoration: none;
           line-height: 14.56px;   
-          margin-right: 5px;     
+          margin-right: 5px;   
+          
+          > span {
+          display: block;
+          overflow: hidden;
+
+          > span {
+            display: block;
+            animation: fadeIn 500ms ease forwards;
+            transform: translateY(100%);
+          }
+        }
 
           svg {
             height: 8px;
@@ -353,6 +437,10 @@ export default {
           padding: 7px 11px 8px;
           text-align: right;
           outline: none;
+
+          span {
+            animation: blink 1.3s step-start 0s infinite;
+          }
         }
       }
 

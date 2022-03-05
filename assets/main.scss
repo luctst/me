@@ -35,6 +35,12 @@ Keyframes
   }
 }
 
+@keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+
 /**********
 Variables
 **********/
