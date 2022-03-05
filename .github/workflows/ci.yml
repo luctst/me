@@ -5,10 +5,7 @@ on:
     branches:
       - main
       - master
-  pull_request:
-    branches:
-      - main
-      - master
+  workflow_dispatch:
 
 jobs:
   ci:
@@ -42,4 +39,26 @@ jobs:
 
       - name: Run linter 👀
         run: npm run lint
+      
+      - name: Create .env
+        if: ${{ success() }}
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          file_name: .env
+          envkey_APIKEY: ${{ secrets.APIKEY }}
+          envkey_STRAPIKEY: ${{ secrets.STRAPIKEY }}
+          envkey_API_URL: ${{ secrets.API_URL }}
+      
+      - name: Generate build
+        if: ${{ success() }}
+        run: npm run generate
 
+      - name: Deploy S3
+        if: ${{ success() }}
+        uses: jakejarvis/s3-sync-action@be0c4ab89158cac4278689ebedd8407dd5f35a83
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_REGION: 'eu-west-1'
+          SOURCE_DIR: 'dist'
