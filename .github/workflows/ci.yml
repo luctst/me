@@ -64,6 +64,7 @@ jobs:
           SOURCE_DIR: 'dist'
       
       - name: Invalidate Cloudfront
+        if: ${{ success() }}
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           DISTRIBUTION: ${{ secrets.DISTRIBUTION_DEV }}

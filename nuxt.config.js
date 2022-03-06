@@ -1,5 +1,9 @@
 require('dotenv').config();
 export default {
+  target: 'static',
+  generate: {
+    cache: false,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   loading: '~/components/Loader.vue',
   head: {

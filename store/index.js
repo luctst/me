@@ -3,7 +3,6 @@ export const state = () => ({
   app: null,
   repos: null,
   canFetchRepos: true,
-  appIsAvailable: false,
   reposPage: 0,
   totalRepos: null,
   footerLinks: [
@@ -25,9 +24,6 @@ export const state = () => ({
 });
 
 export const mutations = {
-  APP_IS_READY(state, bool) {
-    state.appIsAvailable = bool;
-  },
   ADD_MODAL(state, newModalData) {
     const newModalHeight = newModalData.extension === '.md' ? 324 : newModalData.height;
     const newModalWidth = newModalData.extension === '.md' ? 500 : newModalData.width;

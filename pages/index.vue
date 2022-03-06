@@ -1,109 +1,111 @@
 <template>
-  <section v-if="$store.state.appIsAvailable">
-    <main v-if="!dataIsReady" class="loader">
-      <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_j2r5hnko.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
-    </main>
-    <main v-else class="container is-fullhd home">
-      <section class="sidebar">
-        <header class="sidebar--header">
-          <h1>
-            <span><span>Lucas Tostée</span></span>
-          </h1>
-          <h2>
-            <span>
+  <section>
+    <template v-if="!showLoader">
+      <main v-if="!dataIsReady" class="loader">
+        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_j2r5hnko.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+      </main>
+      <main v-else class="container is-fullhd home">
+        <section class="sidebar">
+          <header class="sidebar--header">
+            <h1>
+              <span><span>Lucas Tostée</span></span>
+            </h1>
+            <h2>
               <span>
-                _ Full-Stack JS
-              </span>
-            </span>
-          </h2>
-        </header>
-        <footer class="sidebar--footer">
-          <p
-          v-for="(f, i) in footerContent"
-          :key="i">
-            <span>
-              <span :style="`animation-delay:${400 + (i * 200)}ms;`">
-                {{ f }}
-              </span>
-            </span>
-          </p>
-          <div>
-            <a
-              v-for="(link, i) in $store.state.footerLinks"
-              :key="i"
-              :href="link.href"
-              target="_blank">
-              <span>
-                <span :style="`animation-delay:${1000 + (i * 200)}ms;`">
-                  {{ link.content }}
-                  <arrow></arrow>
+                <span>
+                  _ Full-Stack JS
                 </span>
               </span>
-            </a>
-          </div>
-        </footer>
-      </section>
-      <section class="projects">
-        <header class="projects--header">
-          <div class="projects--header--title">
-            <h3
-            v-for="(t, i) in titles"
-            :key="i"
-            :class="[t.active ? 'title__active' : 'title__inactive']"
-            @click="switchItems(i)">
-              {{ t.content }}
+            </h2>
+          </header>
+          <footer class="sidebar--footer">
+            <p
+            v-for="(f, i) in footerContent"
+            :key="i">
               <span>
-                {{
-                  parseSpanNumber(t.store)
-                }}
+                <span :style="`animation-delay:${400 + (i * 200)}ms;`">
+                  {{ f }}
+                </span>
               </span>
-            </h3>
-          </div>
-          <div class="projects--header--badge">
-            <button><span class="is__blink">_</span>activity</button>
-          </div>
-          <div class="projects--header--banner">
-            <div>Filename</div>
-            <section>
-              <div>Id</div>
-              <div>{{ filter === 'repos' ? 'Last pushed' : 'Created at' }}</div>
-            </section>
-          </div>
-        </header>
-        <main class="projects--container">
-          <section class="projects--container--items">
-            <div 
-            v-if="!$store.state[filter] || !$store.state[filter].length" class="projects--container--items--empty">
-              <p>There is no data for this category..</p>
+            </p>
+            <div>
+              <a
+                v-for="(link, i) in $store.state.footerLinks"
+                :key="i"
+                :href="link.href"
+                target="_blank">
+                <span>
+                  <span :style="`animation-delay:${1000 + (i * 200)}ms;`">
+                    {{ link.content }}
+                    <arrow></arrow>
+                  </span>
+                </span>
+              </a>
             </div>
-            <items
-            v-for="(d, i) in $store.state[filter]"
-            v-else
-            :key="i"
-            :active="itemActive.includes(d.id)"
-            :media="d.media"
-            :itemsType="filter"
-            :repoName="d.name"
-            :description="d.description"
-            :url="d.html_url"
-            :repoId="d.id"
-            :language="d.language ? d.language : false"
-            :topics="d.topics"
-            :lastPush="d.pushed_at"
-            :type="d.visibility"
-            @switchItemActive="function (emitData) { switchItemsActive(emitData, d) }"></items>
-          </section>
-        </main>
-      </section>
-      <template v-if="$store.state.modals.length">
-        <modal 
-        v-for="(modalData, i) in $store.state.modals"
-        ref="i"
-        :key="i"
-        :data="modalData"
-        @removeModal="$store.commit('REMOVE_MODAL', i)"></modal>
-      </template>
-    </main>
+          </footer>
+        </section>
+        <section class="projects">
+          <header class="projects--header">
+            <div class="projects--header--title">
+              <h3
+              v-for="(t, i) in titles"
+              :key="i"
+              :class="[t.active ? 'title__active' : 'title__inactive']"
+              @click="switchItems(i)">
+                {{ t.content }}
+                <span>
+                  {{
+                    parseSpanNumber(t.store)
+                  }}
+                </span>
+              </h3>
+            </div>
+            <div class="projects--header--badge">
+              <button><span class="is__blink">_</span>activity</button>
+            </div>
+            <div class="projects--header--banner">
+              <div>Filename</div>
+              <section>
+                <div>Id</div>
+                <div>{{ filter === 'repos' ? 'Last pushed' : 'Created at' }}</div>
+              </section>
+            </div>
+          </header>
+          <main class="projects--container">
+            <section class="projects--container--items">
+              <div 
+              v-if="!$store.state[filter] || !$store.state[filter].length" class="projects--container--items--empty">
+                <p>There is no data for this category..</p>
+              </div>
+              <items
+              v-for="(d, i) in $store.state[filter]"
+              v-else
+              :key="i"
+              :active="itemActive.includes(d.id)"
+              :media="d.media"
+              :itemsType="filter"
+              :repoName="d.name"
+              :description="d.description"
+              :url="d.html_url"
+              :repoId="d.id"
+              :language="d.language ? d.language : false"
+              :topics="d.topics"
+              :lastPush="d.pushed_at"
+              :type="d.visibility"
+              @switchItemActive="function (emitData) { switchItemsActive(emitData, d) }"></items>
+            </section>
+          </main>
+        </section>
+        <template v-if="$store.state.modals.length">
+          <modal 
+          v-for="(modalData, i) in $store.state.modals"
+          ref="i"
+          :key="i"
+          :data="modalData"
+          @removeModal="$store.commit('REMOVE_MODAL', i)"></modal>
+        </template>
+      </main>
+    </template>
   </section>
 </template>
 
@@ -119,10 +121,8 @@ export default {
   },
   async mounted() {
     try {
-      window.addEventListener('scroll', async () => {
-        if (!this.$store.state.canFetchRepos) return false;
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) await this.fetchRepo();
-      });
+      this.isAppAvailable();
+      this.fetchReposWhenScroll();
 
       await Promise.all([ 
         await this.countRepos(),
@@ -136,13 +136,12 @@ export default {
   },
   data() {
     return {
+      showLoader: false,
       dataIsReady: false,
       itemActive: [],
       filter: 'app',
       footerContent: [
-        '_ Welcome to my website,',
-        'my name is Lucas, I live in Paris,',
-        'I\'m working as a full-stack JavaScript developer.',
+        '_ Welcome to my website, my name is Lucas, I live in Paris, I\'m working as a full-stack JavaScript developer.',
         'I currently maintain more than 100 projects on Github '
       ],
       titles: [
@@ -166,6 +165,28 @@ export default {
   },
   methods: {
     ...mapActions(['fetchRepo', 'fetchProducts', 'countRepos']),
+    isAppAvailable() {
+      if (window.innerWidth <= 700) {
+        this.$nuxt.$loading.start();
+      }
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth <= 700) {
+          this.$nuxt.$loading.start();
+          return true;
+        }
+
+        if (!this.available) {
+          this.$nuxt.$loading.finish();
+        }
+      });
+    },
+    fetchReposWhenScroll() {
+      window.addEventListener('scroll', async () => {
+        if (!this.$store.state.canFetchRepos) return false;
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) await this.fetchRepo();
+      });
+    },
     switchItemsActive(shouldActiveItem, itemData) {
       if (itemData.visibility !== 'public') return false;
 
@@ -236,7 +257,8 @@ export default {
     padding-top: 40px;
     text-align: left;
     justify-content: space-between;
-    position: fixed;
+    position: sticky;
+    top: 0;
 
     &--header {
       width: 100%;
@@ -286,12 +308,13 @@ export default {
     }
 
     &--footer {
-      margin-bottom: 16px;
+      margin-bottom: 40px;
       max-width: 197px;
       width: 100%;
 
       p:last-of-type {
-        margin: 8px 0;
+        margin-top: 8px;
+        margin-bottom: 20px;
       }
 
       p {

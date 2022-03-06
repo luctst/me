@@ -1,6 +1,6 @@
 <template>
   <section
-  v-if="!$store.state.appIsAvailable"
+  v-if="!available"
   class="loader">
     <div
     class="loader--not--available">
@@ -41,33 +41,18 @@ export default {
   components: {
     Arrow,
   },
-  created() {
-    if (process.client) this.checkAppAvailability();
+  data() {
+    return {
+      available: true,
+    };
   },
   methods: {
-    updateAppIsAvailable(bool) {
-      return this.$store.commit('APP_IS_READY', bool);
+    start() {
+      this.available = false;
     },
-    checkAppAvailability() {
-      if (window.innerWidth <= 700) {
-        if (!this.$store.state.appIsAvailable) return false;
-        this.updateAppIsAvailable(false);
-      } else {
-        this.updateAppIsAvailable(true);
-      }
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth <= 700) {
-          if (!this.$store.state.appIsAvailable) return false;
-          this.updateAppIsAvailable(false);
-          return true;
-        }
-
-        if (!this.available) {
-          this.updateAppIsAvailable(true);
-        }
-      });
-    }
+    finish() {
+      this.available = true;
+    },
   },
 }
 </script>
