@@ -33,7 +33,7 @@
                 :href="link.href"
                 target="_blank">
                 <span>
-                  <span :style="`animation-delay:${1000 + (i * 200)}ms;`">
+                  <span :style="`animation-delay:${1000 + (i * 200)}ms;`" @click.stop="link.content === 'Mail' ? $ga.event({ eventCategory: 'prospect', eventAction: 'click'}) : null">
                     {{ link.content }}
                     <arrow></arrow>
                   </span>
