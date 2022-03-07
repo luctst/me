@@ -73,7 +73,7 @@
             <div class="projects--header--badge">
               <button><span class="is__blink">_</span>activity</button>
             </div>
-            <div class="projects--header--banner">
+            <div v-if="showDivUnderline" class="projects--header--banner">
               <div>Filename</div>
               <section>
                 <div>Id</div>
@@ -81,7 +81,7 @@
               </section>
             </div>
           </header>
-          <main class="projects--container">
+          <main v-if="showDivUnderline" class="projects--container">
             <section class="projects--container--items">
               <div 
               v-if="!$store.state[filter] || !$store.state[filter].length" class="projects--container--items--empty">
@@ -395,7 +395,6 @@ export default {
     grid-column: 2 / -1;
 
     &--header {
-      animation-delay: 4000ms;
       align-items: flex-start;
       background-color: $mainLightBg;
       display: flex;
@@ -513,7 +512,6 @@ export default {
       }
 
       &--banner {
-        animation-delay: 4000ms;
         animation: opacityOto100 1000ms ease forwards;
         align-items: center;
         border-bottom: 1px solid $secondaryGrey;
