@@ -6,8 +6,8 @@
   ref="modal">
     <header class="modal--header">
       <div class="modal--header--title">{{ data.name }}</div>
-      <div class="modal--header--icon">
-        <modalicon @click="$emit('removeModal')"></modalicon>
+      <div class="modal--header--icon" @click="$emit('removeModal')">
+        <modalicon></modalicon>
       </div>
     </header>
     <main class="modal--main">
@@ -107,8 +107,8 @@ export default {
 
     &--title {
       color: $mainBlack;
-      font-family: 'helvetica-thin', sans-serif;
-      font-weight: 300;
+      font-family: 'helvetica-regular', sans-serif;
+      font-weight: 400;
       line-height: 14px;
 
       @media screen and (min-width: 700px) {
@@ -117,11 +117,17 @@ export default {
     }
 
     &--icon {
-      svg {
-        &:hover {
-          cursor: pointer;
-        }
+      &:hover {
+        cursor: pointer;
+      }
 
+      height: 100%;
+      width: 5%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      svg {
         height: 10px;
         max-height: 100%;
         max-width: 100%;

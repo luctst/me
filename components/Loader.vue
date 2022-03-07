@@ -61,7 +61,7 @@ export default {
 .loader {
   background: $mainLightBg;
   box-sizing: border-box;
-  padding: 0  15px;
+  padding: 0 25px;
   position: fixed;
   z-index: 30;
   top: 0;
@@ -108,8 +108,8 @@ export default {
 
       h1 {
         color: $mainBlack;
-        font-family: 'helvetica-medium', sans-serif;
-        font-weight: 700;
+        font-family: 'helvetica-regular', sans-serif;
+        font-weight: 500;
         margin-bottom: 5px;
         line-height: 17.09px;
 
@@ -122,8 +122,8 @@ export default {
   
       h2 {
         color: $mainBlack;
-        font-family: 'helvetica-thin', sans-serif;
-        font-weight: normal;
+        font-family: 'helvetica-regular', sans-serif;
+        font-weight: 350;
 
         > span {
           > span {
@@ -134,13 +134,14 @@ export default {
     }
 
     &--main {
+      margin-top: -31px;
       overflow: hidden;
 
       h3 {
         animation: fadeIn 1000ms ease forwards;
         animation-delay: 600ms;
         color: $mainBlack;
-        font-family: 'helvetica-medium', sans-serif;
+        font-family: 'helvetica-regular', sans-serif;
         font-weight: 400;
         font-size: 42px;
         line-height: 50.11px;
@@ -175,7 +176,7 @@ export default {
         color: $mainBlack;
         font-family: 'helvetica-medium', sans-serif;
         font-size: 12px;
-        font-weight: 550;
+        font-weight: 500;
         text-decoration: none;
         line-height: 14.56px;        
         transform: translateY(100%);

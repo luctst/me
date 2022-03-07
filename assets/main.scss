@@ -15,12 +15,17 @@ Font
 *************/
 @font-face {
   font-family: 'helvetica-medium';
-  src: url('~assets/HelveticaMedium.ttf') format('ttf');
+  src: url('~assets/HelveticaNeueLTW1G-Md.otf') format('otf');
 }
 
 @font-face {
   font-family: 'helvetica-thin';
   src: url('~assets/HelveticaThin.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'helvetica-regular';
+  src: url('~assets/HelveticaNeueLTW1G-Roman.otf') format('otf');
 }
 
 /*************

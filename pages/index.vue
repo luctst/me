@@ -33,7 +33,7 @@
                 :href="link.href"
                 target="_blank">
                 <span>
-                  <span :style="`animation-delay:${1000 + (i * 200)}ms;`" @click.stop="link.content === 'Mail' ? $ga.event({ eventCategory: 'prospect', eventAction: 'click'}) : null">
+                  <span :style="`animation-delay:${1200 + (i * 200)}ms;`" @click.stop="link.content === 'Mail' ? $ga.event({ eventCategory: 'prospect', eventAction: 'click'}) : null">
                     {{ link.content }}
                     <arrow></arrow>
                   </span>
@@ -52,7 +52,7 @@
               :class="[t.active ? 'title__active' : 'title__inactive']"
               @click="switchItems(i)">
                 <span v-for="(l, y) in t.content" :key="y">
-                  <span :style="`animation-delay:${1400 + 200}ms;`" @animationend="animationEnd">
+                  <span :style="`animation-delay:${1200 + 250}ms;`" @animationend="animationEnd">
                     {{ l }}
                   </span>
                 </span>
@@ -151,8 +151,11 @@ export default {
       filter: 'app',
       showDivUnderline: false,
       footerContent: [
-        '_ Welcome to my website, my name is Lucas, I live in Paris, I\'m working as a full-stack JavaScript developer.',
-        'I currently maintain more than 100 projects on Github '
+        '_ Welcome to my website, my',
+        'name is Lucas, I live in Paris',
+        'I\'m working as a full-stack',
+        'JavaScript developer.',
+        'I currently maintain more than 100 projects on Github.',
       ],
       titles: [
         {
@@ -203,6 +206,9 @@ export default {
       });
     },
     switchItemsActive(shouldActiveItem, itemData) {
+      if (shouldActiveItem) {
+        this.$ga.event({ eventCategory: 'project', eventAction: 'click', eventLabel: itemData.name });
+      }
       if (itemData.visibility !== 'public') return false;
 
       if (!shouldActiveItem) {
@@ -366,7 +372,7 @@ export default {
           color: $mainBlack;
           font-family: 'helvetica-medium', sans-serif;
           font-size: 10px;
-          font-weight: 550;
+          font-weight: 500;
           text-decoration: none;
           line-height: 14.56px;   
           margin-right: 5px;   
@@ -383,9 +389,8 @@ export default {
         }
 
           svg {
-            height: 8px;
-            margin-left: 2px;
-            width: 8px;
+            height: 6px;
+            width: 6px;
           }
         }
       }
@@ -445,8 +450,8 @@ export default {
 
           align-items: flex-start;
           display: flex;
-          font-family: 'helvetica-medium', sans-serif;
-          font-weight: 300;
+          font-family: 'helvetica-regular', sans-serif;
+          font-weight: 350;
           margin: 0;
           margin-bottom: 6px;
 
@@ -463,7 +468,7 @@ export default {
 
           .title--number {
             animation: fadeInX 500ms ease forwards;
-            font-family: 'helvetica-thin', sans-serif;
+            font-family: 'helvetica-regular', sans-serif;
             font-weight: 400;
             line-height: 11.93px;
             font-size: 10px;

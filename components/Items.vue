@@ -22,7 +22,10 @@
       </div>
     </div>
     <div v-if="type !== 'public'" class="project--item--middle">
-      {{ type }}
+      <lock v-if="type === 'private'"></lock>
+      <template v-else>
+        {{ type }}
+      </template>
     </div>
     <div class="project--item--right">
       <div class="project--item--right--id">{{ repoId }}</div>
@@ -40,6 +43,7 @@
 import folderall from '~/assets/folderall.svg?inline'
 import folderapp from '~/assets/folderapp.svg?inline'
 import foldernpm from '~/assets/foldernpm.svg?inline'
+import lock from '~/assets/lock.svg?inline'
 
 export default {
   name: 'Items',
@@ -47,6 +51,7 @@ export default {
     folderall,
     folderapp,
     foldernpm,
+    lock
   },
   props: {
     active: {
@@ -148,7 +153,7 @@ export default {
     },
     parseDate() {
       const d = new Date(this.lastPush)
-      return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`
+      return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
     },
   },
   directives: {
