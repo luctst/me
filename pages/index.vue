@@ -179,19 +179,21 @@ export default {
       this.showDivUnderline = true;
     },
     isAppAvailable() {
-      if (window.innerWidth <= 700) {
-        this.$nuxt.$loading.start();
-      }
-
-      window.addEventListener('resize', () => {
+      this.$nextTick(() => {
         if (window.innerWidth <= 700) {
           this.$nuxt.$loading.start();
-          return true;
         }
-
-        if (!this.available) {
-          this.$nuxt.$loading.finish();
-        }
+  
+        window.addEventListener('resize', () => {
+          if (window.innerWidth <= 700) {
+            this.$nuxt.$loading.start();
+            return true;
+          }
+  
+          if (!this.available) {
+            this.$nuxt.$loading.finish();
+          }
+        });
       });
     },
     fetchReposWhenScroll() {
