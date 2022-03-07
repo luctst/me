@@ -19,7 +19,7 @@ export const state = () => ({
       content: 'Linkedin'
     }
   ],
-  hostName: 'http://ec2-54-77-208-143.eu-west-1.compute.amazonaws.com',
+  hostName: 'https://api.lucastostee.com',
   modals: [],
 });
 

@@ -11,8 +11,7 @@ services:
     command: 'npm run dev'
     volumes:
       - ./:/nuxt-app
-    networks:
-      - nuxt-network
-networks:
-  nuxt-network:
-    driver: bridge
+      - 'nuxtvm:/nuxt-app/node_modules'
+
+volumes:
+  nuxtvm:

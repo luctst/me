@@ -2,7 +2,7 @@
   <section>
     <template v-if="!showLoader">
       <main v-if="!dataIsReady" class="loader">
-        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_j2r5hnko.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+        <!-- <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_j2r5hnko.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player> -->
       </main>
       <main v-else class="container is-fullhd home">
         <section class="sidebar">
@@ -70,7 +70,7 @@
                 </div>
               </h3>
             </div>
-            <div class="projects--header--badge">
+            <div v-if="showDivUnderline" class="projects--header--badge">
               <button><span class="is__blink">_</span>activity</button>
             </div>
             <div v-if="showDivUnderline" class="projects--header--banner">
@@ -106,15 +106,15 @@
             </section>
           </main>
         </section>
-        <template v-if="$store.state.modals.length">
-          <modal 
-          v-for="(modalData, i) in $store.state.modals"
-          ref="i"
-          :key="i"
-          :data="modalData"
-          @removeModal="$store.commit('REMOVE_MODAL', i)"></modal>
-        </template>
       </main>
+      <section v-if="$store.state.modals.length" class="modal--container">
+        <modal 
+        v-for="(modalData, i) in $store.state.modals"
+        ref="i"
+        :key="i"
+        :data="modalData"
+        @removeModal="$store.commit('REMOVE_MODAL', i)"></modal>
+      </section>
     </template>
   </section>
 </template>
@@ -408,7 +408,6 @@ export default {
       &--title {
         .title__active {
           color: $mainBlack;
-          padding-bottom: 2px;
 
         }
 
@@ -420,13 +419,13 @@ export default {
         .is__title__underline {
           animation: widthLeftToRight 500ms ease forwards;
           background-color: $mainBlack;
-          flex: 0 0 100%;
+          flex: 0 0 calc(100% - 10px);
           height: 3px;
         }
 
         .is__title__underline__inactive {
           background-color: $mainLightBg;
-          flex: 0 0 100%;
+          flex: 0 0 calc(100% - 10px);
           height: 3px;
         }
 
@@ -489,6 +488,8 @@ export default {
       }
 
       &--badge {
+        animation: opacityOto100 400ms ease forwards;
+
         button {
           &:hover {
             cursor: pointer;
@@ -579,5 +580,18 @@ export default {
       }
     }
   }
+}
+
+.modal--container {
+  width: 100vw;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  pointer-events: none;
+  background-color: transparent;
+  pointer-events: all;
+  z-index: 21;
 }
 </style>
