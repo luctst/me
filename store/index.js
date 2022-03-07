@@ -7,6 +7,10 @@ export const state = () => ({
   totalRepos: null,
   footerLinks: [
     {
+      href: 'mailto:lucas.tostee@gmail.com',
+      content: 'Mail',
+    },
+    {
       href: 'https://github.com/luctst',
       content: 'GitHub',
     },
@@ -15,7 +19,7 @@ export const state = () => ({
       content: 'Dev.to'
     },
     {
-      href: '',
+      href: 'https://www.linkedin.com/in/lucas-tost%C3%A9e-97a57711a/',
       content: 'Linkedin'
     }
   ],
