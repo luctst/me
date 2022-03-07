@@ -7,7 +7,7 @@ export const state = () => ({
   totalRepos: null,
   footerLinks: [
     {
-      href: 'mailto:lucas.tostee@gmail.com',
+      href: 'mailto:lucas.tostee.dev@gmail.com',
       content: 'Mail',
     },
     {
