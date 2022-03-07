@@ -138,7 +138,7 @@ export default {
 
       h3 {
         animation: fadeIn 1000ms ease forwards;
-        animation-delay: 2000ms;
+        animation-delay: 600ms;
         color: $mainBlack;
         font-family: 'helvetica-medium', sans-serif;
         font-weight: 400;
@@ -169,7 +169,7 @@ export default {
 
       a {
         animation: fadeIn 1000ms ease forwards;
-        animation-delay: 3000ms;
+        animation-delay: 1000ms;
         align-items: center;
         display: flex;
         color: $mainBlack;

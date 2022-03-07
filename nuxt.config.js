@@ -54,7 +54,7 @@ export default {
 
   publicRuntimeConfig: {
     googleAnalytics: {
-      id: 'G-CFVTFEBD89',
+      id: '306125871',
       dev: true,
       checkDuplicatedScript: true,
     },
