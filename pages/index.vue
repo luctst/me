@@ -161,7 +161,7 @@ export default {
           active: true,
         },
         {
-          content: 'NodeJs Modules',
+          content: 'Node Modules',
           store: 'npm',
           active: false,
         },
