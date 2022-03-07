@@ -35,9 +35,49 @@ Keyframes
   }
 }
 
+@keyframes fadeInX {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 @keyframes blink {
   50% {
     opacity: 0.0;
+  }
+}
+
+@keyframes widthRightToLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes widthLeftToRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes opacityOto100 {
+  0% {
+    opacity: 0;
+    filter: blur(1px);
+    transform: translateY(100%);
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: translateY(0%);
   }
 }
 

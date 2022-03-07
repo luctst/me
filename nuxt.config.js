@@ -1,5 +1,10 @@
 require('dotenv').config();
 export default {
+  watchers: {
+    webpack: {
+      poll: true
+    }
+  },
   target: 'static',
   generate: {
     cache: false,

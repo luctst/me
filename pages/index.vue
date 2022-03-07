@@ -52,12 +52,22 @@
               :key="i"
               :class="[t.active ? 'title__active' : 'title__inactive']"
               @click="switchItems(i)">
-                {{ t.content }}
-                <span>
+                <span v-for="(l, y) in t.content" :key="y">
+                  <span :style="`animation-delay:${1400 + 200}ms;`" @animationend="animationEnd">
+                    {{ l }}
+                  </span>
+                </span>
+                <span
+                v-if="showDivUnderline" 
+                class="title--number">
                   {{
                     parseSpanNumber(t.store)
                   }}
                 </span>
+                <div
+                v-if="showDivUnderline"
+                :class="[t.active ? 'is__title__underline' : 'is__title__underline__inactive']">
+                </div>
               </h3>
             </div>
             <div class="projects--header--badge">
@@ -140,6 +150,7 @@ export default {
       dataIsReady: false,
       itemActive: [],
       filter: 'app',
+      showDivUnderline: false,
       footerContent: [
         '_ Welcome to my website, my name is Lucas, I live in Paris, I\'m working as a full-stack JavaScript developer.',
         'I currently maintain more than 100 projects on Github '
@@ -165,6 +176,9 @@ export default {
   },
   methods: {
     ...mapActions(['fetchRepo', 'fetchProducts', 'countRepos']),
+    animationEnd() {
+      this.showDivUnderline = true;
+    },
     isAppAvailable() {
       if (window.innerWidth <= 700) {
         this.$nuxt.$loading.start();
@@ -381,6 +395,7 @@ export default {
     grid-column: 2 / -1;
 
     &--header {
+      animation-delay: 4000ms;
       align-items: flex-start;
       background-color: $mainLightBg;
       display: flex;
@@ -394,8 +409,8 @@ export default {
       &--title {
         .title__active {
           color: $mainBlack;
-          text-decoration: underline;
           padding-bottom: 2px;
+
         }
 
         .title__inactive {
@@ -403,7 +418,25 @@ export default {
           text-decoration: none;
         }
 
+        .is__title__underline {
+          animation: widthLeftToRight 500ms ease forwards;
+          background-color: $mainBlack;
+          flex: 0 0 100%;
+          height: 3px;
+        }
+
+        .is__title__underline__inactive {
+          background-color: $mainLightBg;
+          flex: 0 0 100%;
+          height: 3px;
+        }
+
         h3 {
+          display: flex;
+          flex-wrap: wrap;
+          width: fit-content;
+          overflow: hidden;
+
           &:hover {
             cursor: pointer;
           }
@@ -415,7 +448,19 @@ export default {
           margin: 0;
           margin-bottom: 6px;
 
-          span {
+          > span {
+            display: block;
+            overflow: hidden;
+
+            > span {
+              display: block;
+              animation: fadeInX 500ms ease forwards;
+              transform: translateX(-100%);
+            }
+          }
+
+          .title--number {
+            animation: fadeInX 500ms ease forwards;
             font-family: 'helvetica-thin', sans-serif;
             font-weight: 400;
             line-height: 11.93px;
@@ -468,6 +513,8 @@ export default {
       }
 
       &--banner {
+        animation-delay: 4000ms;
+        animation: opacityOto100 1000ms ease forwards;
         align-items: center;
         border-bottom: 1px solid $secondaryGrey;
         display: flex;
@@ -513,7 +560,13 @@ export default {
     }
 
     &--container {
+      will-change: filter;
+      filter: blur(0px);
+      overflow: hidden;
+
       &--items {
+        animation: opacityOto100 1000ms ease forwards;
+
         &--empty {
           width: 100%;
           text-align: center;
