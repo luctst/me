@@ -1,9 +1,7 @@
 <template>
   <section>
     <template v-if="!showLoader">
-      <main v-if="!dataIsReady" class="loader">
-        <!-- <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_j2r5hnko.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player> -->
-      </main>
+      <main v-if="!dataIsReady" class="loader"></main>
       <main v-else class="container is-fullhd home">
         <section class="sidebar">
           <header class="sidebar--header">
@@ -44,7 +42,8 @@
             </div>
           </footer>
         </section>
-        <section class="projects">
+        <section
+        class="projects">
           <header class="projects--header">
             <div class="projects--header--title">
               <h3
@@ -71,7 +70,7 @@
               </h3>
             </div>
             <div v-if="showDivUnderline" class="projects--header--badge">
-              <button><span class="is__blink">_</span>activity</button>
+              <button @click="openGitStalk"><span class="is__blink">_</span>activity</button>
             </div>
             <div v-if="showDivUnderline" class="projects--header--banner">
               <div>Filename</div>
@@ -234,6 +233,9 @@ export default {
 
       this.itemActive = [];
       this.titles = newTitles;
+    },
+    openGitStalk() {
+      window.open('https://gitstalk.netlify.app/luctst');
     },
     parseSpanNumber(storeName) {
       if (storeName === 'repos') return this.$store.state.totalRepos;
@@ -591,7 +593,11 @@ export default {
   height: 100vh;
   pointer-events: none;
   background-color: transparent;
-  pointer-events: all;
+  pointer-events: none;
   z-index: 21;
+
+  section {
+    pointer-events: all;
+  }
 }
 </style>
