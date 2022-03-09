@@ -1,7 +1,17 @@
 <template>
   <section>
     <template v-if="!showLoader">
-      <main v-if="!dataIsReady" class="loader"></main>
+      <main v-if="!dataIsReady" class="loader">
+        <div>
+          <p v-for="(c, i) in loaderParse" :key="i">
+            <span>
+              <span :style="`animation-delay:${i * 200}ms;`">
+                {{ c }}
+              </span>
+            </span>
+          </p>
+        </div>
+      </main>
       <main v-else class="container is-fullhd home">
         <section class="sidebar">
           <header class="sidebar--header">
@@ -10,18 +20,14 @@
             </h1>
             <h2>
               <span>
-                <span>
-                  _ Full-Stack JS
-                </span>
+                <span> _ Full-Stack JS </span>
               </span>
             </h2>
           </header>
           <footer class="sidebar--footer">
-            <p
-            v-for="(f, i) in footerContent"
-            :key="i">
+            <p v-for="(f, i) in footerContent" :key="i">
               <span>
-                <span :style="`animation-delay:${400 + (i * 200)}ms;`">
+                <span :style="`animation-delay:${400 + i * 200}ms;`">
                   {{ f }}
                 </span>
               </span>
@@ -31,9 +37,20 @@
                 v-for="(link, i) in $store.state.footerLinks"
                 :key="i"
                 :href="link.href"
-                target="_blank">
+                target="_blank"
+              >
                 <span>
-                  <span :style="`animation-delay:${1200 + (i * 200)}ms;`" @click.stop="link.content === 'Mail' ? $ga.event({ eventCategory: 'prospect', eventAction: 'click'}) : null">
+                  <span
+                    :style="`animation-delay:${1200 + i * 200}ms;`"
+                    @click.stop="
+                      link.content === 'Mail'
+                        ? $ga.event({
+                            eventCategory: 'prospect',
+                            eventAction: 'click',
+                          })
+                        : null
+                    "
+                  >
                     {{ link.content }}
                     <arrow></arrow>
                   </span>
@@ -42,77 +59,88 @@
             </div>
           </footer>
         </section>
-        <section
-        class="projects">
+        <section class="projects">
           <header class="projects--header">
             <div class="projects--header--title">
               <h3
-              v-for="(t, i) in titles"
-              :key="i"
-              :class="[t.active ? 'title__active' : 'title__inactive']"
-              @click="switchItems(i)">
+                v-for="(t, i) in titles"
+                :key="i"
+                :class="[t.active ? 'title__active' : 'title__inactive']"
+                @click="switchItems(i)"
+              >
                 <span v-for="(l, y) in t.content" :key="y">
-                  <span :style="`animation-delay:${1200 + 250}ms;`" @animationend="animationEnd">
+                  <span
+                    :style="`animation-delay:${1200 + 250}ms;`"
+                    @animationend="animationEnd"
+                  >
                     {{ l }}
                   </span>
                 </span>
-                <span
-                v-if="showDivUnderline" 
-                class="title--number">
-                  {{
-                    parseSpanNumber(t.store)
-                  }}
+                <span v-if="showDivUnderline" class="title--number">
+                  {{ parseSpanNumber(t.store) }}
                 </span>
                 <div
-                v-if="showDivUnderline"
-                :class="[t.active ? 'is__title__underline' : 'is__title__underline__inactive']">
-                </div>
+                  v-if="showDivUnderline"
+                  :class="[
+                    t.active
+                      ? 'is__title__underline'
+                      : 'is__title__underline__inactive',
+                  ]"
+                ></div>
               </h3>
             </div>
             <div v-if="showDivUnderline" class="projects--header--badge">
-              <button @click="openGitStalk"><span class="is__blink">_</span>activity</button>
+              <button @click="openGitStalk">
+                <span class="is__blink">_</span>activity
+              </button>
             </div>
             <div v-if="showDivUnderline" class="projects--header--banner">
               <div>Filename</div>
               <section>
                 <div>Id</div>
-                <div>{{ filter === 'repos' ? 'Last pushed' : 'Created at' }}</div>
+                <div>
+                  {{ filter === 'repos' ? 'Last pushed' : 'Created at' }}
+                </div>
               </section>
             </div>
           </header>
           <main v-if="showDivUnderline" class="projects--container">
             <section class="projects--container--items">
-              <div 
-              v-if="!$store.state[filter] || !$store.state[filter].length" class="projects--container--items--empty">
+              <div
+                v-if="!$store.state[filter] || !$store.state[filter].length"
+                class="projects--container--items--empty"
+              >
                 <p>There is no data for this category..</p>
               </div>
               <items
-              v-for="(d, i) in $store.state[filter]"
-              v-else
-              :key="i"
-              :active="itemActive.includes(d.id)"
-              :media="d.media"
-              :itemsType="filter"
-              :repoName="d.name"
-              :description="d.description"
-              :url="d.html_url"
-              :repoId="d.id"
-              :language="d.language ? d.language : false"
-              :topics="d.topics"
-              :lastPush="d.pushed_at"
-              :type="d.visibility"
-              @switchItemActive="function (emitData) { switchItemsActive(emitData, d) }"></items>
+                v-for="(d, i) in $store.state[filter]"
+                v-else
+                :key="i"
+                :active="itemActive.includes(d.id)"
+                :media="d.media"
+                :itemsType="filter"
+                :repoName="d.name"
+                :description="d.description"
+                :url="d.html_url"
+                :repoId="d.id"
+                :language="d.language ? d.language : false"
+                :topics="d.topics"
+                :lastPush="d.pushed_at"
+                :type="d.visibility"
+                @switchItemActive="function (emitData) {switchItemsActive(emitData, d)}"
+              ></items>
             </section>
           </main>
         </section>
       </main>
       <section v-if="$store.state.modals.length" class="modal--container">
-        <modal 
-        v-for="(modalData, i) in $store.state.modals"
-        ref="i"
-        :key="i"
-        :data="modalData"
-        @removeModal="$store.commit('REMOVE_MODAL', i)"></modal>
+        <modal
+          v-for="(modalData, i) in $store.state.modals"
+          ref="i"
+          :key="i"
+          :data="modalData"
+          @removeModal="$store.commit('REMOVE_MODAL', i)"
+        ></modal>
       </section>
     </template>
   </section>
@@ -120,7 +148,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-
+import loaderContent from '~/assets/loader.json';
 import Arrow from '~/assets/arrow.svg?inline';
 
 export default {
@@ -138,7 +166,7 @@ export default {
         await this.fetchRepo(), 
         await this.fetchProducts()
       ]);
-      this.dataIsReady = true;
+      this.dataIsReady = false;
     } catch (error) {
       console.error(error);
     }
@@ -150,6 +178,7 @@ export default {
       itemActive: [],
       filter: 'app',
       showDivUnderline: false,
+      loaderParse: loaderContent[0].split('\n'),
       footerContent: [
         '_ Welcome to my website, my',
         'name is Lucas, I live in Paris',
@@ -169,7 +198,7 @@ export default {
           active: false,
         },
         {
-          content: 'All',
+          content: 'Github',
           store: 'repos',
           active: false,
         }
@@ -254,6 +283,50 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.loader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+
+  div {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 40px;
+    width: 100%;
+    padding: 0 40px;
+    font-size: 1.2em;
+    line-height: 1.2;
+    max-height: 100%;
+    overflow: scroll;
+    word-spacing: 0;
+    word-break: break-all;
+    font-weight: 400;
+
+    
+    p {
+      font-family: 'helvetica-regular', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16.7px;
+      margin: 6px 0;
+
+      > span {
+        display: block;
+        overflow: hidden;
+
+        > span {
+          display: block;
+          animation: fadeIn 500ms ease forwards;
+          transform: translateY(100%);
+        }
+      }
+    }
+  }
+}
 .home {
   display: grid;
 
@@ -317,7 +390,7 @@ export default {
           }
         }
       }
-  
+
       h2 {
         color: $mainBlack;
         font-family: 'helvetica-thin', sans-serif;
@@ -349,7 +422,6 @@ export default {
         color: $mainBlack;
         margin: 0;
 
-
         > span {
           display: block;
           overflow: hidden;
@@ -374,19 +446,19 @@ export default {
           font-size: 10px;
           font-weight: 500;
           text-decoration: none;
-          line-height: 14.56px;   
-          margin-right: 5px;   
-          
-          > span {
-          display: block;
-          overflow: hidden;
+          line-height: 14.56px;
+          margin-right: 5px;
 
           > span {
             display: block;
-            animation: fadeIn 500ms ease forwards;
-            transform: translateY(100%);
+            overflow: hidden;
+
+            > span {
+              display: block;
+              animation: fadeIn 500ms ease forwards;
+              transform: translateY(100%);
+            }
           }
-        }
 
           svg {
             height: 6px;
@@ -417,7 +489,6 @@ export default {
       &--title {
         .title__active {
           color: $mainBlack;
-
         }
 
         .title__inactive {
