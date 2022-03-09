@@ -1,148 +1,148 @@
 <template>
   <section>
-    <template v-if="!showLoader">
-      <main v-if="!dataIsReady" class="loader">
-        <div>
-          <p v-for="(c, i) in loaderParse" :key="i">
+    <main v-if="showLoader" class="loader">
+      <div>
+        <template v-for="(c, i) in loaderParse">
+          <p v-if="c.active" :key="i" :style="`padding-left:${c.pl}px;`">
             <span>
-              <span :style="`animation-delay:${i * 200}ms;`">
-                {{ c }}
+              <span>
+                {{ c.content }}
               </span>
             </span>
           </p>
-        </div>
-      </main>
-      <main v-else class="container is-fullhd home">
-        <section class="sidebar">
-          <header class="sidebar--header">
-            <h1>
-              <span><span>Lucas Tostée</span></span>
-            </h1>
-            <h2>
-              <span>
-                <span> _ Full-Stack JS </span>
+        </template>
+      </div>
+    </main>
+    <main v-else class="container is-fullhd home">
+      <section class="sidebar">
+        <header class="sidebar--header">
+          <h1>
+            <span><span>Lucas Tostée</span></span>
+          </h1>
+          <h2>
+            <span>
+              <span> _ Full-Stack JS </span>
+            </span>
+          </h2>
+        </header>
+        <footer class="sidebar--footer">
+          <p v-for="(f, i) in footerContent" :key="i">
+            <span>
+              <span :style="`animation-delay:${400 + i * 200}ms;`">
+                {{ f }}
               </span>
-            </h2>
-          </header>
-          <footer class="sidebar--footer">
-            <p v-for="(f, i) in footerContent" :key="i">
+            </span>
+          </p>
+          <div>
+            <a
+              v-for="(link, i) in $store.state.footerLinks"
+              :key="i"
+              :href="link.href"
+              target="_blank"
+            >
               <span>
-                <span :style="`animation-delay:${400 + i * 200}ms;`">
-                  {{ f }}
+                <span
+                  :style="`animation-delay:${1200 + i * 200}ms;`"
+                  @click.stop="
+                    link.content === 'Mail'
+                      ? $ga.event({
+                          eventCategory: 'prospect',
+                          eventAction: 'click',
+                        })
+                      : null
+                  "
+                >
+                  {{ link.content }}
+                  <arrow></arrow>
                 </span>
               </span>
-            </p>
-            <div>
-              <a
-                v-for="(link, i) in $store.state.footerLinks"
-                :key="i"
-                :href="link.href"
-                target="_blank"
-              >
-                <span>
-                  <span
-                    :style="`animation-delay:${1200 + i * 200}ms;`"
-                    @click.stop="
-                      link.content === 'Mail'
-                        ? $ga.event({
-                            eventCategory: 'prospect',
-                            eventAction: 'click',
-                          })
-                        : null
-                    "
-                  >
-                    {{ link.content }}
-                    <arrow></arrow>
-                  </span>
-                </span>
-              </a>
-            </div>
-          </footer>
-        </section>
-        <section class="projects">
-          <header class="projects--header">
-            <div class="projects--header--title">
-              <h3
-                v-for="(t, i) in titles"
-                :key="i"
-                :class="[t.active ? 'title__active' : 'title__inactive']"
-                @click="switchItems(i)"
-              >
-                <span v-for="(l, y) in t.content" :key="y">
-                  <span
-                    :style="`animation-delay:${1200 + 250}ms;`"
-                    @animationend="animationEnd"
-                  >
-                    {{ l }}
-                  </span>
-                </span>
-                <span v-if="showDivUnderline" class="title--number">
-                  {{ parseSpanNumber(t.store) }}
-                </span>
-                <div
-                  v-if="showDivUnderline"
-                  :class="[
-                    t.active
-                      ? 'is__title__underline'
-                      : 'is__title__underline__inactive',
-                  ]"
-                ></div>
-              </h3>
-            </div>
-            <div v-if="showDivUnderline" class="projects--header--badge">
-              <button @click="openGitStalk">
-                <span class="is__blink">_</span>activity
-              </button>
-            </div>
-            <div v-if="showDivUnderline" class="projects--header--banner">
-              <div>Filename</div>
-              <section>
-                <div>Id</div>
-                <div>
-                  {{ filter === 'repos' ? 'Last pushed' : 'Created at' }}
-                </div>
-              </section>
-            </div>
-          </header>
-          <main v-if="showDivUnderline" class="projects--container">
-            <section class="projects--container--items">
-              <div
-                v-if="!$store.state[filter] || !$store.state[filter].length"
-                class="projects--container--items--empty"
-              >
-                <p>There is no data for this category..</p>
-              </div>
-              <items
-                v-for="(d, i) in $store.state[filter]"
-                v-else
-                :key="i"
-                :active="itemActive.includes(d.id)"
-                :media="d.media"
-                :itemsType="filter"
-                :repoName="d.name"
-                :description="d.description"
-                :url="d.html_url"
-                :repoId="d.id"
-                :language="d.language ? d.language : false"
-                :topics="d.topics"
-                :lastPush="d.pushed_at"
-                :type="d.visibility"
-                @switchItemActive="function (emitData) {switchItemsActive(emitData, d)}"
-              ></items>
-            </section>
-          </main>
-        </section>
-      </main>
-      <section v-if="$store.state.modals.length" class="modal--container">
-        <modal
-          v-for="(modalData, i) in $store.state.modals"
-          ref="i"
-          :key="i"
-          :data="modalData"
-          @removeModal="$store.commit('REMOVE_MODAL', i)"
-        ></modal>
+            </a>
+          </div>
+        </footer>
       </section>
-    </template>
+      <section class="projects">
+        <header class="projects--header">
+          <div class="projects--header--title">
+            <h3
+              v-for="(t, i) in titles"
+              :key="i"
+              :class="[t.active ? 'title__active' : 'title__inactive']"
+              @click="switchItems(i)"
+            >
+              <span v-for="(l, y) in t.content" :key="y">
+                <span
+                  :style="`animation-delay:${1200 + 250}ms;`"
+                  @animationend="animationEnd"
+                >
+                  {{ l }}
+                </span>
+              </span>
+              <span v-if="showDivUnderline" class="title--number">
+                {{ parseSpanNumber(t.store) }}
+              </span>
+              <div
+                v-if="showDivUnderline"
+                :class="[
+                  t.active
+                    ? 'is__title__underline'
+                    : 'is__title__underline__inactive',
+                ]"
+              ></div>
+            </h3>
+          </div>
+          <div v-if="showDivUnderline" class="projects--header--badge">
+            <button @click="openGitStalk">
+              <span class="is__blink">_</span>activity
+            </button>
+          </div>
+          <div v-if="showDivUnderline" class="projects--header--banner">
+            <div>Filename</div>
+            <section>
+              <div>Id</div>
+              <div>
+                {{ filter === 'repos' ? 'Last pushed' : 'Created at' }}
+              </div>
+            </section>
+          </div>
+        </header>
+        <main v-if="showDivUnderline" class="projects--container">
+          <section class="projects--container--items">
+            <div
+              v-if="!$store.state[filter] || !$store.state[filter].length"
+              class="projects--container--items--empty"
+            >
+              <p>There is no data for this category..</p>
+            </div>
+            <items
+              v-for="(d, i) in $store.state[filter]"
+              v-else
+              :key="i"
+              :active="itemActive.includes(d.id)"
+              :media="d.media"
+              :itemsType="filter"
+              :repoName="d.name"
+              :description="d.description"
+              :url="d.html_url"
+              :repoId="d.id"
+              :language="d.language ? d.language : false"
+              :topics="d.topics"
+              :lastPush="d.pushed_at"
+              :type="d.visibility"
+              @switchItemActive="function (emitData) {switchItemsActive(emitData, d)}"
+            ></items>
+          </section>
+        </main>
+      </section>
+    </main>
+    <section v-if="$store.state.modals.length" class="modal--container">
+      <modal
+        v-for="(modalData, i) in $store.state.modals"
+        ref="i"
+        :key="i"
+        :data="modalData"
+        @removeModal="$store.commit('REMOVE_MODAL', i)"
+      ></modal>
+    </section>
   </section>
 </template>
 
@@ -158,6 +158,8 @@ export default {
   },
   async mounted() {
     try {
+      const strArray = loaderContent[0].split('\n');
+      strArray.forEach((el, i) => (this.$set(this.loaderParse, i, { content: el, active: false, pl: Math.floor(Math.random() * ((50 - 0) - 0 + 1) - 0 + 1)})));
       this.isAppAvailable();
       this.fetchReposWhenScroll();
 
@@ -166,19 +168,19 @@ export default {
         await this.fetchRepo(), 
         await this.fetchProducts()
       ]);
-      this.dataIsReady = false;
+      this.dataIsReady = true;
     } catch (error) {
       console.error(error);
     }
   },
   data() {
     return {
-      showLoader: false,
+      showLoader: true,
       dataIsReady: false,
       itemActive: [],
       filter: 'app',
       showDivUnderline: false,
-      loaderParse: loaderContent[0].split('\n'),
+      loaderParse: [],
       footerContent: [
         '_ Welcome to my website, my',
         'name is Lucas, I live in Paris',
@@ -212,10 +214,6 @@ export default {
     },
     isAppAvailable() {
       this.$nextTick(() => {
-        if (window.innerWidth <= 700) {
-          this.$nuxt.$loading.start();
-        }
-  
         window.addEventListener('resize', () => {
           if (window.innerWidth <= 700) {
             this.$nuxt.$loading.start();
@@ -226,7 +224,38 @@ export default {
             this.$nuxt.$loading.finish();
           }
         });
+
+        if (window.innerWidth <= 700) {
+          this.$nuxt.$loading.start();
+          return false;
+        }
+
+        this.handleLoader();
+        return true;
       });
+    },
+    handleLoader() {
+      let timeoutId;
+      let iterator = 0;
+
+      timeoutId = setInterval(
+        () => {
+          if (this.loaderParse.length === iterator) {
+            clearInterval(timeoutId);
+            timeoutId = null;
+            iterator = 0;
+            
+            if (!this.dataIsReady) return this.handleLoader();
+            this.showLoader = false;
+            return true;
+          }
+
+          this.loaderParse[iterator].active = true;
+          iterator = iterator + 1;
+          return true;
+        },
+        150
+      );
     },
     fetchReposWhenScroll() {
       window.addEventListener('scroll', async () => {
@@ -284,29 +313,22 @@ export default {
 
 <style lang="scss" scoped>
 .loader {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  align-items: flex-end;
+  display: flex;
+  box-sizing: border-box;
+  margin: 40px 40px 0 40px;
+  position: sticky;
+  width: 100vw;
+  height: 90vh;
   z-index: 1000;
+  overflow: scroll;
 
   div {
-    position: absolute;
-    left: 0;
     bottom: 0;
-    top: 40px;
-    width: 100%;
-    padding: 0 40px;
-    font-size: 1.2em;
-    line-height: 1.2;
-    max-height: 100%;
-    overflow: scroll;
-    word-spacing: 0;
-    word-break: break-all;
-    font-weight: 400;
+    position: absolute;
+    max-height: 100vh;
+    height: fit-content;
 
-    
     p {
       font-family: 'helvetica-regular', sans-serif;
       font-size: 14px;
