@@ -1,7 +1,7 @@
 <template>
   <section>
-    <main v-if="showLoader" class="loader">
-      <div>
+    <main v-if="showLoader" class="loader" ref="loaderContainer">
+      <div ref="innerLoader">
         <template v-for="(c, i) in loaderParse">
           <p v-if="c.active" :key="i" :style="`padding-left:${c.pl}px;`">
             <span>
@@ -235,6 +235,16 @@ export default {
       });
     },
     handleLoader() {
+      const resizeObserver = new ResizeObserver(entries => {
+        console.error(this.$refs);
+        this.$refs.innerLoader.scrollTo({
+          left: 0,
+          top: entries[0].target.children[entries[0].target.children.length - 1].offsetTop,
+          behavior: 'smooth',
+        });
+      });
+
+      resizeObserver.observe(this.$refs.innerLoader);
       let timeoutId;
       let iterator = 0;
 
@@ -246,7 +256,7 @@ export default {
             iterator = 0;
             
             if (!this.dataIsReady) return this.handleLoader();
-            this.showLoader = false;
+            // this.showLoader = false;
             return true;
           }
 
