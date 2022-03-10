@@ -236,12 +236,7 @@ export default {
     },
     handleLoader() {
       const resizeObserver = new ResizeObserver(entries => {
-        console.error(this.$refs);
-        this.$refs.innerLoader.scrollTo({
-          left: 0,
-          top: entries[0].target.children[entries[0].target.children.length - 1].offsetTop,
-          behavior: 'smooth',
-        });
+        this.$nextTick(() => entries[0].target.scrollIntoView({block: "end", inline: "nearest", behavior: 'smooth'}))
       });
 
       resizeObserver.observe(this.$refs.innerLoader);
@@ -256,7 +251,9 @@ export default {
             iterator = 0;
             
             if (!this.dataIsReady) return this.handleLoader();
-            // this.showLoader = false;
+            resizeObserver.disconnect();
+            this.$refs.loaderContainer.classList.add('is__loader__gone');
+            setTimeout(() => { this.showLoader = false }, 2000);
             return true;
           }
 
@@ -264,7 +261,7 @@ export default {
           iterator = iterator + 1;
           return true;
         },
-        150
+        100
       );
     },
     fetchReposWhenScroll() {
@@ -322,23 +319,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.is__loader__gone {
+  animation: opacity100to0 1400ms ease forwards;
+}
 .loader {
-  align-items: flex-end;
-  display: flex;
   box-sizing: border-box;
   margin: 40px 40px 0 40px;
-  position: sticky;
-  width: 100vw;
-  height: 90vh;
-  z-index: 1000;
-  overflow: scroll;
+  min-height: 100vh;
+  position: relative;
 
   div {
-    bottom: 0;
-    position: absolute;
-    max-height: 100vh;
-    height: fit-content;
-
     p {
       font-family: 'helvetica-regular', sans-serif;
       font-size: 14px;

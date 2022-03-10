@@ -86,6 +86,17 @@ Keyframes
   }
 }
 
+@keyframes opacity100to0 {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    filter: blur(1px);
+    opacity: 0;
+  }
+}
+
 /**********
 Variables
 **********/
