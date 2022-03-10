@@ -261,12 +261,12 @@ export default {
           iterator = iterator + 1;
           return true;
         },
-        100
+        55
       );
     },
     fetchReposWhenScroll() {
       window.addEventListener('scroll', async () => {
-        if (!this.$store.state.canFetchRepos) return false;
+        if (!this.$store.state.canFetchRepos || this.showLoader) return false;
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) await this.fetchRepo();
       });
     },
