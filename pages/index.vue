@@ -252,8 +252,8 @@ export default {
             
             if (!this.dataIsReady) return this.handleLoader();
             resizeObserver.disconnect();
-            // this.$refs.loaderContainer.classList.add('is__loader__gone');
-            // setTimeout(() => { this.showLoader = false }, 2000);
+            this.$refs.loaderContainer.classList.add('is__loader__gone');
+            setTimeout(() => { this.showLoader = false }, 2000);
             return true;
           }
 
