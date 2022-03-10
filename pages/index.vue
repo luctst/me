@@ -252,8 +252,8 @@ export default {
             
             if (!this.dataIsReady) return this.handleLoader();
             resizeObserver.disconnect();
-            this.$refs.loaderContainer.classList.add('is__loader__gone');
-            setTimeout(() => { this.showLoader = false }, 2000);
+            // this.$refs.loaderContainer.classList.add('is__loader__gone');
+            // setTimeout(() => { this.showLoader = false }, 2000);
             return true;
           }
 
@@ -323,12 +323,20 @@ export default {
   animation: opacity100to0 1400ms ease forwards;
 }
 .loader {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
   box-sizing: border-box;
   margin: 40px 40px 0 40px;
   min-height: 100vh;
   position: relative;
 
   div {
+    padding-bottom: 40px;
+
     p {
       font-family: 'helvetica-regular', sans-serif;
       font-size: 14px;
