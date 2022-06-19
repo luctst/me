@@ -17,12 +17,13 @@
       :width="data.width"
       :src="`${$store.state.hostName}${data.url}`"
       class="modal--main--img"/>
-      <div v-else class="modal--main--content">{{ data.content }}</div>
+      <div v-else v-html="markdownParsed" class="modal--main--content"></div>
     </main>
   </section>
 </template>
 
 <script>
+import { marked } from 'marked';
 import modalicon from '~/assets/modalicon.svg?inline';
 
 export default {
@@ -39,6 +40,14 @@ export default {
   computed: {
     innerStyle() {
       return `z-index:${this.data.zIndex};top:${this.data.top}px;left:${this.data.left}px;`;
+    },
+    markdownParsed() {
+      marked.setOptions({
+        breaks: true,
+        gfm: true,
+      });
+
+      return marked(this.data.content);
     }
   },
   methods: {
@@ -147,14 +156,17 @@ export default {
     }
 
     &--content {
-      align-items: flex-end;
       color: $mainBlack;
       display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       font-family: 'helvetica-medium', sans-serif;
       font-weight: 500;
       height: max-content;
       min-height: 324px;
       width: 440px;
+      max-height: 500px;
+      overflow: scroll;
       max-width: 500px;
       line-height: 28.63px;
       margin-top: 6px;

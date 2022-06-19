@@ -185,7 +185,7 @@ export default {
         '_ Welcome to my website, my',
         'name is Lucas, I live in Paris',
         'I\'m working as a full-stack',
-        'JavaScript developer.',
+        'JavaScript developer, also mentor in OpenClassrooms',
         'I currently maintain more than 100 projects on Github.',
       ],
       titles: [
