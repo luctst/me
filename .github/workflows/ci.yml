@@ -9,9 +9,6 @@ on:
 jobs:
   ci:
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        shell: bash
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -41,6 +38,9 @@ jobs:
   deploy:
     needs: ci
     runs-ons: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
     strategy:
       matrix:
         os: [ubuntu-latest]
