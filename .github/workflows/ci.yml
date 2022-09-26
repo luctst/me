@@ -10,22 +10,18 @@ on:
 jobs:
   ci:
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]
-
+        node: [16.x]
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@master
-
       - name: Setup node env 🏗
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
-
       - name: Cache node_modules 📦
         uses: actions/cache@v2.1.4
         with:
@@ -33,42 +29,44 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-
       - name: Install dependencies 👨🏻‍💻
         run: npm ci --prefer-offline --no-audit
-
       - name: Run linter 👀
         run: npm run lint
-      
-      - name: Create .env
-        if: ${{ success() }}
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          file_name: .env
-          envkey_APIKEY: ${{ secrets.APIKEY }}
-          envkey_STRAPIKEY: ${{ secrets.STRAPIKEY }}
-          envkey_API_URL: ${{ secrets.API_URL }}
-      
       - name: Generate build
         if: ${{ success() }}
         run: npm run generate
-
-      - name: Deploy S3
-        if: ${{ success() }}
-        uses: jakejarvis/s3-sync-action@be0c4ab89158cac4278689ebedd8407dd5f35a83
-        env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_REGION: 'eu-west-1'
-          SOURCE_DIR: 'dist'
-      
-      - name: Invalidate Cloudfront
-        if: ${{ success() }}
-        uses: chetan/invalidate-cloudfront-action@v2
-        env:
-          DISTRIBUTION: ${{ secrets.DISTRIBUTION_DEV }}
-          PATHS: '/*'
-          AWS_REGION: 'eu-west-1'
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+  deploy:
+    needs: ci
+    run-ons: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+      - name: Cache node_modules 📦
+        uses: actions/cache@v2.1.4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies 👨🏻‍💻
+        run: npm ci --prefer-offline --no-audit
+      - name: Generate build
+        run: npm run generate
+      # - name: deploy
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "${{secrets.HEROKU_APP_NAME}}"
+          heroku_email: "${{secrets.HEROKU_EMAIL}}"
+          appdir: "dist"
+          buildpack: "https://github.com/heroku/heroku-buildpack-static.git"
