@@ -59,6 +59,9 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies 👨🏻‍💻
         run: npm ci --prefer-offline --no-audit
+      
+      - name: Generate static website
+        run: npm run generate
       # - name: deploy
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
@@ -67,4 +70,3 @@ jobs:
           heroku_app_name: "${{secrets.HEROKU_APP_NAME}}"
           heroku_email: "${{secrets.HEROKU_EMAIL}}"
           buildpack: "https://github.com/heroku/heroku-buildpack-static.git"
-          procfile: "web: npm run generate"
