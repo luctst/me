@@ -37,10 +37,7 @@ jobs:
         run: npm run generate
   deploy:
     needs: ci
-    runs-ons: ${{ matrix.os }}
-    defaults:
-      run:
-        shell: bash
+    runs-ons: ubuntu-latest
     strategy:
       matrix:
         os: [ubuntu-latest]
