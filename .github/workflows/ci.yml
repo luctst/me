@@ -40,7 +40,8 @@ jobs:
     run-ons: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [16.x]
+        os: [ubuntu-latest]
+        node: [16.x]
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@master
