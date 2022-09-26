@@ -68,4 +68,3 @@ jobs:
           heroku_email: "${{secrets.HEROKU_EMAIL}}"
           buildpack: "https://github.com/heroku/heroku-buildpack-static.git"
           procfile: "web: npm run generate"
-          appdir: "dist"
