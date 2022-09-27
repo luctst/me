@@ -5,7 +5,7 @@ export default {
       poll: true
     }
   },
-  target: 'server',
+  target: 'static',
   generate: {
     cache: false,
   },
@@ -53,6 +53,8 @@ export default {
   ],
 
   publicRuntimeConfig: {
+    APIKEY: process.env.APIKEY,
+    API_URL: process.env.API_URL,
     googleAnalytics: {
       id: 'UA-222276813-1',
       dev: true,
