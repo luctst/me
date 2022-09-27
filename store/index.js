@@ -23,7 +23,6 @@ export const state = () => ({
       content: 'Linkedin'
     }
   ],
-  hostName: 'https://api.lucastostee.com',
   modals: [],
 });
 
