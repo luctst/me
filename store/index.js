@@ -112,7 +112,7 @@ export const actions = {
       'https://api.github.com/user',
       {
         headers: {
-          Authorization: `token ${process.env.APIKEY}`,
+          Authorization: `token ${process.env.NUXT_ENV_API_KEY}`,
           Accept: 'application/vnd.github.v3+json',
           "User-Agent": "luctst",
         }
@@ -132,7 +132,7 @@ export const actions = {
             page: state.reposPage
           },
           headers: {
-            Authorization: `token ${process.env.APIKEY}`,
+            Authorization: `token ${process.env.NUXT_ENV_API_KEY}`,
             Accept: 'application/vnd.github.v3+json',
             "User-Agent": "luctst",
           }
