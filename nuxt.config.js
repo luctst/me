@@ -47,7 +47,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/google-analytics',
-    '@nuxtjs/dotenv',
+    ['@nuxtjs/dotenv', { path: './' }],
     "@nuxtjs/svg",
     '@nuxtjs/eslint-module',
   ],

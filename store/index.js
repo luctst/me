@@ -108,7 +108,6 @@ export const actions = {
     if (npm.length) commit('UPDATE_NPM', npm);
   },
   async countRepos({ commit}) {
-    console.log(process.env);
     const data = await this.$axios.$get(
       'https://api.github.com/user',
       {

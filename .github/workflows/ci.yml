@@ -57,6 +57,13 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      - name: Create .env
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          file_name: .env
+          envkey_APIKEY: ${{ secrets.APIKEY }}
+          envkey_STRAPIKEY: ${{ secrets.STRAPIKEY }}
+          envkey_API_URL: ${{ secrets.API_URL }}
       - name: Install dependencies 👨🏻‍💻
         run: npm ci --prefer-offline --no-audit
       # - name: deploy
