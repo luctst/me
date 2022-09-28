@@ -5,7 +5,7 @@ export default {
       poll: true
     }
   },
-  target: 'static',
+  target: 'server',
   generate: {
     cache: false,
   },
