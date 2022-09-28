@@ -112,7 +112,7 @@ export const actions = {
       'https://api.github.com/user',
       {
         headers: {
-          Authorization: `token ${this.$config.APIKEY}`,
+          Authorization: `token ${process.env.APIKEY}`,
           Accept: 'application/vnd.github.v3+json',
           "User-Agent": "luctst",
         }
