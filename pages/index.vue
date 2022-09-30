@@ -127,7 +127,7 @@
               :language="d.language ? d.language : false"
               :topics="d.topics"
               :lastPush="d.pushed_at"
-              :type="d.visibility"
+              :visibility="d.private"
               @switchItemActive="function (emitData) {switchItemsActive(emitData, d)}"
             ></items>
           </section>
@@ -274,7 +274,8 @@ export default {
       if (shouldActiveItem) {
         this.$ga.event({ eventCategory: 'project', eventAction: 'click', eventLabel: itemData.name });
       }
-      if (itemData.visibility !== 'public') return false;
+
+      if (!itemData.private) return false;
 
       if (!shouldActiveItem) {
         const newArray = [...this.itemActive];

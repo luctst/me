@@ -1,7 +1,7 @@
 <template>
   <div
     @click="$emit('switchItemActive', !active)"
-    :class="['project--item', type !== 'public' ? 'is__private' : 'is__public']"
+    :class="['project--item', visibility ? 'is__public' : 'is__private']"
     v-add-class-hover
   >
     <div class="project--item--left">
@@ -21,8 +21,8 @@
         </span>
       </div>
     </div>
-    <div v-if="type !== 'public'" class="project--item--middle">
-      <lock v-if="type === 'private'"></lock>
+    <div v-if="!visibility" class="project--item--middle">
+      <lock v-if="!visibility"></lock>
       <template v-else>
         {{ type }}
       </template>
@@ -97,8 +97,8 @@ export default {
       type: String,
       required: true,
     },
-    type: {
-      type: String,
+    visibility: {
+      type: Boolean,
       required: true,
     },
   },

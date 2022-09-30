@@ -90,7 +90,7 @@ export const actions = {
         itemsType: p.attributes.type,
         topics: p.attributes.topics,
         name: p.attributes.name,
-        visibility: p.attributes.visibility,
+        private: p.attributes.is_private,
         pushed_at: p.attributes.createdAt,
         ...(p.attributes.assets && { media: p.attributes.assets.data }),
       };
@@ -129,7 +129,8 @@ export const actions = {
           params: {
             sort: 'pushed',
             per_page: 10,
-            page: state.reposPage
+            page: state.reposPage,
+            affiliation: 'owner',
           },
           headers: {
             Authorization: `token ${process.env.NUXT_ENV_API_KEY}`,
