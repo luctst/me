@@ -12,10 +12,10 @@
     </header>
     <main class="modal--main">
       <img
-      v-if="data.extension === '.jpg'"
+      v-if="data.extension === '.jpg' || data.extension === '.png'"
       :height="data.height"
       :width="data.width"
-      :src="`${$store.state.hostName}${data.url}`"
+      :src="`${$store.state.hostname}${data.url}`"
       class="modal--main--img"/>
       <div v-else v-html="markdownParsed" class="modal--main--content"></div>
     </main>

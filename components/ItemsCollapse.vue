@@ -7,7 +7,7 @@
       class="project--item--meta--container--item">
       <div class="project--item--meta--container--item--icon">
         <img 
-        v-if="a.extension === '.jpg'"
+        v-if="a.extension === '.jpg' || a.extension === '.png'"
         :src="`${$store.state.hostName}${a.small.url}`" 
         :alt="a.alt"/>
         <collapsedescription v-if="a.extension === '.md'"></collapsedescription>

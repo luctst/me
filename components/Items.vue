@@ -116,7 +116,7 @@ export default {
 
       if (this.media) {
         const assetMedia = this.media.map((a) => ({
-          name: a.attributes.name,
+          name: `${a.attributes.name}${a.attributes.ext}`,
           alt: a.attributes.alternativeText,
           extension: a.attributes.ext,
           height: a.attributes.height,

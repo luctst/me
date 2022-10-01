@@ -24,6 +24,7 @@ export const state = () => ({
     }
   ],
   modals: [],
+  hostname: process.env.NUXT_ENV_HOSTNAME,
 });
 
 export const mutations = {
@@ -92,7 +93,7 @@ export const actions = {
         name: p.attributes.name,
         private: p.attributes.is_private,
         pushed_at: p.attributes.createdAt,
-        ...(p.attributes.assets && { media: p.attributes.assets.data }),
+        media: p.attributes.media.data ? p.attributes.media.data : false, 
       };
        
       if (objToPush.itemsType === 'app') {
