@@ -1,11 +1,19 @@
 import {Roboto} from 'next/font/google'
-import "@workspace/ui/globals.css"
+import { Metadata } from 'next'
 import {cn} from '@workspace/ui/lib/utils'
 import { Providers } from "@/components/providers"
+import {Loading} from '@/components/loader'
+
+import "@workspace/ui/globals.css"
 
 const roboto = Roboto({
-	weight: ['100', '400', '500'] 
+	weight: ['100', '400', '500', '700'] 
 })
+
+export const metadata: Metadata = {
+	title: 'Lucas Tostée | Développeur Javascript Full Stack Freelance Paris',
+	description: ''
+}
 
 export default function RootLayout({
   children,
@@ -17,7 +25,11 @@ export default function RootLayout({
       <body
         className={cn(roboto.className, 'bg-[#F7F4F0]', 'px-4')}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+					<Loading>
+						{children}
+					</Loading>
+				</Providers>
       </body>
     </html>
   )

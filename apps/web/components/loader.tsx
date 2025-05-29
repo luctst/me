@@ -2,7 +2,8 @@
 import { useEffect, useRef, useState } from 'react';
 import loader from '@/public/loader.json'
 
-export default function Loading() {
+export function Loading({children}) {
+	const [showLoader, setShowLoader] = useState(true)
 	const [loaderContent, setLoaderContent] = useState(loader[0]?.split('\n').map(content => ({content, active: false, pl: Math.floor(Math.random() * ((50 - 0) - 0 + 1) - 0 + 1)})))
 
 	const loaderContainer = useRef(null)
@@ -27,6 +28,7 @@ export default function Loading() {
 
 				resizer.disconnect()
 				loaderContainer.current?.classList.add('animate-[opacity100to0_1400ms_ease_forwards]')
+				setTimeout(() => setShowLoader(false), 2000)
 				return
 			}
 
@@ -40,6 +42,8 @@ export default function Loading() {
 	}
 
 	useEffect(() => handleLoader(), [])
+
+	if (showLoader === false) return children
 
   return (
 		<main className="box-border m-10 min-h-screen relative" ref={loaderContainer}>
