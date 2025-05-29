@@ -1,12 +1,11 @@
-import localFont from 'next/font/local'
+import {Roboto} from 'next/font/google'
 import "@workspace/ui/globals.css"
+import {cn} from '@workspace/ui/lib/utils'
 import { Providers } from "@/components/providers"
 
-const helvetica = localFont({
-	src: '../public/fonts/helvmn.ttf',
-	variable: '--font-helvetica-medium'
+const roboto = Roboto({
+	weight: ['100', '400', '500'] 
 })
-console.log(helvetica)
 
 export default function RootLayout({
   children,
@@ -16,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        //className={helvetica.className}
+        className={cn(roboto.className, 'bg-[#F7F4F0]', 'px-4')}
       >
         <Providers>{children}</Providers>
       </body>
