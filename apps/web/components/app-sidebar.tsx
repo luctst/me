@@ -9,7 +9,7 @@ export function AppSidebar() {
 		'name is Lucas, I live in Paris',
 		'I\'m working as a full-stack',
 		'JavaScript developer, also mentor in OpenClassrooms',
-		'I currently maintain more than 100 projects on Github.',
+		'If you\'re interested, feel free to explore some of my works.',
 	]
 	const footerLinks = [
 		{

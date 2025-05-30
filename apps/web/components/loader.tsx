@@ -1,8 +1,8 @@
 'use client'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, ReactNode } from 'react';
 import loader from '@/public/loader.json'
 
-export function Loading({children}) {
+export function Loading({children}: { children: ReactNode}) {
 	const [showLoader, setShowLoader] = useState(true)
 	const [loaderContent, setLoaderContent] = useState(loader[0]?.split('\n').map(content => ({content, active: false, pl: Math.floor(Math.random() * ((50 - 0) - 0 + 1) - 0 + 1)})))
 
