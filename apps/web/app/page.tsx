@@ -1,7 +1,6 @@
 import {SidebarProvider, SidebarTrigger} from '@workspace/ui/components/sidebar'
 import {AppSidebar} from '@/components/app-sidebar'
-import {Titles} from '@/components/titles'
-import projects from '@/public/projects.json'
+import {Home} from '@/components/home'
 
 export default function Page() {
 	return (
@@ -9,7 +8,7 @@ export default function Page() {
 			<AppSidebar />
 			<main className="flex flex-col mt-8">
 				<SidebarTrigger className="hover:cursor-pointer"/>
-				<Titles />
+				<Home />
 			</main>
 		</SidebarProvider>
 	)

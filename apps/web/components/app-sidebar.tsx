@@ -17,10 +17,6 @@ export function AppSidebar() {
 			content: 'Mail',
 		},
 		{
-			href: '',
-			content: 'Malt'
-		},
-		{
 			href: 'https://github.com/luctst',
 			content: 'GitHub',
 		},
