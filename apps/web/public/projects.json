@@ -1,4 +1,6 @@
 {
-	"projects": [],
+	"projects": [
+		{"name": "Tickets", "date": "-", "topics": ["AWS"]}
+	],
 	"experiences": []
 }

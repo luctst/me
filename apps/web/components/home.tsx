@@ -2,6 +2,7 @@
 import { Dispatch, SetStateAction, useMemo, useState } from 'react'
 import { cn } from '@workspace/ui/lib/utils'
 import projects from '@/public/projects.json'
+import {ProjectItems} from '@/components/projects-items'
 
 type Keys = 'projects' | 'experiences'
 
@@ -12,7 +13,9 @@ export function Home() {
 		<>
 			<Titles action={setActive} keyActive={active}/>
 			<section className="will-change-[filter] overflow-hidden blur-0">
-				<div className="animate-[opacity0to100_1000ms_ease_forwards]"></div>
+				<div className="animate-[opacity0to100_1000ms_ease_forwards]">
+					<ProjectItems data={projects[active]}/>
+				</div>
 			</section>
 		</>
 	)

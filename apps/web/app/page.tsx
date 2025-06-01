@@ -6,7 +6,7 @@ export default function Page() {
 	return (
 		<SidebarProvider>
 			<AppSidebar />
-			<main className="flex flex-col mt-8">
+			<main className="flex flex-col mt-8 w-full">
 				<SidebarTrigger className="hover:cursor-pointer"/>
 				<Home />
 			</main>
