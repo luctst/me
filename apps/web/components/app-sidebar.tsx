@@ -27,7 +27,7 @@ export function AppSidebar() {
 	]
 
 	return (
-		<Sidebar className="pt-[40px] pl-4">
+		<Sidebar className="pt-[40px] pl-4" variant="sidebar">
 			<SidebarHeader className="p-0">
 				<h1 className="text-base m-0 mb-[5px] font-bold text-[#262626] leading-[17.09px]">
 					<span className="block overflow-hidden">
