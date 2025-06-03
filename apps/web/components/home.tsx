@@ -1,11 +1,11 @@
 'use client'
-import { Dispatch, SetStateAction, useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useMemo, useState, memo } from 'react'
 import { cn } from '@workspace/ui/lib/utils'
 import projects from '@/public/projects.json'
 import { ProjectItems, Assets } from '@/components/projects-items'
 import { Modals } from '@/components/modals'
 
-type Keys = 'projects' | 'experiences'
+export type Keys = 'projects' | 'experiences'
 
 export type Modal = {
 	id: string
@@ -20,7 +20,7 @@ export function Home() {
 	const [modals, setModals] = useState<Array<Modal>>([])
 
 	const createNewModal = (asset: Assets[number]) => {
-		const maxX = window.innerWidth - 400 
+		const maxX = window.innerWidth - 400
 		const maxY = window.innerHeight - 300
 		const x = Math.max(20, Math.random() * maxX)
 		const y = Math.max(20, Math.random() * maxY)
@@ -38,17 +38,15 @@ export function Home() {
 	return (
 		<>
 			<Titles action={setActive} keyActive={active} />
-			<section className="will-change-[filter] overflow-hidden blur-0">
-				<div className="animate-[opacity0to100_1000ms_ease_forwards]">
-					<ProjectItems data={projects[active]} createNewModalAction={createNewModal} />
-				</div>
-			</section>
-			<Modals modals={modals} setModalsAction={setModals}/>
+			<main className="mt-8">
+				<ProjectItems active={active} createNewModalAction={createNewModal} />
+			</main>
+			<Modals modals={modals} setModalsAction={setModals} />
 		</>
 	)
 }
 
-export function Titles({ action, keyActive }: { action: Dispatch<SetStateAction<Keys>>, keyActive: Keys }) {
+export const Titles = memo(({ action, keyActive }: { action: Dispatch<SetStateAction<Keys>>, keyActive: Keys }) => {
 	const [titles, setTitles] = useState<Array<{ content: Keys, animationDone: boolean }>>([
 		{ content: 'projects', animationDone: false },
 		{ content: 'experiences', animationDone: false, }
@@ -117,5 +115,5 @@ export function Titles({ action, keyActive }: { action: Dispatch<SetStateAction<
 			}
 		</header>
 	)
-}
+}) 
 

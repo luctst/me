@@ -71,11 +71,12 @@ export function DataTable<TData>(props: Props<TData>) {
 			</TableHeader>
 			<TableBody>
 				{table.getRowModel().rows?.length ? (
-					table.getRowModel().rows.map((row, i) => (
+					table.getRowModel().rows.map((row, i, array) => (
 						<Fragment key={row.id}>
 							<TableRow
 								data-state={row.getIsSelected() && "selected"}
-								className="transition-colors group"
+								className="transition-colors group animate-[fadeIn_500ms_ease_forwards]"
+								style={{ transform: `translateY(${array.length * 100}%)`, animationDelay: `${3000 + 250}ms` }}
 							>
 								{row.getVisibleCells().map((cell) => (
 									<TableCell key={cell.id} className={cn("group-hover:bg-accent", cell.column.columnDef.meta?.cellCustomClass)} style={{ ...getCommonPinningStyles(cell.column) }}>

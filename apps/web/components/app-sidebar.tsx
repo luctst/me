@@ -8,12 +8,12 @@ export function AppSidebar() {
 		'_ Welcome to my website, my',
 		'name is Lucas, I live in Paris',
 		'I\'m working as a full-stack',
-		'JavaScript developer, also mentor in OpenClassrooms',
+		'JS freelancer, also mentor in OpenClassrooms',
 		'If you\'re interested, feel free to explore some of my works.',
 	]
 	const footerLinks = [
 		{
-			href: 'mailto:lucas.tostee.dev@gmail.com',
+			href: 'mailto:lucas.tostee@gmail.com',
 			content: 'Mail',
 		},
 		{
@@ -27,7 +27,7 @@ export function AppSidebar() {
 	]
 
 	return (
-		<Sidebar className="pt-[40px] pl-4" variant="sidebar">
+		<Sidebar className="pt-[40px] px-6 border-none" variant="sidebar">
 			<SidebarHeader className="p-0">
 				<h1 className="text-base m-0 mb-[5px] font-bold text-[#262626] leading-[17.09px]">
 					<span className="block overflow-hidden">
