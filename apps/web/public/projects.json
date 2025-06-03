@@ -1,6 +1,29 @@
 {
 	"projects": [
-		{"name": "Tickets", "date": "-", "topics": ["AWS"], "description": "Anim minim enim duis qui exercitation velit tempor adipisicing aliqua qui dolor. Exercitation proident sint adipisicing nisi commodo esse ullamco laborum labore sint sint aute exercitation quis veniam. Irure eiusmod velit reprehenderit sint exercitation consequat proident cillum ipsum adipisicing. Tempor excepteur qui ea eiusmod laboris ullamco et.Adipisicing reprehenderit id in pariatur ipsum. Sit magna consequat incididunt sint culpa esse mollit pariatur adipisicing mollit labore laboris dolor est eiusmod. Eu velit nostrud dolore ex excepteur magna Lorem. Magna est enim mollit esse ea magna dolore id Lorem veniam amet ullamco.", "assets": ["screen-1.jpg", "screen-2.web"]}
+		{
+			"name": "Tickets",
+			"date": "-",
+			"topics": ["AWS"],
+			"description": "Anim minim enim duis qui exercitation velit tempor adipisicing aliqua qui dolor. Exercitation proident sint adipisicing nisi commodo esse ullamco laborum labore sint sint aute exercitation quis veniam. Irure eiusmod velit reprehenderit sint exercitation consequat proident cillum ipsum adipisicing. Tempor excepteur qui ea eiusmod laboris ullamco et.Adipisicing reprehenderit id in pariatur ipsum. Sit magna consequat incididunt sint culpa esse mollit pariatur adipisicing mollit labore laboris dolor est eiusmod. Eu velit nostrud dolore ex excepteur magna Lorem. Magna est enim mollit esse ea magna dolore id Lorem veniam amet ullamco.",
+			"assets": [
+				{
+					"name": "screen-1.jpg",
+					"url": ""
+				}
+			]
+		},
+		{
+			"name": "Freezer",
+			"date": "Start in May 2024",
+			"topics": ["AWS", "React Native"],
+			"description": "Short description",
+			"assets": [
+				{
+					"name": "screen-2.web",
+					"url": ""
+				}
+			]
+		}
 	],
 	"experiences": []
 }

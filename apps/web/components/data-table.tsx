@@ -1,6 +1,6 @@
 'use client'
 
-import { CSSProperties } from 'react'
+import {CSSProperties, Fragment} from 'react'
 
 import {
 	flexRender,
@@ -18,14 +18,13 @@ import {
 	TableHeader,
 	TableRow,
 } from "@workspace/ui/components/table"
-import {ScrollArea} from '@workspace/ui/components/scroll-area'
-import {Badge} from '@workspace/ui/components/badge'
 import { cn } from '@workspace/ui/lib/utils'
 
-type Props<TData> = TableOptions<TData>
+type Props<TData> = TableOptions<TData> 
 
 declare module '@tanstack/react-table' {
 	interface ColumnMeta<TData, TValue> {
+		children?: (rox: Row<TData>) => Renderable<any>
 		cellCustomClass?: string
 		headerCustomClass?: string
 		hasBorder?: boolean
@@ -72,10 +71,9 @@ export function DataTable<TData>(props: Props<TData>) {
 			</TableHeader>
 			<TableBody>
 				{table.getRowModel().rows?.length ? (
-					table.getRowModel().rows.map((row) => (
-						<>
+					table.getRowModel().rows.map((row, i) => (
+						<Fragment key={row.id}>
 							<TableRow
-								key={row.id}
 								data-state={row.getIsSelected() && "selected"}
 								className="transition-colors group"
 							>
@@ -89,19 +87,12 @@ export function DataTable<TData>(props: Props<TData>) {
 								row.getIsExpanded() ? (
 									<TableRow className="bg-transparent" key={`${row.id}-expanded`}>
 										<TableCell colSpan={row.getVisibleCells().length} className="p-0 relative whitespace-normal">
-											<div className="ml-4 mt-2 flex items-start justify-center flex-col">
-												<p className="leading-7 [&:not(:first-child)]:mt-6 text-[#262626]">{row.original.description}</p>
-												<div className="flex items-center mt-2">
-													{
-														row.original.assets.map((a, i) => <Badge key={i} className="odd:mr-2 hover:cursor-pointer">{a}</Badge>)
-													}
-												</div>
-											</div>
+											{flexRender(row.getVisibleCells()[0]?.column.columnDef.meta?.children(row), row.getVisibleCells()[i]?.getContext())}
 										</TableCell>
 									</TableRow>
 								) : null
 							}
-						</>
+						</Fragment>
 					))
 				) : (
 					<TableRow>
