@@ -1,15 +1,15 @@
 'use client'
 import { memo, useMemo } from 'react'
-import { createColumnHelper, getCoreRowModel, getExpandedRowModel, InitialTableState} from '@tanstack/react-table'
+import { createColumnHelper, getCoreRowModel, getExpandedRowModel, InitialTableState } from '@tanstack/react-table'
 import { Folder, FolderOpen, ChevronRight, ChevronDown } from 'lucide-react'
+import { cn } from '@workspace/ui/lib/utils'
 import { DataTable } from '@/components/data-table'
-import { ScrollArea } from '@workspace/ui/components/scroll-area'
 import { Badge } from '@workspace/ui/components/badge'
 import { Button } from '@workspace/ui/components/button'
 import { Keys } from '@/components/home'
 import projects from '@/public/projects.json'
 
-export type Assets = Array<{name: string, url: string}>
+export type Assets = Array<{ name: string, url: string }>
 type Props = {
 	createNewModalAction: (asset: Assets[number]) => void
 	active: Keys
@@ -19,12 +19,12 @@ type Item = {
 	date: string
 	topics: Array<string>
 	description: string
-	assets: Assets 
+	assets: Assets
 }
 
 const columnHelper = createColumnHelper<Item>()
 
-export const ProjectItems = memo(({active, createNewModalAction }: Props) => {
+export const ProjectItems = memo(({ active, createNewModalAction }: Props) => {
 	const columns = useMemo(() => ([
 		columnHelper.display({
 			id: 'expand',
@@ -57,16 +57,14 @@ export const ProjectItems = memo(({active, createNewModalAction }: Props) => {
 			cell: ({ row }) => (
 				<div className="flex items-center h-8">
 					{
-						row.getIsExpanded() ? <FolderOpen className="h-4 w-4"/> : <Folder className="h-4 w-4" />
+						row.getIsExpanded() ? <FolderOpen size={16} /> : <Folder size={16} />
 					}
 					<div className="text-[#262626] font-normal text-base ml-[4px] mr-6">{row.original.name}</div>
-					<ScrollArea className="w-full whitespace-nowrap">
-						<div className="flex items-center">
-							{
-								row.original.topics.map((t, i) => <Badge key={i} className="bg-[#F1FF4A] text-[#262626] font-medium py-[4px] px-[5px] text-[10px] odd:mr-2" variant="default">{t}</Badge>)
-							}
-						</div>
-					</ScrollArea>
+					<div className="flex items-center">
+						{
+							row.original.topics.map((t, i, array) => <Badge key={i} className={cn("bg-[#F1FF4A] text-[#262626] font-medium py-[4px] px-[5px] text-[10px]", i === array.length - 1 ? null : 'mr-2')} variant="default">{t}</Badge>)
+						}
+					</div>
 				</div>
 			),
 			size: Number.MAX_SAFE_INTEGER,

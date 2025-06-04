@@ -46,16 +46,16 @@ export function Loading({children}: { children: ReactNode}) {
 	if (showLoader === false) return children
 
   return (
-		<main className="box-border m-10 min-h-screen relative" ref={loaderContainer}>
+		<main className="box-border mt-10 min-h-screen relative" ref={loaderContainer}>
 			<div className="pb-10" ref={innerLoader}>
 				{
 					loaderContent?.map((c, i) => {
 						if (c.active === false) return null	
 
 						return (
-						<p key={i} style={{paddingLeft: `${c.pl}px`}} className="text-base font-normal leading-[16.7px] my-1.5 text-[#262626]">
+						<p key={i} style={{paddingLeft: `${c.pl}px`}} className="text-base font-normal my-1.5 text-[#262626]">
 							<span className="block">
-								<span className="block animate-[fadeIn_500ms_ease_forwards] translate-y-full">{c.content}</span>
+								<span className="block animate-[fadeIn_500ms_ease_forwards]" style={{transform: 'translateY(100%)'}}>{c.content}</span>
 							</span>
 						</p>
 					)})

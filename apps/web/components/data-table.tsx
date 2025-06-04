@@ -1,6 +1,6 @@
 'use client'
 
-import {CSSProperties, Fragment} from 'react'
+import {CSSProperties, Fragment, useEffect, useState} from 'react'
 
 import {
 	flexRender,
@@ -33,6 +33,7 @@ declare module '@tanstack/react-table' {
 
 export function DataTable<TData>(props: Props<TData>) {
 	const table = useReactTable(props)
+	const [isMounted, setIsMounted] = useState(false)
 
 	const getCommonPinningStyles = (column: Column<TData>): CSSProperties => {
 		const isPinned = column.getIsPinned()
@@ -49,8 +50,13 @@ export function DataTable<TData>(props: Props<TData>) {
 		}
 	}
 
+	useEffect(() => {
+		setIsMounted(true)
+		return () => setIsMounted(false)
+	}, [])
+
 	return (
-		<Table>
+		<Table className={cn(isMounted ? 'animate-[fadeIn_500ms_ease_forwards]': null)} style={{transform: 'translateY(100%)', animationDelay: `${3000 + 250}ms`}}>
 			<TableHeader>
 				{table.getHeaderGroups().map((headerGroup) => (
 					<TableRow key={headerGroup.id}>
@@ -71,15 +77,14 @@ export function DataTable<TData>(props: Props<TData>) {
 			</TableHeader>
 			<TableBody>
 				{table.getRowModel().rows?.length ? (
-					table.getRowModel().rows.map((row, i, array) => (
+					table.getRowModel().rows.map((row, i) => (
 						<Fragment key={row.id}>
 							<TableRow
 								data-state={row.getIsSelected() && "selected"}
-								className="transition-colors group animate-[fadeIn_500ms_ease_forwards]"
-								style={{ transform: `translateY(${array.length * 100}%)`, animationDelay: `${3000 + 250}ms` }}
+								className={cn("transition-colors group")}
 							>
 								{row.getVisibleCells().map((cell) => (
-									<TableCell key={cell.id} className={cn("group-hover:bg-accent", cell.column.columnDef.meta?.cellCustomClass)} style={{ ...getCommonPinningStyles(cell.column) }}>
+									<TableCell key={cell.id} className={cn("group-hover:bg-accent bg-accent", cell.column.columnDef.meta?.cellCustomClass)} style={{ ...getCommonPinningStyles(cell.column) }}>
 										{flexRender(cell.column.columnDef.cell, cell.getContext())}
 									</TableCell>
 								))}
