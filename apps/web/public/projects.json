@@ -2,9 +2,9 @@
 	"projects": [
 		{
 			"name": "Tickets",
-			"date": "-",
-			"topics": ["AWS"],
-			"description": "Anim minim enim duis qui exercitation velit tempor adipisicing aliqua qui dolor. Exercitation proident sint adipisicing nisi commodo esse ullamco laborum labore sint sint aute exercitation quis veniam. Irure eiusmod velit reprehenderit sint exercitation consequat proident cillum ipsum adipisicing. Tempor excepteur qui ea eiusmod laboris ullamco et.Adipisicing reprehenderit id in pariatur ipsum. Sit magna consequat incididunt sint culpa esse mollit pariatur adipisicing mollit labore laboris dolor est eiusmod. Eu velit nostrud dolore ex excepteur magna Lorem. Magna est enim mollit esse ea magna dolore id Lorem veniam amet ullamco.",
+			"date": "Start in 2022 to now",
+			"topics": ["VueJs", "SAAS", "Appwrite", "AWS"],
+			"description": "Tickets is a web application that enables users to manage their bank accounts in a secure and digital manner. The app offers features such as automated operations, analytics, AI capabilities, and the ability to import transactions by capturing images of shopping receipts, bills, and more. With thousands of users, the app continues to grow, and new features and fixes are implemented daily. For more information, visit the <a href='https://www.ticketsapp.money/en' target='_blank' class='underline'>Tickets website.</a>",
 			"assets": [
 				{
 					"name": "screen-1.jpg",
@@ -14,16 +14,52 @@
 		},
 		{
 			"name": "Freezer",
-			"date": "Start in May 2024",
-			"topics": ["AWS", "React Native", "React Native", "React Native", "React Native"],
-			"description": "Short description",
+			"date": "Start in March 2024 to now",
+			"topics": ["React Native", "IOS", "Android", "AWS"],
+			"description": "Freezer is a web application that helps users find free parking near their location using an AI-powered algorithm. The application is currently in beta. If you'd like to try it, please send an email.",
 			"assets": [
 				{
 					"name": "screen-2.web",
 					"url": ""
 				}
 			]
+		},
+		{
+			"name": "LucTst CLI",
+			"date": "Created in 2022",
+			"topics": ["NodeJs", "CLI", "Boilerplate generator"],
+			"description": "A command-line interface (CLI) tool designed to streamline the creation of Node.js module projects. I developed this tool to efficiently manage the common boilerplate structures I encounter while working on numerous open-source projects. <a href='https://www.npmjs.com/package/luctst-cli' target='_blank' class='underline'>More info here</a>",
+			"assets": []
+		},
+		{
+			"name": "Fast Repo",
+			"date": "Created in 2021",
+			"topics": ["NodeJs", "CLI", "Github CLI"],
+			"description": "Efficiently manage and interact with your GitHub repository using a variety of quick actions designed to streamline your workflow. <a href='https://www.npmjs.com/package/fast-repo' target='_blank' class='underline'>More info here</a>",
+			"assets": []
+		},
+		{
+			"name": "Get Good Readme.md",
+			"date": "Created in 2020",
+			"topics": ["Nodejs", "CLI", "Readme generator"],
+			"description": "Get Good Readme is a command-line tool build with NodeJs created in 2020 designed to generate README.md files using a selection of templates. <a href='https://www.npmjs.com/package/get-good-readme' target='_blank' class='underline'>More info here</a>",
+			"assets": []
 		}
 	],
-	"experiences": []
+	"experiences": [
+		{
+			"name": "Moonshot Insurance(previously Internet)",
+			"date": "2019 - 2020",
+			"topics": ["SAAS", "VueJS", "Python", "GCP"],
+			"description": "I worked as a full stack software engineer at Moonshot Insurance for a year, using Vue.js for front-end development and Python for back-end development, collaborating with cross-functional teams to deliver high-quality software solutions. <a href='https://www.moonshot-insurance.com/' target='_blank' class='underline'> More info here</a>",
+			"assets": []
+		},
+		{
+			"name": "Learning Software Engineering",
+			"date": "2015 to 2019",
+			"description": "During the first three years of my master's program, I gained diverse experience in web development, I worked both in Startup and as a freelancer, in France and internationally(New-York, South Africa).",
+			"topics": ["Software Engineering", "Master program"],
+			"assets": []
+		}
+	]
 }

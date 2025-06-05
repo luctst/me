@@ -41,7 +41,7 @@ export const ProjectItems = memo(({ active, createNewModalAction }: Props) => {
 			meta: {
 				children: ({ original }) => (
 					<div className="ml-8 my-4 flex items-start justify-center flex-col">
-						<p className="leading-7 [&:not(:first-child)]:mt-6 text-[#262626]">{original.description}</p>
+						<div className="leading-7 [&:not(:first-child)]:mt-6 text-[#262626]" dangerouslySetInnerHTML={{ __html: original.description }} />
 						<div className="flex items-center mt-2">
 							{
 								original.assets.map((a, i) => <Badge key={i} className="odd:mr-2 hover:cursor-pointer" onClick={() => createNewModalAction(a)}>{a.name}</Badge>)
@@ -72,8 +72,8 @@ export const ProjectItems = memo(({ active, createNewModalAction }: Props) => {
 		columnHelper.accessor('date', {
 			id: 'date',
 			header: 'Date',
-			size: 150,
-			maxSize: 150,
+			size: 200,
+			maxSize: 200,
 			cell: ({ getValue }) => getValue(),
 			meta: {
 				hasBorderLeft: true,
