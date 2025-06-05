@@ -28,7 +28,10 @@ export function Loading({children}: { children: ReactNode}) {
 
 				resizer.disconnect()
 				loaderContainer.current?.classList.add('animate-[opacity100to0_1400ms_ease_forwards]')
-				setTimeout(() => setShowLoader(false), 2000)
+				setTimeout(() => {
+					window.scrollTo({top: 0, behavior: 'smooth'})
+					setShowLoader(false)
+				}, 2000)
 				return
 			}
 

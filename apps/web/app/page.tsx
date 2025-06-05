@@ -13,6 +13,9 @@ export default async function Page() {
 		return (
 			<>
 				<Mobile />
+				<section className="min-h-[100vh] mt-8">
+					<Home />
+				</section>
 			</>
 		);
 	}
