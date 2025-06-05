@@ -20,10 +20,13 @@ export function Home() {
 	const [modals, setModals] = useState<Array<Modal>>([])
 
 	const createNewModal = (asset: Assets[number]) => {
-		const maxX = window.innerWidth - 400
-		const maxY = window.innerHeight - 300
-		const x = Math.max(20, Math.random() * maxX)
-		const y = Math.max(20, Math.random() * maxY)
+		const minX = 10
+    const minY = 10
+    const maxX = window.innerWidth - 20 - 10
+    const maxY = window.innerHeight - 20 - 10
+    const x = Math.max(minX, Math.min(minX + Math.random() * (maxX - minX), maxX))
+    const y = Math.max(minY, Math.min(minY + Math.random() * (maxY - minY), maxY))
+
 		const newModal = {
 			id: Math.random().toString(36).substr(2, 9),
 			y,

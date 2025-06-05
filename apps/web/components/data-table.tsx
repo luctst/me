@@ -27,7 +27,7 @@ declare module '@tanstack/react-table' {
 		children?: (rox: Row<TData>) => Renderable<any>
 		cellCustomClass?: string
 		headerCustomClass?: string
-		hasBorder?: boolean
+		hasBorderLeft?: boolean
 	}
 }
 
@@ -62,7 +62,7 @@ export function DataTable<TData>(props: Props<TData>) {
 					<TableRow key={headerGroup.id}>
 						{headerGroup.headers.map((header) => {
 							return (
-								<TableHead key={header.id} style={{ ...getCommonPinningStyles(header.column) }} className={cn(header.column.columnDef.meta?.hasBorder && 'border-r-1', header.column.columnDef.meta?.headerCustomClass)}>
+								<TableHead key={header.id} style={{ ...getCommonPinningStyles(header.column) }} className={cn(header.column.columnDef.meta?.headerCustomClass)}>
 									{header.isPlaceholder
 										? null
 										: flexRender(
@@ -84,7 +84,7 @@ export function DataTable<TData>(props: Props<TData>) {
 								className={cn("transition-colors group")}
 							>
 								{row.getVisibleCells().map((cell) => (
-									<TableCell key={cell.id} className={cn("group-hover:bg-accent bg-accent", cell.column.columnDef.meta?.cellCustomClass)} style={{ ...getCommonPinningStyles(cell.column) }}>
+									<TableCell key={cell.id} className={cn("group-hover:bg-[#F7F4F0] hover:bg-[#F7F4F0] bg-[#F7F4F0]", cell.column.columnDef.meta?.cellCustomClass)} style={{ ...getCommonPinningStyles(cell.column) }}>
 										{flexRender(cell.column.columnDef.cell, cell.getContext())}
 									</TableCell>
 								))}

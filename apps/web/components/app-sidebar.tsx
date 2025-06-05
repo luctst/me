@@ -8,7 +8,7 @@ export function AppSidebar() {
 		'_ Welcome to my website, my',
 		'name is Lucas, I live in Paris',
 		'I\'m working as a full-stack',
-		'JS freelancer, also mentor in OpenClassrooms',
+		'JS freelancer, also mentor at OpenClassrooms',
 		'If you\'re interested, feel free to explore some of my works.',
 	]
 	const footerLinks = [
@@ -44,7 +44,7 @@ export function AppSidebar() {
 					</span>
 				</h2>
 			</SidebarHeader>
-			<SidebarFooter className="mt-auto p-0 mb-[40px]">
+			<SidebarFooter className="mt-auto p-0 mb-[40px] max-w-[69%]">
 				{
 					footerContent.map((f, i) => <p key={i} className={cn('text-base font-normal leading-[16.7px] text-[#262626] m-0', i === footerContent.length - 1 && 'mt-4 mb-12')}>
 						<span className="block overflow-hidden">

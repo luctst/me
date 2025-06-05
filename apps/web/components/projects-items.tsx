@@ -68,9 +68,6 @@ export const ProjectItems = memo(({ active, createNewModalAction }: Props) => {
 				</div>
 			),
 			size: Number.MAX_SAFE_INTEGER,
-			meta: {
-				hasBorder: true,
-			},
 		}),
 		columnHelper.accessor('date', {
 			id: 'date',
@@ -78,6 +75,9 @@ export const ProjectItems = memo(({ active, createNewModalAction }: Props) => {
 			size: 150,
 			maxSize: 150,
 			cell: ({ getValue }) => getValue(),
+			meta: {
+				hasBorderLeft: true,
+			},
 		})
 	]), [active])
 	const initialState = useMemo<InitialTableState>(() => ({
