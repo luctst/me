@@ -43,7 +43,8 @@ jobs:
       - name: typecheck
         run: pnpm run --filter web typecheck
   push-to-vercel:
-    # needs: lint-typecheck
+    if: false
+    needs: lint-typecheck
     runs-on: macos-latest
     strategy:
       fail-fast: true
