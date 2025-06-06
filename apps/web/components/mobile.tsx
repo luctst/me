@@ -41,7 +41,7 @@ export function Mobile() {
 			<footer className="flex items-center justify-between overflow-hidden mb-2">
 				{
 					footerLinks.map((link, i) => (
-						<a className="animate-[fadeIn_1000ms_ease_forwards] flex items-center font-medium no-underline text-[#262626]" style={{ animationDelay: '1000ms', transform: 'translateY(100%)' }} href={link.href} target="_blank" key={i}>
+						<a className="animate-[fadeIn_1000ms_ease_forwards] flex items-center font-medium no-underline text-[#262626]" style={{ animationDelay: '1000ms', transform: 'translateY(100%)' }} href={link.href} target="_blank" key={i} rel="noreferrer">
 							{link.content}
 							<ArrowRight size={12} className="ml-2" />
 						</a>

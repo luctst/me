@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Dispatch, SetStateAction, useCallback, MouseEvent, useState, useEffect } from "react"
+import { Dispatch, SetStateAction, useCallback, useState, useEffect } from "react"
 import { X } from "lucide-react"
 import { Modal } from "@/components/home"
 import { createPortal } from "react-dom"
@@ -18,27 +18,27 @@ export function Modals({ modals, setModalsAction }: { modals: Array<Modal>, setM
 
 	const onClickClose = (id: string) => setModalsAction(prev => prev.filter(modal => modal.id !== id))
 	const bringToFront = (id: string) => setModalsAction(prev => {
-		const highestValue = prev.reduce((max, obj) => obj.zIndex > max ? obj.zIndex : max, prev[0]?.zIndex)
+		const highestValue = prev.reduce((max, obj) => obj.zIndex > max ? obj.zIndex : max, prev[0]?.zIndex ?? 0)
 
 		if (highestValue) {
-			return prev.map((modal, i) => modal.id === id ? { ...modal, zIndex: highestValue + 1 } : modal)
+			return prev.map(modal => modal.id === id ? { ...modal, zIndex: highestValue + 1 } : modal)
 		}
 
 		return prev
 	})
 
-	const onMouseDown = useCallback((e: MouseEvent | TouchEvent, modalId: string) => {
+	const onMouseDown = useCallback((e: any, modalId: string) => {
 		const modal = modals.find(m => m.id === modalId)
 		if (!modal) return
 
 		bringToFront(modalId)
 
-		const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
-		const clientY = "touches" in e ? e.touches[0].clientY : e.clientY
+		const clientX = "touches" in e ? e.touches[0]?.clientX : e.clientX
+		const clientY = "touches" in e ? e.touches[0]?.clientY : e.clientY
 
 		const offset = {
-			x: clientX - modal.x,
-			y: clientY - modal.y,
+			x: clientX ?? 0 - modal.x,
+			y: clientY ?? 0 - modal.y,
 		}
 
 		setDragState({
@@ -51,14 +51,14 @@ export function Modals({ modals, setModalsAction }: { modals: Array<Modal>, setM
 		e.stopPropagation()
 	}, [modals])
 	const handleMouseMove = useCallback(
-		(e: MouseEvent | TouchEvent) => {
+		(e: globalThis.MouseEvent | TouchEvent) => {
 			if (!dragState.isDragging || !dragState.modalId) return
 
-			const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
-			const clientY = "touches" in e ? e.touches[0].clientY : e.clientY
+			const clientX = "touches" in e ? e.touches[0]?.clientX : e.clientX
+			const clientY = "touches" in e ? e.touches[0]?.clientY : e.clientY
 
-			const newX = clientX - dragState.offset.x
-			const newY = clientY - dragState.offset.y
+			const newX = clientX ?? 0 - dragState.offset.x
+			const newY = clientY ?? 0 - dragState.offset.y
 
 			const boundedX = newX
 			const boundedY = newY

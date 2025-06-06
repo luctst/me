@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import {Roboto} from 'next/font/google'
 import { Metadata } from 'next'
 import {cn} from '@workspace/ui/lib/utils'
@@ -7,7 +8,8 @@ import {Loading} from '@/components/loader'
 import "@workspace/ui/globals.css"
 
 const roboto = Roboto({
-	weight: ['100', '400', '500', '700'] 
+	weight: ['100', '400', '500', '700'],
+	subsets: ['latin']
 })
 
 export const metadata: Metadata = {
@@ -30,6 +32,7 @@ export default function RootLayout({
 						{children}
 					</Loading>
 				</Providers>
+				<Analytics />
       </body>
     </html>
   )

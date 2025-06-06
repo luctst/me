@@ -69,7 +69,7 @@ export function AppSidebar() {
 				}
 				<div className="flex items-center">
 					{
-						footerLinks.map((link, i) => <a key={i} href={link.href} target="_blank" className="flex items-center text-[#262626] text-[12px] font-medium no-underline leading-[14.56px] mr-[5px]">
+						footerLinks.map((link, i) => <a key={i} href={link.href} target="_blank" className="flex items-center text-[#262626] text-[12px] font-medium no-underline leading-[14.56px] mr-[5px]" rel="noreferrer">
 							<span className="block overflow-hidden">
 								<span className=' block animate-[fadeIn_500ms_ease_forwards] flex items-center' style={{ transform: 'translateY(100%)', animationDelay: `${1200 + i * 200}ms` }}>
 									{link.content}

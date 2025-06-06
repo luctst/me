@@ -6,22 +6,26 @@ export function Loading({children}: { children: ReactNode}) {
 	const [showLoader, setShowLoader] = useState(true)
 	const [loaderContent, setLoaderContent] = useState(loader[0]?.split('\n').map(content => ({content, active: false, pl: Math.floor(Math.random() * ((50 - 0) - 0 + 1) - 0 + 1)})))
 
-	const loaderContainer = useRef(null)
-	const innerLoader = useRef(null)
+	const loaderContainer = useRef<HTMLElement>(null)
+	const innerLoader = useRef<HTMLDivElement>(null)
 
 	const handleLoader = () => {
 		const resizer = new ResizeObserver(entries => {
 			entries[0]?.target.scrollIntoView({block: "end", inline: "nearest", behavior: 'smooth'})
 		})
 
-		resizer.observe(innerLoader.current)
+		if (innerLoader.current) {
+			resizer.observe(innerLoader.current)
+		}
 
-		let timeoutId;
+		let timeoutId: NodeJS.Timeout | null;
 		let iterator = 0;
 	
 		timeoutId = setInterval(() => {
 			if (loaderContent?.length === iterator) {
-				clearInterval(timeoutId)
+				if (timeoutId) {
+					clearInterval(timeoutId)
+				}
 
 				timeoutId = null
 				iterator = 0
@@ -35,12 +39,18 @@ export function Loading({children}: { children: ReactNode}) {
 				return
 			}
 
-			const	newLoaderContent = [...loaderContent]
+			if (loaderContent) {
+				const	newLoaderContent = [...loaderContent]
 
-			newLoaderContent[iterator].active = true
-			setLoaderContent(newLoaderContent)
+				if (newLoaderContent) {
+					if (newLoaderContent[iterator]) {
+						(newLoaderContent[iterator] as {content: string, active: boolean, pl: number}).active = true
+					}
+				}
+				setLoaderContent(newLoaderContent)
 
-			iterator = iterator + 1
+				iterator = iterator + 1
+			}
 		}, 55)
 	}
 

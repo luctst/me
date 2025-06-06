@@ -1,6 +1,6 @@
 'use client'
 
-import {CSSProperties, Fragment, useEffect, useState} from 'react'
+import { CSSProperties, Fragment, useEffect, useState } from 'react'
 
 import {
 	flexRender,
@@ -20,7 +20,7 @@ import {
 } from "@workspace/ui/components/table"
 import { cn } from '@workspace/ui/lib/utils'
 
-type Props<TData> = TableOptions<TData> 
+type Props<TData> = TableOptions<TData>
 
 declare module '@tanstack/react-table' {
 	interface ColumnMeta<TData, TValue> {
@@ -55,8 +55,21 @@ export function DataTable<TData>(props: Props<TData>) {
 		return () => setIsMounted(false)
 	}, [])
 
+	const innerRow = (row: Row<TData>, i: number) => {
+		const cells = row.getVisibleCells();
+		const firstCell = cells[0];
+		const childrenFunction = firstCell?.column.columnDef.meta?.children;
+		const context = cells[i]?.getContext();
+
+		if (childrenFunction && context) {
+			return flexRender(childrenFunction(row), context);
+		}
+
+		return null;
+	}
+
 	return (
-		<Table className={cn(isMounted ? 'animate-[fadeIn_500ms_ease_forwards]': null)} style={{transform: 'translateY(100%)', animationDelay: `${4000 + 250}ms`}}>
+		<Table className={cn(isMounted ? 'animate-[fadeIn_500ms_ease_forwards]' : null)} style={{ transform: 'translateY(100%)', animationDelay: `${4000 + 250}ms` }}>
 			<TableHeader>
 				{table.getHeaderGroups().map((headerGroup) => (
 					<TableRow key={headerGroup.id}>
@@ -93,7 +106,7 @@ export function DataTable<TData>(props: Props<TData>) {
 								row.getIsExpanded() ? (
 									<TableRow className="bg-transparent" key={`${row.id}-expanded`}>
 										<TableCell colSpan={row.getVisibleCells().length} className="p-0 relative whitespace-normal">
-											{flexRender(row.getVisibleCells()[0]?.column.columnDef.meta?.children(row), row.getVisibleCells()[i]?.getContext())}
+											{innerRow(row, i)}
 										</TableCell>
 									</TableRow>
 								) : null
