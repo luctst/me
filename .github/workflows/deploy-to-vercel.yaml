@@ -1,0 +1,96 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'master'
+env:
+  WORKING_DIRECTORY: apps/web/
+
+jobs:
+  lint-typecheck:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: store_dir
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path | tr -d '\n')" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.store_dir.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+        env:
+          HUSKY: 0
+
+      - name: lint
+        run: pnpm run --filter web lint
+
+      - name: typecheck
+        run: pnpm run --filter web typecheck
+  push-to-vercel:
+    # needs: lint-typecheck
+    runs-on: macos-latest
+    strategy:
+      fail-fast: true
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: store_dir
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path | tr -d '\n')" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.store_dir.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+        env:
+          HUSKY: 0
+
+      - name: Install Vercel
+        run: pnpm install -g vercel@latest
+
+      - name: Link repo vercel
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: vercel link --yes --token=${{ secrets.VERCEL_API_KEY_VALUE }} --project me
+
+      - name: Pull Vercel Environment Information
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: vercel pull --yes --environment production --token=${{ secrets.VERCEL_API_KEY_VALUE }}
+
+      - name: Build project
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: vercel build --token=${{ secrets.VERCEL_API_KEY_VALUE }} --target production 
+
+      - name: Deploy Project Artifacts to Vercel
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: vercel deploy --token=${{ secrets.VERCEL_API_KEY_VALUE }} --target production 

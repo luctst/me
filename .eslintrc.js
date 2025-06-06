@@ -1,20 +1,10 @@
+// This configuration only applies to the package manager root.
+/** @type {import("eslint").Linter.Config} */
 module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    node: true
-  },
+  ignorePatterns: ["apps/**", "packages/**"],
+  //extends: ["@workspace/eslint-config/library.js"],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    parser: '@babel/eslint-parser',
-    requireConfigFile: false
+    project: true,
   },
-  extends: [
-    '@nuxtjs',
-    'plugin:nuxt/recommended',
-    'prettier'
-  ],
-  plugins: [
-  ],
-  // add your custom rules here
-  rules: {}
 }
