@@ -56,7 +56,7 @@ export function DataTable<TData>(props: Props<TData>) {
 	}, [])
 
 	return (
-		<Table className={cn(isMounted ? 'animate-[fadeIn_500ms_ease_forwards]': null)} style={{transform: 'translateY(100%)', animationDelay: `${3000 + 250}ms`}}>
+		<Table className={cn(isMounted ? 'animate-[fadeIn_500ms_ease_forwards]': null)} style={{transform: 'translateY(100%)', animationDelay: `${4000 + 250}ms`}}>
 			<TableHeader>
 				{table.getHeaderGroups().map((headerGroup) => (
 					<TableRow key={headerGroup.id}>

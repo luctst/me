@@ -6,10 +6,6 @@
 			"topics": ["VueJs", "SAAS", "Appwrite", "AWS"],
 			"description": "Tickets is a web application that enables users to manage their bank accounts in a secure and digital manner. The app offers features such as automated operations, analytics, AI capabilities, and the ability to import transactions by capturing images of shopping receipts, bills, and more. With thousands of users, the app continues to grow, and new features and fixes are implemented daily. For more information, visit the <a href='https://www.ticketsapp.money/en' target='_blank' class='underline'>Tickets website.</a>",
 			"assets": [
-				{
-					"name": "screen-1.jpg",
-					"url": ""
-				}
 			]
 		},
 		{
@@ -18,10 +14,6 @@
 			"topics": ["React Native", "IOS", "Android", "AWS"],
 			"description": "Freezer is a web application that helps users find free parking near their location using an AI-powered algorithm. The application is currently in beta. If you'd like to try it, please send an email.",
 			"assets": [
-				{
-					"name": "screen-2.web",
-					"url": ""
-				}
 			]
 		},
 		{
@@ -47,6 +39,41 @@
 		}
 	],
 	"experiences": [
+		{
+			"name": "Localista",
+			"date": "January 2025 - May 2025",
+			"topics": ["SAAS", "RemixJs", "Freelance"],
+			"description": "I have been collaborating with Localista on a four-month mission focused on optimizing and resolving issues within their web application. This project involves enhancing user experience, improving performance, and ensuring the platform's reliability and efficiency.",
+			"assets": []
+		},
+		{
+			"name": "BIM Cloissons",
+			"date": "July 2024 - October 2024",
+			"topics": ["SAAS", "RemixJs", "Freelance"],
+			"description": "As part of my freelance journey, I have been engaged for a short-term project with BIM Cloissons, a company that operates a SaaS platform within the building industry.",
+			"assets": []
+		},
+		{
+			"name": "Prestashop",
+			"date": "2022 - 2024",
+			"topics": ["SAAS", "NodeJs", "VueJs", "AWS"],
+			"description": "As a full-stack developer, I was part of one of the 'modules' teams at PrestaShop. My role involved creating plugins and modules that integrate into the user's back office. This included the Metrics module for collecting e-commerce site data, the Legal module, and the Shipping module.",
+			"assets": []
+		},
+		{
+			"name": "Mentoring Openclassrooms",
+			"date": "2021 to now",
+			"topics": ["Mentoring", "Web development", "Algorithm", "React", "NodeJs"],
+			"description": "Since the beginning of 2021, I have been mentoring students on their web development journey through OpenClassrooms, and I continue to do so to this day.",
+			"assets": []
+		},
+		{
+			"name": "Bluecoders",
+			"date": "2020 - 2021",
+			"topics": ["VueJs", "SAAS", "GCP", "NodeJs"],
+			"description": "I worked as a Full Stack JavaScript Developer on an internal Customer Relationship Management (CRM) system utilized by various sales teams. My role involved both front-end and back-end development, ensuring seamless integration and functionality across the platform to enhance the efficiency and productivity of the sales personnel. I collaborated closely with cross-functional teams to implement user-friendly features and optimize the system's performance.",
+			"assets": []
+		},
 		{
 			"name": "Moonshot Insurance(previously Internet)",
 			"date": "2019 - 2020",

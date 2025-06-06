@@ -12,7 +12,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
 	title: 'Lucas Tostée | Développeur Javascript Full Stack Freelance Paris',
-	description: ''
+	description: 'Lucas Tostée JS full stack developpeur, Mentor Openclassrooms I create natives and web applications'
 }
 
 export default function RootLayout({
