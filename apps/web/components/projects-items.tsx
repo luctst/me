@@ -44,7 +44,7 @@ export const ProjectItems = memo(({ active, createNewModalAction }: Props) => {
 						<div className="leading-7 [&:not(:first-child)]:mt-6 text-[#262626]" dangerouslySetInnerHTML={{ __html: original.description }} />
 						<div className="flex items-center mt-2">
 							{
-								original.assets.map((a, i) => <Badge key={i} className="odd:mr-2 hover:cursor-pointer" onClick={() => createNewModalAction(a)}>{a.name}</Badge>)
+								original.assets.map((a, i, array) => <Badge key={i} className={cn("hover:cursor-pointer", i === array.length - 1 ? null : 'mr-2')} onClick={() => createNewModalAction(a)}>{a.name}</Badge>)
 							}
 						</div>
 					</div>

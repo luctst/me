@@ -6,13 +6,25 @@
 			"topics": ["VueJs", "SAAS", "Appwrite", "AWS"],
 			"description": "Tickets is a web application that enables users to manage their bank accounts in a secure and digital manner. The app offers features such as automated operations, analytics, AI capabilities, and the ability to import transactions by capturing images of shopping receipts, bills, and more. With thousands of users, the app continues to grow, and new features and fixes are implemented daily. For more information, visit the <a href='https://www.ticketsapp.money/en' target='_blank' class='underline'>Tickets website.</a>",
 			"assets": [
+        {
+          "name": "tickets-dashboard-mobile.webp",
+          "url": "https://lucas-tostee-assets.s3.eu-west-1.amazonaws.com/Tickets+_+G_rer+ses+comptes.webp"
+        },
+        {
+          "name": "tickets-transactions-desktop.webp",
+          "url": "https://lucas-tostee-assets.s3.eu-west-1.amazonaws.com/tickets-transactions-desktop.webp"
+        },
+        {
+          "name": "tickets-dahsboard-desktop.webp",
+          "url": "https://lucas-tostee-assets.s3.eu-west-1.amazonaws.com/tickets-dashboard-desktop.webp"
+        }
 			]
 		},
 		{
 			"name": "Freezer",
 			"date": "Start in March 2024 to now",
 			"topics": ["React Native", "IOS", "Android", "AWS"],
-			"description": "Freezer is a web application that helps users find free parking near their location using an AI-powered algorithm. The application is currently in beta. If you'd like to try it, please send an email.",
+			"description": "Freezer is a native IOS applications that helps users find free parking near their location using an AI-powered algorithm. The application is currently in beta. If you'd like to try it, please send an email.",
 			"assets": [
 			]
 		},

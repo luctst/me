@@ -6,7 +6,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'placehold.co'
+				hostname: 'lucas-tostee-assets.s3.eu-west-1.amazonaws.com'
 			},
 		],
 	},

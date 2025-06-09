@@ -103,7 +103,7 @@ export function Modals({ modals, setModalsAction }: { modals: Array<Modal>, setM
 	}, [dragState.isDragging, handleMouseMove, handleMouseUp])
 
 	return createPortal(modals.map(m => (
-		<div className="flex flex-col fixed max-w-max hover:cursor-move" style={{ left: `${m.x}px`, top: `${m.y}px`, zIndex: m.zIndex }} onClick={() => bringToFront(m.id)} onMouseDown={e => onMouseDown(e, m.id)} key={m.id} onTouchStart={e => onMouseDown(e, m.id)}>
+		<div className="flex flex-col fixed w-auto max-w-[500px] h-auto max-h-[500px] hover:cursor-move" style={{ left: `${m.x}px`, top: `${m.y}px`, zIndex: m.zIndex }} onClick={() => bringToFront(m.id)} onMouseDown={e => onMouseDown(e, m.id)} key={m.id} onTouchStart={e => onMouseDown(e, m.id)}>
 			<div className="flex justify-between items-center bg-[#FFFCF9] h-[30px] p-0 px-[10px] w-full min-w-64 box-border">
 				<div className="text-[#262626] font-normal leading-[14px] text-xs md:text-[13px]">
 					{m.metadata.name}
@@ -118,7 +118,9 @@ export function Modals({ modals, setModalsAction }: { modals: Array<Modal>, setM
 					src={m.metadata.url}
 					alt="Image Description"
 					layout="responsive"
-					fill={true}
+					//fill={true}
+          width={500}
+          height={500}
 				/>
 			</div>
 		</div>

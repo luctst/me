@@ -61,7 +61,7 @@ export function DataTable<TData>(props: Props<TData>) {
 		const childrenFunction = firstCell?.column.columnDef.meta?.children;
 		const context = cells[i]?.getContext();
 
-		if (childrenFunction && context) {
+		if (childrenFunction) {
 			return flexRender(childrenFunction(row), context);
 		}
 
