@@ -37,8 +37,8 @@ export function Modals({ modals, setModalsAction }: { modals: Array<Modal>, setM
 		const clientY = "touches" in e ? e.touches[0]?.clientY : e.clientY
 
 		const offset = {
-			x: clientX ?? 0 - modal.x,
-			y: clientY ?? 0 - modal.y,
+			x: clientX - modal.x,
+			y: clientY - modal.y,
 		}
 
 		setDragState({
@@ -57,8 +57,8 @@ export function Modals({ modals, setModalsAction }: { modals: Array<Modal>, setM
 			const clientX = "touches" in e ? e.touches[0]?.clientX : e.clientX
 			const clientY = "touches" in e ? e.touches[0]?.clientY : e.clientY
 
-			const newX = clientX ?? 0 - dragState.offset.x
-			const newY = clientY ?? 0 - dragState.offset.y
+			const newX = (clientX ?? 0) - dragState.offset.x
+			const newY = (clientY ?? 0) - dragState.offset.y
 
 			const boundedX = newX
 			const boundedY = newY
@@ -104,7 +104,7 @@ export function Modals({ modals, setModalsAction }: { modals: Array<Modal>, setM
 
 	return createPortal(modals.map(m => (
 		<div className="flex flex-col fixed w-auto max-w-[500px] h-auto max-h-[500px] hover:cursor-move" style={{ left: `${m.x}px`, top: `${m.y}px`, zIndex: m.zIndex }} onClick={() => bringToFront(m.id)} onMouseDown={e => onMouseDown(e, m.id)} key={m.id} onTouchStart={e => onMouseDown(e, m.id)}>
-			<div className="flex justify-between items-center bg-[#FFFCF9] h-[30px] p-0 px-[10px] w-full min-w-64 box-border">
+			<div className="flex justify-between items-center bg-[#FFFCF9] h-[30px] min-h-[30px] p-0 px-[10px] w-full min-w-64 box-border">
 				<div className="text-[#262626] font-normal leading-[14px] text-xs md:text-[13px]">
 					{m.metadata.name}
 				</div>
@@ -114,11 +114,10 @@ export function Modals({ modals, setModalsAction }: { modals: Array<Modal>, setM
 			</div>
 			<div className="bg-[#FFFCF9] relative">
 				<Image
-					style={{ objectFit: 'contain' }}
+					style={{ objectFit: 'contain', maxHeight: 500 }}
 					src={m.metadata.url}
 					alt="Image Description"
 					layout="responsive"
-					//fill={true}
           width={500}
           height={500}
 				/>

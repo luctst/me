@@ -33,21 +33,36 @@
 			"date": "Created in 2022",
 			"topics": ["NodeJs", "CLI", "Boilerplate generator"],
 			"description": "A command-line interface (CLI) tool designed to streamline the creation of Node.js module projects. I developed this tool to efficiently manage the common boilerplate structures I encounter while working on numerous open-source projects. <a href='https://www.npmjs.com/package/luctst-cli' target='_blank' class='underline'>More info here</a>",
-			"assets": []
+			"assets": [
+        {
+          "name": "luctst-cli-poster.webp",
+          "url": "https://lucas-tostee-assets.s3.eu-west-1.amazonaws.com/luctst-cli.webp"
+        }
+      ]
 		},
 		{
 			"name": "Fast Repo",
 			"date": "Created in 2021",
 			"topics": ["NodeJs", "CLI", "Github CLI"],
 			"description": "Efficiently manage and interact with your GitHub repository using a variety of quick actions designed to streamline your workflow. <a href='https://www.npmjs.com/package/fast-repo' target='_blank' class='underline'>More info here</a>",
-			"assets": []
+			"assets": [
+        {
+          "name": "fast-repo-poster.webp",
+          "url": "https://lucas-tostee-assets.s3.eu-west-1.amazonaws.com/fast-repo-poster.webp"
+        }
+      ]
 		},
 		{
 			"name": "Get Good Readme.md",
 			"date": "Created in 2020",
 			"topics": ["Nodejs", "CLI", "Readme generator"],
 			"description": "Get Good Readme is a command-line tool build with NodeJs created in 2020 designed to generate README.md files using a selection of templates. <a href='https://www.npmjs.com/package/get-good-readme' target='_blank' class='underline'>More info here</a>",
-			"assets": []
+			"assets": [
+        {
+          "name": "get-good-README.md-poster.webp",
+          "url": "https://lucas-tostee-assets.s3.eu-west-1.amazonaws.com/get-good-readme-poster.webp"
+        }
+      ]
 		}
 	],
 	"experiences": [
