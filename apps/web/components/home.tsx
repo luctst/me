@@ -22,8 +22,8 @@ export function Home() {
 	const createNewModal = (asset: Assets[number]) => {
 		const minX = 10
     const minY = 10
-    const maxX = window.innerWidth - 20 - 10
-    const maxY = window.innerHeight - 20 - 10
+    const maxX = window.innerWidth - 500 - 10
+    const maxY = window.innerHeight - 500 - 10
     const x = Math.max(minX, Math.min(minX + Math.random() * (maxX - minX), maxX))
     const y = Math.max(minY, Math.min(minY + Math.random() * (maxY - minY), maxY))
 
@@ -109,7 +109,7 @@ export const Titles = memo(({ action, keyActive }: { action: Dispatch<SetStateAc
 				isAllAnimationDone ? (
 					<>
 						<div className="animate-[opacity0to100_400ms_ease_forwards]">
-							<button onClick={openMaltProfile} className="hover:cursor-pointer bg-[#FFFCF9] rounded-[2px] text-[#262626] text-sm text-right" style={{ outline: 'none', border: 'none', padding: '7px 11px 8px' }}>
+							<button onClick={openMaltProfile} className="bg-[#F1FF4A] hover:cursor-pointer rounded-[2px] text-[#262626] text-sm text-right" style={{ outline: 'none', border: 'none', padding: '7px 11px 8px' }}>
 								<span className="animate-[blink_1.3s_step-start_0s_infinite]">_</span> Hire me
 							</button>
 						</div>
