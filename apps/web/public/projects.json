@@ -3,7 +3,7 @@
 		{
 			"name": "Tickets",
 			"date": "Start in 2022 to now",
-			"topics": ["VueJs", "SAAS", "Appwrite", "AWS"],
+			"topics": ["VueJs", "NextJs", "SAAS", "Appwrite", "AWS"],
 			"description": "Tickets is a web application that enables users to manage their bank accounts in a secure and digital manner. The app offers features such as automated operations, analytics, AI capabilities, and the ability to import transactions by capturing images of shopping receipts, bills, and more. With thousands of users, the app continues to grow, and new features and fixes are implemented daily. For more information, visit the <a href='https://www.ticketsapp.money/en' target='_blank' class='underline'>Tickets website.</a>",
 			"assets": [
         {
@@ -69,21 +69,21 @@
 		{
 			"name": "Localista",
 			"date": "January 2025 - May 2025",
-			"topics": ["SAAS", "RemixJs", "Freelance"],
+			"topics": ["SAAS", "React", "PostGreSQL", "RemixJs", "Freelance"],
 			"description": "I have been collaborating with Localista on a four-month mission focused on optimizing and resolving issues within their web application. This project involves enhancing user experience, improving performance, and ensuring the platform's reliability and efficiency.",
 			"assets": []
 		},
 		{
 			"name": "BIM Cloissons",
 			"date": "July 2024 - October 2024",
-			"topics": ["SAAS", "RemixJs", "Freelance"],
+			"topics": ["SAAS", "React", "PostGreSQL", "RemixJs", "Freelance"],
 			"description": "As part of my freelance journey, I have been engaged for a short-term project with BIM Cloissons, a company that operates a SaaS platform within the building industry.",
 			"assets": []
 		},
 		{
 			"name": "Prestashop",
 			"date": "2022 - 2024",
-			"topics": ["SAAS", "NodeJs", "VueJs", "AWS"],
+			"topics": ["SAAS", "NodeJs", "NestJs", "SQL", "VueJs", "AWS"],
 			"description": "As a full-stack developer, I was part of one of the 'modules' teams at PrestaShop. My role involved creating plugins and modules that integrate into the user's back office. This included the Metrics module for collecting e-commerce site data, the Legal module, and the Shipping module.",
 			"assets": []
 		},

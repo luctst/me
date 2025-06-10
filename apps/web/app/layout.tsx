@@ -14,7 +14,15 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
 	title: 'Lucas Tostée | Développeur Javascript Full Stack Freelance Paris',
-	description: 'Lucas Tostée JS full stack developpeur, Mentor Openclassrooms I create natives and web applications'
+	description: 'Lucas Tostée JS full stack developpeur, Mentor Openclassrooms I create natives and web applications',
+  generator: 'NextJs',
+  applicationName: 'me',
+  referrer: 'origin-when-cross-origin',
+  keywords: ['Software Engineer', 'Paris', 'JavaScript', 'React', 'NextJs', 'Full Stack'],
+  authors: [{ name: 'Tostee Lucas', url: 'https://lucastostee.com' }],
+  verification: {
+    google: 'google',
+  }
 }
 
 export default function RootLayout({
