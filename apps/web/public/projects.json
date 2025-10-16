@@ -20,6 +20,30 @@
         }
 			]
 		},
+    {
+      "name": "Paper",
+      "date": "March 2024",
+      "topics": ["Raycast", "Mac", "Raycast Extension", "React"],
+      "description": "Create and organize your ideas, work, etc., in Markdown files by category. <a href='https://www.raycast.com/luctst/paper' target='_blank' class='underline'>More info</a>.",
+      "assets": [
+        {
+          "name": "Paper-command1.webp",
+          "url": "https://lucas-tostee-assets.s3.eu-west-1.amazonaws.com/Paper.webp"
+        },
+        {
+          "name": "Paper-command2.webp",
+          "url": "https://lucas-tostee-assets.s3.eu-west-1.amazonaws.com/Paper-command2.webp"
+        },
+        {
+          "name": "Paper-command3.webp",
+          "url": "https://lucas-tostee-assets.s3.eu-west-1.amazonaws.com/paper-command3.webp"
+        },
+        {
+          "name": "Paper-command4.webp",
+          "url": "https://lucas-tostee-assets.s3.eu-west-1.amazonaws.com/paper-command4.webp"
+        }
+      ]
+    },
 		{
 			"name": "Freezer",
 			"date": "Start in March 2024 to now",
