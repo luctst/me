@@ -4,7 +4,7 @@ const nextConfig = {
 	devIndicators: false,
 	images: {
 		remotePatterns: [
-			{
+      {
 				protocol: 'https',
 				hostname: 'lucas-tostee-assets.s3.eu-west-1.amazonaws.com'
 			},
