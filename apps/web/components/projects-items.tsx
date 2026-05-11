@@ -89,7 +89,7 @@ export const ProjectItems = memo(({ active, createNewModalAction }: Props) => {
                 <Badge
                   key={i}
                   className={cn(
-                    'bg-accent-badge text-foreground font-medium py-[4px] px-[5px] text-[10px]',
+                    'bg-accent-badge text-accent-badge-foreground font-medium py-[4px] px-[5px] text-[10px]',
                     i === array.length - 1 ? null : 'mr-2',
                   )}
                   variant="default"
