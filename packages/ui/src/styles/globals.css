@@ -1,27 +1,29 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @source "../../../apps/**/*.{ts,tsx}";
 @source "../../../components/**/*.{ts,tsx}";
 @source "../**/*.{ts,tsx}";
 
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.965 0.005 75);
+  --foreground: oklch(0.205 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.205 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.205 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.7 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
+  --surface-elevated: oklch(0.995 0.003 75);
+  --accent-badge: oklch(0.95 0.2 105);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -68,6 +70,8 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
+  --surface-elevated: oklch(0.269 0 0);
+  --accent-badge: oklch(0.85 0.15 105);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -115,72 +119,74 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-accent-badge: var(--accent-badge);
 
-	@keyframes fadeIn {
-  0% {
-    transform: translateY(100%);
+  @keyframes fadeIn {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
   }
-  100% {
-    transform: translateY(0);
-  }
-}
 
-@keyframes fadeInX {
-  0% {
-    transform: translateX(-100%);
+  @keyframes fadeInX {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
-  100% {
-    transform: translateX(0);
-  }
-}
 
-@keyframes blink {
-  50% {
-    opacity: 0.0;
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
   }
-}
 
-@keyframes widthRightToLeft {
-  0% {
-    transform: translateX(100%);
+  @keyframes widthRightToLeft {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
-  100% {
-    transform: translateX(0);
-  }
-}
 
-@keyframes widthLeftToRight {
-  0% {
-    transform: translateX(-100%);
+  @keyframes widthLeftToRight {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
-  100% {
-    transform: translateX(0);
-  }
-}
 
-@keyframes opacityOto100 {
-  0% {
-    opacity: 0;
-    filter: blur(1px);
-    transform: translateY(100%);
+  @keyframes opacityOto100 {
+    0% {
+      opacity: 0;
+      filter: blur(1px);
+      transform: translateY(100%);
+    }
+    100% {
+      filter: blur(0px);
+      opacity: 1;
+      transform: translateY(0%);
+    }
   }
-  100% {
-    filter: blur(0px);
-    opacity: 1;
-    transform: translateY(0%);
-  }
-}
 
-@keyframes opacity100to0 {
-  0% {
-    opacity: 1;
-    filter: blur(0px);
+  @keyframes opacity100to0 {
+    0% {
+      opacity: 1;
+      filter: blur(0px);
+    }
+    100% {
+      filter: blur(1px);
+      opacity: 0;
+    }
   }
-  100% {
-    filter: blur(1px);
-    opacity: 0;
-  }
-}
 }
 
 @layer base {
