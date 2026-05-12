@@ -1,5 +1,5 @@
 'use client'
-import { memo, useMemo } from 'react'
+import { memo, useEffect, useMemo, useState } from 'react'
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -30,6 +30,13 @@ type Item = {
 const columnHelper = createColumnHelper<Item>()
 
 export const ProjectItems = memo(({ active, createNewModalAction }: Props) => {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
   const columns = useMemo(
     () => [
       columnHelper.display({
@@ -125,13 +132,37 @@ export const ProjectItems = memo(({ active, createNewModalAction }: Props) => {
   )
 
   return (
-    <DataTable
-      data={projects[active]}
-      columns={columns}
-      getCoreRowModel={getCoreRowModel()}
-      getExpandedRowModel={getExpandedRowModel()}
-      initialState={initialState}
-      getRowCanExpand={() => true}
-    />
+    <>
+      <DataTable
+        data={projects[active]}
+        columns={columns}
+        getCoreRowModel={getCoreRowModel()}
+        getExpandedRowModel={getExpandedRowModel()}
+        initialState={initialState}
+        getRowCanExpand={() => true}
+      />
+      <div
+        className={cn(
+          'mt-6 flex justify-center overflow-hidden',
+          active === 'projects' ? 'visible' : 'invisible',
+        )}
+      >
+        <a
+          href="https://github.com/luctst"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(
+            'block rounded-sm text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+            isMounted ? 'animate-[fadeIn_500ms_ease_forwards]' : null,
+          )}
+          style={{
+            transform: 'translateY(100%)',
+            animationDelay: `${4000 + 700}ms`,
+          }}
+        >
+          See more on GitHub →
+        </a>
+      </div>
+    </>
   )
 })
