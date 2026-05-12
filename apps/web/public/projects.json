@@ -9,6 +9,20 @@
       "assets": []
     },
     {
+      "name": "marcdown",
+      "date": "May 2026",
+      "topics": ["Swift", "macOS", "Markdown", "Keyboard-driven"],
+      "description": "A lightweight native macOS markdown editor that lives in the background—summoned by Cmd+Shift+Space to capture ideas in plain text. Built with Swift 6 and AppKit, it stores everything locally in ~/marcdown/ with zero cloud dependencies, offering live rendering and a fully keyboard-driven workflow for distraction-free writing. <a href='https://github.com/luctst/marcdown/releases' target='_blank' class='underline'>Download from releases</a>.",
+      "assets": []
+    },
+    {
+      "name": "commai",
+      "date": "April 2026",
+      "topics": ["TypeScript", "Node.js", "CLI", "Git"],
+      "description": "An AI-powered git commit message generator that integrates seamlessly as a prepare-commit-msg hook, supporting Claude or OpenAI with just two production dependencies. It respects your existing hook chains (husky, commitlint, etc.) and fails gracefully—API errors never block your commits, letting you write the message yourself when needed. <a href='https://www.npmjs.com/package/@luctst/commai' target='_blank' class='underline'>Install via npm</a>.",
+      "assets": []
+    },
+    {
       "name": "Paper",
       "date": "March 2024",
       "topics": ["Raycast", "Mac", "Raycast Extension", "React"],
@@ -23,21 +37,21 @@
       "assets": []
     },
     {
-      "name": "Fast Repo",
-      "date": "Created in 2021",
-      "topics": ["NodeJs", "CLI", "Github CLI"],
-      "description": "Efficiently manage and interact with your GitHub repository using a variety of quick actions designed to streamline your workflow. <a href='https://www.npmjs.com/package/fast-repo' target='_blank' class='underline'>More info here</a>",
-      "assets": []
-    },
-    {
-      "name": "Get Good Readme.md",
+      "name": "get-readme",
       "date": "Created in 2020",
-      "topics": ["Nodejs", "CLI", "Readme generator"],
-      "description": "Get Good Readme is a command-line tool build with NodeJs created in 2020 designed to generate README.md files using a selection of templates. <a href='https://www.npmjs.com/package/get-good-readme' target='_blank' class='underline'>More info here</a>",
+      "topics": ["CLI", "Node.js", "README Generator", "Developer Tools"],
+      "description": "A straightforward CLI tool that generates clean, well-structured README files for Node.js projects, eliminating the friction of manual boilerplate creation. Built for developers who want to spend less time on documentation setup and more time shipping code. <a href='https://www.npmjs.com/package/get-good-readme' target='_blank' class='underline'>Install via npm</a>.",
       "assets": []
     }
   ],
   "experiences": [
+    {
+      "name": "Linxea",
+      "date": "March 2026 - May 2026",
+      "topics": ["Strapi", "Next.js", "Headless CMS", "Migration", "Architecture"],
+      "description": "Led a two-month technical migration for a large enterprise, transforming a tightly coupled monolith into a modern, decoupled architecture combining Strapi as a headless CMS with Next.js on the frontend. Designed content models, built REST/GraphQL APIs, and implemented optimized rendering strategies (SSR, SSG, ISR) that cut load times, enabled independent scaling of backend and frontend services, and unblocked parallel development workflows. The result: faster performance, reduced deployment friction, and a 10x improvement in developer velocity across teams.",
+      "assets": []
+    },
     {
       "name": "Localista",
       "date": "January 2025 - May 2025",
@@ -61,7 +75,7 @@
     },
     {
       "name": "Mentoring Openclassrooms",
-      "date": "2021 to now",
+      "date": "2021 - 2026",
       "topics": [
         "Mentoring",
         "Web development",
@@ -84,13 +98,6 @@
       "date": "2019 - 2020",
       "topics": ["SAAS", "VueJS", "Python", "GCP"],
       "description": "I worked as a full stack software engineer at Moonshot Insurance for a year, using Vue.js for front-end development and Python for back-end development, collaborating with cross-functional teams to deliver high-quality software solutions. <a href='https://www.moonshot-insurance.com/' target='_blank' class='underline'> More info here</a>",
-      "assets": []
-    },
-    {
-      "name": "Learning Software Engineering",
-      "date": "2015 to 2019",
-      "description": "During the first three years of my master's program, I gained diverse experience in web development, I worked both in Startup and as a freelancer, in France and internationally(New-York, South Africa).",
-      "topics": ["Software Engineering", "Master program"],
       "assets": []
     }
   ]
