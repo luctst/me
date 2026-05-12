@@ -71,10 +71,10 @@ export const Titles = memo(
     keyActive: Keys
   }) => {
     const [titles, setTitles] = useState<
-      Array<{ content: Keys; animationDone: boolean }>
+      Array<{ content: Keys; display: string; animationDone: boolean }>
     >([
-      { content: 'projects', animationDone: false },
-      { content: 'experiences', animationDone: false },
+      { content: 'projects', display: 'Featured Work', animationDone: false },
+      { content: 'experiences', display: 'experiences', animationDone: false },
     ])
 
     const [showCTA, setShowCTA] = useState(false)
@@ -122,7 +122,7 @@ export const Titles = memo(
                 'text-5xl tracking-tight flex items-start font-normal m-0 leading-[3.5rem] flex-wrap w-fit hover:cursor-pointer',
               )}
             >
-              {t.content.split('').map((l, y, array) => (
+              {t.display.split('').map((l, y, array) => (
                 <span key={y} className="block overflow-hidden">
                   <span
                     className={cn(
