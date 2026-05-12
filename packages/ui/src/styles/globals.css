@@ -24,6 +24,7 @@
   --accent-foreground: oklch(0.205 0 0);
   --surface-elevated: oklch(0.995 0.003 75);
   --accent-badge: oklch(0.95 0.2 105);
+  --accent-badge-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -72,6 +73,7 @@
   --chart-5: oklch(0.645 0.246 16.439);
   --surface-elevated: oklch(0.269 0 0);
   --accent-badge: oklch(0.85 0.15 105);
+  --accent-badge-foreground: oklch(0.205 0 0);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -121,6 +123,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-surface-elevated: var(--surface-elevated);
   --color-accent-badge: var(--accent-badge);
+  --color-accent-badge-foreground: var(--accent-badge-foreground);
 
   @keyframes fadeIn {
     0% {
