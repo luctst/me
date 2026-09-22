@@ -1,0 +1,440 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-22T14:30:30Z",
+  "title": "Design System: lucastostee.me",
+  "extensions": {
+    "colorMeta": {
+      "soft-ink": {
+        "role": "primary",
+        "displayName": "Soft Ink",
+        "canonical": "oklch(0.205 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ],
+        "cssVar": "--foreground"
+      },
+      "warm-paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "oklch(0.965 0.005 75)",
+        "tonalRamp": [
+          "oklch(0.15 0.005 75)",
+          "oklch(0.26 0.005 75)",
+          "oklch(0.38 0.005 75)",
+          "oklch(0.49 0.005 75)",
+          "oklch(0.61 0.005 75)",
+          "oklch(0.72 0.005 75)",
+          "oklch(0.84 0.005 75)",
+          "oklch(0.95 0.005 75)"
+        ],
+        "cssVar": "--background"
+      },
+      "raised-paper": {
+        "role": "neutral",
+        "displayName": "Raised Paper",
+        "canonical": "oklch(0.995 0.003 75)",
+        "tonalRamp": [
+          "oklch(0.15 0.003 75)",
+          "oklch(0.26 0.003 75)",
+          "oklch(0.38 0.003 75)",
+          "oklch(0.49 0.003 75)",
+          "oklch(0.61 0.003 75)",
+          "oklch(0.72 0.003 75)",
+          "oklch(0.84 0.003 75)",
+          "oklch(0.95 0.003 75)"
+        ],
+        "cssVar": "--surface-elevated"
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "oklch(0.985 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ],
+        "cssVar": "--primary-foreground"
+      },
+      "pencil-grey": {
+        "role": "neutral",
+        "displayName": "Pencil Grey",
+        "canonical": "oklch(0.5 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ],
+        "cssVar": "--muted-foreground"
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(0.922 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ],
+        "cssVar": "--border"
+      },
+      "focus-ring": {
+        "role": "neutral",
+        "displayName": "Focus Ring",
+        "canonical": "oklch(0.708 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ],
+        "cssVar": "--ring"
+      },
+      "hover-wash": {
+        "role": "neutral",
+        "displayName": "Hover Wash",
+        "canonical": "oklch(0.97 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ],
+        "cssVar": "--accent"
+      },
+      "highlighter-yellow": {
+        "role": "tertiary",
+        "displayName": "Highlighter Yellow",
+        "canonical": "oklch(0.95 0.2 105)",
+        "tonalRamp": [
+          "oklch(0.15 0.2 105)",
+          "oklch(0.26 0.2 105)",
+          "oklch(0.38 0.2 105)",
+          "oklch(0.49 0.2 105)",
+          "oklch(0.61 0.2 105)",
+          "oklch(0.72 0.2 105)",
+          "oklch(0.84 0.2 105)",
+          "oklch(0.95 0.2 105)"
+        ],
+        "cssVar": "--accent-badge"
+      },
+      "night-ink": {
+        "role": "neutral",
+        "displayName": "Night Ink",
+        "canonical": "oklch(0.145 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ],
+        "cssVar": "--background",
+        "theme": "dark"
+      },
+      "night-raised": {
+        "role": "neutral",
+        "displayName": "Night Raised",
+        "canonical": "oklch(0.269 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ],
+        "cssVar": "--surface-elevated",
+        "theme": "dark"
+      },
+      "night-pencil": {
+        "role": "neutral",
+        "displayName": "Night Pencil",
+        "canonical": "oklch(0.708 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ],
+        "cssVar": "--muted-foreground",
+        "theme": "dark"
+      },
+      "night-highlighter": {
+        "role": "tertiary",
+        "displayName": "Night Highlighter",
+        "canonical": "oklch(0.85 0.15 105)",
+        "tonalRamp": [
+          "oklch(0.15 0.15 105)",
+          "oklch(0.26 0.15 105)",
+          "oklch(0.38 0.15 105)",
+          "oklch(0.49 0.15 105)",
+          "oklch(0.61 0.15 105)",
+          "oklch(0.72 0.15 105)",
+          "oklch(0.84 0.15 105)",
+          "oklch(0.95 0.15 105)"
+        ],
+        "cssVar": "--accent-badge",
+        "theme": "dark"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The statement, the only large type on the page; 40px / 48px below 640px, 48px / 56px from 640px, capped at 22ch and balanced."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The two paragraphs at 18px / 30px, capped at 60ch; product names inside them are inline links."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The name at the top of the page, 16px bold on a 20px line, plain text."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "The role line after the blinking underscore, weight 400 in Pencil Grey."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "The verb line of an activity row, 16px on the row's 24px line; the repository name inside it is weight 500."
+      },
+      "body-compact": {
+        "displayName": "Body compact",
+        "purpose": "The list heading (weight 500), the note lines, the quiet link; inside a row the detail and the time keep 14px on the row's 24px line."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Footer links, 12px medium on a 16px line, rem-sized."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "fadeIn",
+        "value": "translateY(100%) -> translateY(0); 700ms ease forwards",
+        "purpose": "Curtain reveal for every line on the page (the Reveal component); the loader runs the same keyframe at 500ms per source line."
+      },
+      {
+        "name": "blink",
+        "value": "50% { opacity: 0 }; 1s linear infinite",
+        "purpose": "The underscore cursor. One cadence; exactly one instance, on the role line."
+      },
+      {
+        "name": "opacity100to0",
+        "value": "opacity 1 -> opacity 0 + blur(1px); 400ms ease forwards",
+        "purpose": "Loader exit before handoff."
+      },
+      {
+        "name": "stagger-rows",
+        "value": "100ms",
+        "purpose": "Delay between the first row, the \"4 more\" summary, and the quiet link."
+      },
+      {
+        "name": "stagger-footer",
+        "value": "150ms",
+        "purpose": "Delay between the three footer links and before the theme toggle."
+      },
+      {
+        "name": "loader-cadence",
+        "value": "20ms",
+        "purpose": "One source line per tick during boot: 92 lines, then a 400ms fade; about 2.2s, once per session, skipped under reduced motion."
+      },
+      {
+        "name": "timeline-home",
+        "value": "name 100ms, role 300ms, statement 400ms, paragraphs 650 / 800ms, list heading 950ms, first row 1050ms, \"4 more\" summary 1150ms, quiet link 1250ms, footer links 1700 / 1850 / 2000ms, toggle 2150ms",
+        "purpose": "Where elements join the reveal; the page settles about 2.9s after handoff. Rows behind the disclosure have no entrance."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "@media (prefers-reduced-motion: reduce): animation-duration 0.01ms, animation-delay 0ms, animation-iteration-count 1, transition-duration 0.01ms; fill-mode kept; JS loader skipped",
+        "purpose": "Everything lands in its final state at once."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      }
+    ],
+    "layout": {
+      "column": "42rem",
+      "framePadding": "40px 0",
+      "bodyPaddingX": "16px",
+      "nameToRole": "4px",
+      "headerToMain": "40px",
+      "statementToLead": "32px",
+      "leadToLead": "16px",
+      "leadToSection": "40px",
+      "headingToList": "4px",
+      "rowPadding": "12px 0",
+      "rowGap": "16px 2px",
+      "listToQuietLink": "12px",
+      "mainToFooter": "48px",
+      "footerLinkGap": "16px",
+      "statementMaxWidth": "22ch",
+      "leadMaxWidth": "60ch",
+      "footer": "follows content, 48px below, never pinned",
+      "disclosure": "native <details>; summary is a quiet 14px line, 8px vertical padding, 12px chevron rotating 90deg when open; first row always visible, up to four rows inside"
+    }
+  },
+  "components": [
+    {
+      "name": "Frame Header",
+      "kind": "custom",
+      "description": "The top of the page: the name at 700 over the role line at 400 in Pencil Grey, led by the one blinking underscore.",
+      "html": "<div class=\"ds-frame-header\"><h1 class=\"ds-frame-header__name\">Lucas Tostée</h1><h2 class=\"ds-frame-header__role\"><span class=\"ds-frame-header__cursor\" aria-hidden=\"true\">_</span> Software engineer</h2></div>",
+      "css": ".ds-frame-header { font-family: Roboto, system-ui, sans-serif; color: var(--foreground, oklch(0.205 0 0)); } .ds-frame-header__name { margin: 0 0 4px; font-size: 1rem; font-weight: 700; line-height: 1.25rem; } .ds-frame-header__role { margin: 0; font-size: 1rem; font-weight: 400; line-height: 1.25rem; color: var(--muted-foreground, oklch(0.5 0 0)); } .ds-frame-header__cursor { animation: ds-blink 1s linear infinite; } @keyframes ds-blink { 50% { opacity: 0; } } @media (prefers-reduced-motion: reduce) { .ds-frame-header__cursor { animation: none; } }"
+    },
+    {
+      "name": "Activity Row",
+      "kind": "custom",
+      "refersTo": "activity-row",
+      "description": "One line of \"Lately on GitHub\": verb, repository link at 500, grey detail, and the relative time on the verb's line; a hairline between rows and none after the last. Below 640px the detail drops to a second line clamped at two.",
+      "html": "<h3 class=\"ds-activity-heading\">Lately on GitHub</h3><ol class=\"ds-activity\"><li class=\"ds-activity__item\"><span class=\"ds-activity__row\"><span class=\"ds-activity__verb\">Merged #37 in <a class=\"ds-activity__repo\" href=\"#\">marcdown</a></span><span class=\"ds-activity__when\">2 weeks ago</span><span class=\"ds-activity__detail\" title=\"fix: align nested tick boxes for tab and space indents\"><a href=\"#\">fix: align nested tick boxes for tab and space indents</a></span></span></li><li class=\"ds-activity__item\"><span class=\"ds-activity__row\"><span class=\"ds-activity__verb\">Pushed to <a class=\"ds-activity__repo\" href=\"#\">tron</a></span><span class=\"ds-activity__when\">last week</span><span class=\"ds-activity__detail\" title=\"Publish releases to npm, test only on PRs\"><a href=\"#\">Publish releases to npm, test only on PRs</a></span></span></li></ol>",
+      "css": ".ds-activity-heading { margin: 0 0 4px; font-family: Roboto, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25rem; color: var(--foreground, oklch(0.205 0 0)); } .ds-activity { list-style: none; margin: 0; padding: 0; font-family: Roboto, system-ui, sans-serif; } .ds-activity__item { border-bottom: 1px solid var(--border, oklch(0.922 0 0)); } .ds-activity__item:last-child { border-bottom: 0; } .ds-activity__row { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 16px; row-gap: 2px; padding: 12px 0; } .ds-activity__verb { font-size: 1rem; font-weight: 400; line-height: 1.5rem; color: var(--foreground, oklch(0.205 0 0)); } .ds-activity__repo { font-weight: 500; color: var(--foreground, oklch(0.205 0 0)); text-decoration: none; text-underline-offset: 4px; } .ds-activity__repo:hover { text-decoration: underline; } .ds-activity__when { margin-left: auto; font-size: 0.875rem; line-height: 1.5rem; color: var(--muted-foreground, oklch(0.5 0 0)); font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-activity__detail { min-width: 0; flex-basis: 100%; font-size: 0.875rem; line-height: 1.5rem; color: var(--muted-foreground, oklch(0.5 0 0)); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; } .ds-activity__detail a { color: inherit; text-decoration: none; text-underline-offset: 4px; } .ds-activity__detail a:hover { color: var(--foreground, oklch(0.205 0 0)); text-decoration: underline; } .ds-activity a:focus-visible { outline: 2px solid color-mix(in oklch, var(--ring, oklch(0.708 0 0)) 50%, transparent); outline-offset: 2px; } @media (min-width: 640px) { .ds-activity__when { order: 99; } .ds-activity__detail { flex: 1 1 0%; -webkit-line-clamp: 1; } }"
+    },
+    {
+      "name": "Quiet Link",
+      "kind": "nav",
+      "refersTo": "link-quiet",
+      "description": "Pencil Grey 14px link with a 12px arrow that turns ink and underlines on hover; closes the activity list: \"All activity on GitHub →\".",
+      "html": "<a class=\"ds-link-quiet\" href=\"#\">All activity on GitHub<svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-link-quiet { display: inline-flex; align-items: center; font-family: Roboto, system-ui, sans-serif; font-size: 0.875rem; font-weight: 400; line-height: 1.25rem; color: var(--muted-foreground, oklch(0.5 0 0)); text-decoration: none; text-underline-offset: 4px; } .ds-link-quiet svg { margin-left: 4px; } .ds-link-quiet:hover { color: var(--foreground, oklch(0.205 0 0)); text-decoration: underline; } .ds-link-quiet:focus-visible { outline: 2px solid color-mix(in oklch, var(--ring, oklch(0.708 0 0)) 50%, transparent); outline-offset: 2px; }"
+    },
+    {
+      "name": "Inline Link",
+      "kind": "nav",
+      "refersTo": "link-inline",
+      "description": "A product name inside the lead paragraph: Soft Ink text with a Pencil Grey underline offset 4px that turns ink on hover.",
+      "html": "<p class=\"ds-lead\">Lately that means <a class=\"ds-link-inline\" href=\"#\">Kayu</a>, a medicine finder for iOS.</p>",
+      "css": ".ds-lead { margin: 0; max-width: 60ch; font-family: Roboto, system-ui, sans-serif; font-size: 1.125rem; font-weight: 400; line-height: 1.875rem; color: var(--foreground, oklch(0.205 0 0)); } .ds-link-inline { color: var(--foreground, oklch(0.205 0 0)); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted-foreground, oklch(0.5 0 0)); } .ds-link-inline:hover { text-decoration-color: var(--foreground, oklch(0.205 0 0)); } .ds-link-inline:focus-visible { outline: 2px solid color-mix(in oklch, var(--ring, oklch(0.708 0 0)) 50%, transparent); outline-offset: 2px; }"
+    },
+    {
+      "name": "Arrow Link",
+      "kind": "nav",
+      "refersTo": "link-arrow",
+      "description": "Footer contact link: 12px medium ink text with an 8px arrow 5px after it, underline on hover.",
+      "html": "<a class=\"ds-link-arrow\" href=\"#\">GitHub<svg width=\"8\" height=\"8\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-link-arrow { display: inline-flex; align-items: center; font-family: Roboto, system-ui, sans-serif; font-size: 0.75rem; font-weight: 500; line-height: 1rem; color: var(--foreground, oklch(0.205 0 0)); text-decoration: none; text-underline-offset: 4px; margin-right: 16px; } .ds-link-arrow svg { margin-left: 5px; } .ds-link-arrow:hover { text-decoration: underline; } .ds-link-arrow:focus-visible { outline: 2px solid color-mix(in oklch, var(--ring, oklch(0.708 0 0)) 50%, transparent); outline-offset: 2px; }"
+    },
+    {
+      "name": "Theme Toggle",
+      "kind": "button",
+      "refersTo": "button-theme-toggle",
+      "description": "The 28px ghost square at the far right of the footer, the only button and the only rounded element; moon in light mode, sun in dark.",
+      "html": "<button class=\"ds-btn-toggle\" type=\"button\" aria-label=\"Switch to dark theme\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z\"/></svg></button>",
+      "css": ".ds-btn-toggle { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; padding: 0; background: transparent; color: var(--foreground, oklch(0.205 0 0)); border: none; border-radius: 8px; cursor: pointer; } .ds-btn-toggle:hover { background: var(--accent, oklch(0.97 0 0)); } .ds-btn-toggle:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring, oklch(0.708 0 0)) 50%, transparent); }"
+    },
+    {
+      "name": "Reveal",
+      "kind": "custom",
+      "description": "The Curtain Rule as a component: an overflow-hidden span around a block span that rises from translateY(100%) over 700ms ease after a per-element delay. Spans only, so it nests inside any text element.",
+      "html": "<p class=\"ds-reveal-demo\"><span class=\"ds-reveal\"><span class=\"ds-reveal__line\" style=\"animation-delay: 400ms\">I build software products, end to end.</span></span></p>",
+      "css": ".ds-reveal-demo { margin: 0; max-width: 22ch; font-family: Roboto, system-ui, sans-serif; font-size: 3rem; font-weight: 400; line-height: 3.5rem; letter-spacing: -0.025em; color: var(--foreground, oklch(0.205 0 0)); text-wrap: balance; } .ds-reveal { display: block; overflow: hidden; } .ds-reveal__line { display: block; transform: translateY(100%); animation: ds-fadeIn 700ms ease forwards; } @keyframes ds-fadeIn { 0% { transform: translateY(100%); } 100% { transform: translateY(0); } } @media (prefers-reduced-motion: reduce) { .ds-reveal__line { animation-duration: 0.01ms; animation-delay: 0ms; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Terminal",
+    "overview": "The site behaves like a text editor at rest on warm paper. Nothing is laid out; everything is typed in. The page boots by printing its own HTML source line by line, then the name, the role, the statement, and five lines of GitHub activity rise into place one line at a time, each behind an invisible curtain. One underscore blinks. That cursor, and the cadence of the reveals, carry the whole \"developer\" identity. There is no monospace font, no dark hacker chrome, no gradient. Roboto in three weights on a cream ground does the work.\n\nDensity is low and the palette is nearly monochrome: Soft Ink on Warm Paper, with Pencil Grey for the past. A single saturated color exists, Highlighter Yellow, and it is spent on text selection only. Depth is tonal, never cast, and today nothing on the page is raised: there is no panel, no card, no table. The page is one column of prose closed by a short list. The statement says what Lucas builds, \"Lately on GitHub\" shows the last five things he shipped, and every row leads to the repository or the commit on GitHub.",
+    "keyCharacteristics": [
+      "Warm cream ground, near-black ink, one highlighter kept for text selection",
+      "Text reveals by sliding up through an overflow-hidden curtain, never by fading alone",
+      "A single blinking underscore is the identity mark",
+      "Flat, tonal depth; no shadows; hairlines are the only lines",
+      "Roboto only, three weights (700 / 500 / 400), hierarchy by weight and by ink vs grey, not by color",
+      "Measured, staggered choreography: 700ms curtains, rows 100ms apart, a boot sequence of about 2.2s that plays once per session",
+      "One route, one column, max 42rem, on every screen"
+    ],
+    "rules": [
+      {
+        "name": "The One Highlighter Rule",
+        "body": "Highlighter Yellow appears on text selection and nowhere else. Every other surface is ink, grey, or paper. If a new element wants color, it is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tonal Depth Rule",
+        "body": "Elevation is a lighter sheet (Raised Paper), never a shadow. New panels pick a paper token, not a box-shadow. Today no panel exists; the rule says what one would be.",
+        "section": "colors"
+      },
+      {
+        "name": "The Past Is Grey Rule",
+        "body": "Pencil Grey carries what already happened and what supports: former employers, the role line, a row's detail and its date. What Lucas is doing now is Soft Ink: the statement, the current products, the verb and the repository.",
+        "section": "colors"
+      },
+      {
+        "name": "The Curtain Rule",
+        "body": "Every text reveal is a translateY(100%) to 0 inside an overflow: hidden wrapper, 700ms ease, with a per-element delay. Text never simply fades in; it rises into view. The Reveal component is the only way to do this. It renders spans only, so it can sit inside a paragraph, a heading, a list item, or a link without breaking the markup.",
+        "section": "typography"
+      },
+      {
+        "name": "The Underscore Rule",
+        "body": "Exactly one blinking _ on the page, on the role line, 1s linear. It is the identity mark, not punctuation: do not add a second one to a heading, a link, or a list row, and do not replace it with a pipe or a block cursor.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Shadow Rule",
+        "body": "Surfaces are flat at rest and flat on hover. Hover and focus are communicated with a Hover Wash fill, an underline, or a color shift from Pencil Grey to Soft Ink, never with lift.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do reveal new text through the Curtain Rule with ease timing over 700ms and a stagger of 100–250ms between siblings.",
+      "Do express hierarchy with weight (700 / 500 / 400) and with Soft Ink versus Pencil Grey.",
+      "Do build a new elevated surface, if one is ever needed, from Raised Paper (or Night Raised in dark mode).",
+      "Do keep Highlighter Yellow on text selection only.",
+      "Do keep everything inside the one 42rem column with the footer following the content.",
+      "Do keep the one underscore on the role line and nowhere else.",
+      "Do keep every activity row one line at sm and above, with the time on the verb's line at every width.",
+      "Do style through the theme tokens so both light and dark modes stay correct."
+    ],
+    "donts": [
+      "Don't add box-shadow, gradients, or blur to convey depth.",
+      "Don't reach for a monospace face to signal \"developer\"; the cursor and cadence already do it in Roboto.",
+      "Don't introduce a second accent color or use Highlighter Yellow for tags, buttons, links, or states.",
+      "Don't use spring or bounce easing; the site uses ease and linear only.",
+      "Don't round anything but the theme toggle; if a panel returns, keep its corner at 2px or less.",
+      "Don't make elements appear instantly on load; join the reveal timeline.",
+      "Don't bring back a second route, a repository table, technology tags, a sidebar, a device split, or a hand-maintained project list; five live rows are the proof."
+    ]
+  }
+}

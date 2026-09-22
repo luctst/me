@@ -36,3 +36,6 @@ npm-debug.log*
 *.pem
 
 .git
+
+# Impeccable review captures
+.impeccable/review/
