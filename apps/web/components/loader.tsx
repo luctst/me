@@ -19,6 +19,17 @@ export function Loading({ children }: { children: ReactNode }) {
   const resizerRef = useRef<ResizeObserver | null>(null)
 
   useEffect(() => {
+    let booted = false
+    try {
+      booted = sessionStorage.getItem('booted') === '1'
+    } catch {}
+    if (booted || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setShowLoader(false)
+      return
+    }
+    try {
+      sessionStorage.setItem('booted', '1')
+    } catch {}
     const resizer = new ResizeObserver((entries) => {
       entries[0]?.target.scrollIntoView({
         block: 'end',
@@ -46,12 +57,12 @@ export function Loading({ children }: { children: ReactNode }) {
 
         resizer.disconnect()
         loaderContainer.current?.classList.add(
-          'animate-[opacity100to0_1400ms_ease_forwards]',
+          'animate-[opacity100to0_400ms_ease_forwards]',
         )
         timeoutRef.current = setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
+          window.scrollTo(0, 0)
           setShowLoader(false)
-        }, 2000)
+        }, 400)
         return
       }
 
@@ -73,7 +84,7 @@ export function Loading({ children }: { children: ReactNode }) {
 
         iterator = iterator + 1
       }
-    }, 55)
+    }, 20)
 
     return () => {
       if (intervalRef.current) {
@@ -90,6 +101,10 @@ export function Loading({ children }: { children: ReactNode }) {
       }
     }
   }, [])
+
+  useEffect(() => {
+    if (!showLoader) window.scrollTo(0, 0)
+  }, [showLoader])
 
   if (showLoader === false) return children
 

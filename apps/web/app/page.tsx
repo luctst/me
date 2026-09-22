@@ -1,32 +1,24 @@
-import { headers } from 'next/headers'
-import {SidebarProvider, SidebarTrigger} from '@workspace/ui/components/sidebar'
-import {AppSidebar} from '@/components/app-sidebar'
-import {Home} from '@/components/home'
-import {Mobile} from '@/components/mobile'
+import { Frame } from '@/components/frame'
+import { Home, type Row } from '@/components/home'
+import { getActivity, relativeTime } from '@/lib/github'
+
+export const revalidate = 3600
 
 export default async function Page() {
-	const headersList = await headers()
-	const userAgent = headersList.get('user-agent') || '';
-  const isMobile = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase().trim());
-
-	if (isMobile) {
-		return (
-			<>
-				<Mobile />
-				<section className="min-h-[100vh] pt-12">
-					<Home />
-				</section>
-			</>
-		);
-	}
-
-	return (
-		<SidebarProvider>
-			<AppSidebar />
-			<main className="flex flex-col mt-8 w-full overflow-hidden">
-				<SidebarTrigger className="hover:cursor-pointer"/>
-				<Home />
-			</main>
-		</SidebarProvider>
-	)
+  const activity = await getActivity(5)
+  const rows: Row[] | null =
+    activity?.map((a) => ({
+      id: a.id,
+      verb: a.verb,
+      repo: a.repo,
+      repoUrl: a.repoUrl,
+      detail: a.detail,
+      detailUrl: a.detailUrl,
+      when: relativeTime(a.at),
+    })) ?? null
+  return (
+    <Frame>
+      <Home rows={rows} />
+    </Frame>
+  )
 }
