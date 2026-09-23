@@ -1,177 +1,119 @@
-'use client'
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useMemo,
-  useState,
-  memo,
-} from 'react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
 import { cn } from '@workspace/ui/lib/utils'
-import projects from '@/public/projects.json'
-import { ProjectItems, Assets } from '@/components/projects-items'
-import { Modals } from '@/components/modals'
+import { Reveal } from '@/components/reveal'
 
-export type Keys = 'projects' | 'experiences'
-
-export type Modal = {
+export type Row = {
   id: string
-  x: number
-  y: number
-  zIndex: number
-  metadata: Assets[number]
+  verb: string
+  repo: string
+  repoUrl: string
+  detail: string | null
+  detailUrl: string | null
+  when: string
 }
 
-export function Home() {
-  const [active, setActive] = useState<Keys>('projects')
-  const [modals, setModals] = useState<Array<Modal>>([])
+const inline = 'text-foreground underline underline-offset-4 decoration-muted-foreground hover:decoration-foreground'
+const quiet = 'inline-flex items-center text-sm text-muted-foreground no-underline hover:text-foreground hover:underline underline-offset-4'
+const ROWS_AT = 1050
+const ROW_STEP = 100
+const line = 'flex flex-wrap items-baseline gap-x-4 gap-y-0.5 py-3'
 
-  const createNewModal = (asset: Assets[number]) => {
-    const minX = 10
-    const minY = 10
-    const maxX = window.innerWidth - 20 - 10
-    const maxY = window.innerHeight - 20 - 10
-    const x = Math.max(
-      minX,
-      Math.min(minX + Math.random() * (maxX - minX), maxX),
-    )
-    const y = Math.max(
-      minY,
-      Math.min(minY + Math.random() * (maxY - minY), maxY),
-    )
-
-    const newModal = {
-      id: Math.random().toString(36).substr(2, 9),
-      y,
-      x,
-      zIndex: modals.length + 100,
-      metadata: asset,
-    }
-
-    setModals((prev) => [...prev, newModal])
-  }
-
+export function Home({ rows }: { rows: Row[] | null }) {
+  const afterRows = ROWS_AT + (rows && rows.length > 1 ? 2 : 1) * ROW_STEP
   return (
     <>
-      <Titles action={setActive} keyActive={active} />
-      <main className="mt-8">
-        <ProjectItems active={active} createNewModalAction={createNewModal} />
-      </main>
-      <Modals modals={modals} setModalsAction={setModals} />
+      <p className="m-0 max-w-[22ch] text-[2.5rem] leading-12 tracking-tight text-foreground text-balance sm:text-5xl sm:leading-14">
+        <Reveal delay={400}>I build software products, end to end.</Reveal>
+      </p>
+      <p className="mt-8 mb-0 max-w-[60ch] text-lg leading-[1.875rem] text-foreground">
+        <Reveal delay={650}>
+          Software engineer in a full-time role, with a product engineer&rsquo;s reflex for shipping
+          things people actually use. Lately that means{' '}
+          <a href="https://apps.apple.com/fr/app/kayu-medicine-finder/id6778128009?l=en-GB" target="_blank" rel="noreferrer" className={inline}>
+            Kayu
+          </a>
+          , a medicine finder for iOS.
+        </Reveal>
+      </p>
+      <p className="mt-4 mb-0 max-w-[60ch] text-lg leading-[1.875rem] text-muted-foreground">
+        <Reveal delay={800}>
+          Before that I shipped for Linxea, PrestaShop, Localista, and Moonshot Insurance. Since 2021
+          I&rsquo;ve mentored developers at OpenClassrooms.
+        </Reveal>
+      </p>
+
+      <section className="mt-10" aria-labelledby="lately">
+        <h3 id="lately" className="m-0 text-sm leading-5 font-medium text-foreground">
+          <Reveal delay={950}>Lately on GitHub</Reveal>
+        </h3>
+        {rows === null ? (
+          <p className="mt-2 mb-0 text-sm leading-5 text-muted-foreground">
+            <Reveal delay={ROWS_AT}>GitHub is unreachable right now.</Reveal>
+          </p>
+        ) : rows.length === 0 ? (
+          <p className="mt-2 mb-0 text-sm leading-5 text-muted-foreground">
+            <Reveal delay={ROWS_AT}>Nothing public in the last 90 days.</Reveal>
+          </p>
+        ) : (
+          <>
+            <div className="mt-1 border-b border-border">
+              <Reveal delay={ROWS_AT} className={line}>
+                <RowLine r={rows[0]!} />
+              </Reveal>
+            </div>
+            {rows.length > 1 ? (
+              <details className="group">
+                <summary className={cn(quiet, 'cursor-pointer list-none py-2 select-none [&::-webkit-details-marker]:hidden')}>
+                  <Reveal delay={ROWS_AT + ROW_STEP} className="flex items-center">
+                    <span className="group-open:hidden">{rows.length - 1} more</span>
+                    <span className="hidden group-open:inline">Show less</span>
+                    <ChevronRight className="ml-1 size-3 transition-transform group-open:rotate-90" aria-hidden="true" />
+                  </Reveal>
+                </summary>
+                <ol className="m-0 list-none border-t border-border p-0">
+                  {rows.slice(1).map((r) => (
+                    <li key={r.id} className={cn(line, 'border-b border-border last:border-0')}>
+                      <RowLine r={r} />
+                    </li>
+                  ))}
+                </ol>
+              </details>
+            ) : null}
+          </>
+        )}
+        <p className={cn('mb-0', rows?.length ? 'mt-1' : 'mt-2')}>
+          <Reveal delay={afterRows}>
+            <a href="https://github.com/luctst" target="_blank" rel="noreferrer" className={quiet}>
+              All activity on GitHub <ArrowRight className="ml-1 size-3" aria-hidden="true" />
+            </a>
+          </Reveal>
+        </p>
+      </section>
     </>
   )
 }
 
-export const Titles = memo(
-  ({
-    action,
-    keyActive,
-  }: {
-    action: Dispatch<SetStateAction<Keys>>
-    keyActive: Keys
-  }) => {
-    const [titles, setTitles] = useState<
-      Array<{ content: Keys; display: string; animationDone: boolean }>
-    >([
-      { content: 'projects', display: 'Featured Work', animationDone: false },
-      { content: 'experiences', display: 'experiences', animationDone: false },
-    ])
-
-    const [showCTA, setShowCTA] = useState(false)
-
-    useEffect(() => {
-      const timer = setTimeout(() => setShowCTA(true), 2000)
-      return () => clearTimeout(timer)
-    }, [])
-
-    const parseNumber = (key: Keys) => projects[key].length
-    const openMaltProfile = () =>
-      window.open('https://www.malt.fr/profile/lucastostee')
-    const onAnimationEnd = (
-      mainIndex: number,
-      index: number,
-      length: number,
-    ) => {
-      if (index !== length - 1) return
-
-      const newTitles = [...titles]
-
-      if (newTitles[mainIndex]) {
-        newTitles[mainIndex].animationDone = true
-        setTitles(newTitles)
-      }
-    }
-    const switchItem = (index: number) => {
-      if (titles[index]) {
-        if (keyActive === titles[index].content) return
-        action(titles[index].content)
-      }
-    }
-
-    return (
-      <header className="flex items-start flex-wrap justify-between sticky top-0 w-full bg-background">
-        <div>
-          {titles.map((t, i) => (
-            <h3
-              key={i}
-              onClick={() => switchItem(i)}
-              className={cn(
-                keyActive === t.content
-                  ? 'text-foreground'
-                  : 'text-muted-foreground no-underline',
-                'text-5xl tracking-tight flex items-start font-normal m-0 leading-[3.5rem] flex-wrap w-fit hover:cursor-pointer',
-              )}
-            >
-              {t.display.split('').map((l, y, array) => (
-                <span key={y} className="block overflow-hidden">
-                  <span
-                    className={cn(
-                      'block animate-[fadeInX_500ms_ease_forwards]',
-                      y === 0 ? 'capitalize' : null,
-                    )}
-                    style={{
-                      transform: 'translateX(-100%)',
-                      animationDelay: `${1200 + y * 250}ms`,
-                    }}
-                    onAnimationEnd={() => onAnimationEnd(i, y, array.length)}
-                  >
-                    {l}
-                  </span>
-                </span>
-              ))}
-              {t.animationDone ? (
-                <>
-                  <span className="animate-[fadeInX_500ms_ease_forwards] font-normal leading-[11.93px] text-sm ml-[5.48px] no-underline">
-                    {parseNumber(t.content)}
-                  </span>
-                  <div
-                    className={cn(
-                      keyActive === t.content
-                        ? 'animate-[widthLeftToRight_500ms_ease_forwards] bg-foreground'
-                        : 'bg-background',
-                      'h-[3px]',
-                    )}
-                    style={{ flex: '0 0 calc(100% - 10px)' }}
-                  />
-                </>
-              ) : null}
-            </h3>
-          ))}
-        </div>
-        {showCTA ? (
-          <div className="animate-[opacity0to100_400ms_ease_forwards]">
-            <button
-              onClick={openMaltProfile}
-              className="hover:cursor-pointer bg-surface-elevated rounded-[2px] text-foreground text-sm text-right outline-none border-none py-[7px] px-[11px] pb-[8px]"
-            >
-              <span className="animate-[blink_1.3s_step-start_0s_infinite]">
-                _
-              </span>{' '}
-              Hire me
-            </button>
-          </div>
-        ) : null}
-      </header>
-    )
-  },
-)
+function RowLine({ r }: { r: Row }) {
+  return (
+    <>
+      <span className="text-base leading-6 text-foreground">
+        {r.verb}{' '}
+        <a href={r.repoUrl} target="_blank" rel="noreferrer" className="font-medium text-foreground no-underline hover:underline underline-offset-4">
+          {r.repo}
+        </a>
+      </span>
+      <span className="ml-auto text-sm leading-6 text-muted-foreground tabular-nums whitespace-nowrap sm:order-last">{r.when}</span>
+      {r.detail ? (
+        <span className="min-w-0 basis-full line-clamp-2 text-sm leading-6 text-muted-foreground sm:flex-1 sm:basis-0 sm:line-clamp-1" title={r.detail}>
+          {r.detailUrl ? (
+            <a href={r.detailUrl} target="_blank" rel="noreferrer" className="no-underline hover:text-foreground hover:underline underline-offset-4">
+              {r.detail}
+            </a>
+          ) : (
+            r.detail
+          )}
+        </span>
+      ) : null}
+    </>
+  )
+}

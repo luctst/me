@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-Personal portfolio site for Lucas Tostee (Full Stack JavaScript Developer, freelance). Single-page Next.js app with mobile/desktop detection via user-agent, serving different layouts per device.
+Personal site for Lucas Tostée (software engineer). A single Next.js page: a typed statement, two paragraphs, and "Lately on GitHub", five live activity rows fetched from the GitHub events API.
 
 ## Monorepo structure
 
@@ -46,9 +46,10 @@ Utility: `cn()` from `@workspace/ui/lib/utils` (clsx + tailwind-merge).
 
 ## Architecture notes
 
-- **Single route**: `apps/web/app/page.tsx` is the only page. It reads `user-agent` headers server-side and renders either `<Mobile />` or the desktop layout with `<SidebarProvider>` + `<AppSidebar>`.
+- **Single route**: `apps/web/app/page.tsx` is the only page, one responsive column on every screen. `components/frame.tsx` is the shared header/footer, `components/home.tsx` the content, `components/loader.tsx` the once-per-session boot sequence.
+- **GitHub data**: `apps/web/lib/github.ts` fetches the public events for `luctst`, keeps pushes to main, merged PRs, releases, and new repos, collapses merge-commit pushes into their PR, and revalidates hourly. Set `GITHUB_TOKEN` in the environment to lift the unauthenticated rate limit. Unit tests: `node --test lib/github.test.ts` from `apps/web/`.
+- **Design records**: `apps/web/PRODUCT.md` (product truth) and `apps/web/DESIGN.md` (visual system, "The Quiet Terminal") are maintained with the Impeccable skill; keep them in sync with UI changes.
 - **Styling**: Tailwind CSS v4 via `@tailwindcss/postcss`. Global styles in `packages/ui/src/styles/globals.css` with OKLCH CSS custom properties for theming. Dark mode via `next-themes`.
-- **Data table**: Uses `@tanstack/react-table` in `apps/web/components/data-table.tsx`.
 - **Deployment**: Vercel (analytics integrated via `@vercel/analytics`).
 
 ## Git workflow
